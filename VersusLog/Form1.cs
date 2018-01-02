@@ -59,13 +59,13 @@ namespace VersusLog
         public string Vsdate { get; set; }
 
         //自デッキ・大分類
-        public string Mydeck_mahjorclass { get; set; }
+        public string Mydeck_majorclass { get; set; }
 
         //自デッキ・小分類
         public string Mydeck_smallclass { get; set; }
 
         //相手デッキ・大分類
-        public string Enemydeck_mahjorclass { get; set; }
+        public string Enemydeck_majorclass { get; set; }
 
         //相手デッキ・小分類
         public string Enemydeck_smallclass { get; set; }
@@ -79,12 +79,12 @@ namespace VersusLog
         //1 = 先行、0 = 後攻
         public int Pracedence { get; set; }
 
-        public LogData(string vsdate, string mydeck_mahjorclass, string mydeck_smallclass, string enemydeck_mahjorclass, string enemydeck_smallclass, object win, string format, object pracedence)
+        public LogData(string vsdate, string mydeck_majorclass, string mydeck_smallclass, string enemydeck_majorclass, string enemydeck_smallclass, object win, string format, object pracedence)
         {
             this.Vsdate = vsdate;
-            this.Mydeck_mahjorclass = mydeck_mahjorclass;
+            this.Mydeck_majorclass = mydeck_majorclass;
             this.Mydeck_smallclass = mydeck_smallclass;
-            this.Enemydeck_mahjorclass = enemydeck_mahjorclass;
+            this.Enemydeck_majorclass = enemydeck_majorclass;
             this.Enemydeck_smallclass = enemydeck_smallclass;
             this.Win = (int)(long)win;
             this.Format = format;
