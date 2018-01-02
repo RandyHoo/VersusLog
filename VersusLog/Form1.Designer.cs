@@ -28,34 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.DataGetButton = new System.Windows.Forms.Button();
+            this.LogGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.LogGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // DataGetButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 32);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.DataGetButton.Location = new System.Drawing.Point(12, 602);
+            this.DataGetButton.Name = "DataGetButton";
+            this.DataGetButton.Size = new System.Drawing.Size(122, 32);
+            this.DataGetButton.TabIndex = 0;
+            this.DataGetButton.Text = "DataGet";
+            this.DataGetButton.UseVisualStyleBackColor = true;
+            this.DataGetButton.Click += new System.EventHandler(this.DataGetButton_Click);
+            // 
+            // LogGridView
+            // 
+            this.LogGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LogGridView.Location = new System.Drawing.Point(140, 12);
+            this.LogGridView.Name = "LogGridView";
+            this.LogGridView.RowTemplate.Height = 21;
+            this.LogGridView.Size = new System.Drawing.Size(858, 622);
+            this.LogGridView.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 128);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1010, 646);
+            this.Controls.Add(this.LogGridView);
+            this.Controls.Add(this.DataGetButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.LogGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DataGetButton;
+        private System.Windows.Forms.DataGridView LogGridView;
     }
 }
 
