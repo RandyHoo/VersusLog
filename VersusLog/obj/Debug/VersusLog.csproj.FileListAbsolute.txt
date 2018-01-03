@@ -16,4 +16,4 @@ C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.Generat
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.CoreCompileInputs.cache
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.exe
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
-C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.Form1.resources
+C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.VSLogGetForm.resources
