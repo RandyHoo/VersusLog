@@ -20,3 +20,4 @@ C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.InsertLogForm.
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.DeckRecordForm.resources
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.VSLogForm.resources
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.MainMenuForm.resources
+C:\Users\Ryo\source\repos\VersusLog\VersusLog\obj\Debug\VersusLog.MetaAnalyzeForm.resources
