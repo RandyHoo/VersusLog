@@ -63,25 +63,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeckRecodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeckRecodeForm.Designer.cs">
+      <DependentUpon>DeckRecodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InsertLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InsertLogForm.Designer.cs">
       <DependentUpon>InsertLogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VSLogGetForm.cs">
+    <Compile Include="VSLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VSLogGetForm.Designer.cs">
-      <DependentUpon>VSLogGetForm.cs</DependentUpon>
+    <Compile Include="VSLogForm.Designer.cs">
+      <DependentUpon>VSLogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DeckRecodeForm.resx">
+      <DependentUpon>DeckRecodeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InsertLogForm.resx">
       <DependentUpon>InsertLogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VSLogGetForm.resx">
-      <DependentUpon>VSLogGetForm.cs</DependentUpon>
+    <EmbeddedResource Include="VSLogForm.resx">
+      <DependentUpon>VSLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
