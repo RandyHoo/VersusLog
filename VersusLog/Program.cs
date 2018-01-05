@@ -17,7 +17,7 @@ namespace VersusLog
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form ViewForm = new VSLogForm();
+            Form ViewForm = new MainMenuForm();
             Application.Run(ViewForm);
         }
     }
