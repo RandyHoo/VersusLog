@@ -163,9 +163,10 @@ namespace VersusLog
                 {
                     //コマンド生成
                     //ID
-                    cmd.CommandText = "select count(*) from VSLOG";
+                    cmd.CommandText = "select ID from VSLOG";
                     using (var reader = cmd.ExecuteReader())
                     {
+                        //最後のレコードのIDを取得する
                         while (reader.Read())
                         {
                             id = (int)(long)reader.GetValue(0);

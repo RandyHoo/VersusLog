@@ -75,9 +75,10 @@ namespace VersusLog
                         using (var cmd = con.CreateCommand())
                         {
                             //ID取得用コマンド生成
-                            cmd.CommandText = "select count(*) from DECK";
+                            cmd.CommandText = "select ID from DECK";
                             using (var reader = cmd.ExecuteReader())
                             {
+                                //最後のレコードのIDを取得する
                                 while (reader.Read())
                                 {
                                     id = (int)(long)reader.GetValue(0);

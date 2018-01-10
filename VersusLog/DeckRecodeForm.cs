@@ -164,6 +164,7 @@ namespace VersusLog
                         }
                         else
                         {
+                            //対戦したことがないことを示すため「-」を入力する
                             total = 999;
                         }
 
@@ -216,6 +217,9 @@ namespace VersusLog
                         MydeckSmallclassComboBox.DataSource = DeckSmallclassDatasource;
                     }
                 }
+
+                //DB切断
+                con.Close();
             }
         }
 
