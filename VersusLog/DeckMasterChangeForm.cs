@@ -27,18 +27,16 @@ namespace VersusLog
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            //変更種別ごとにコマンド生成
-            switch (ChangeGenreComboBox.Text)
+            using (var con = new SQLiteConnection(ConnectionString))
             {
-                case "変更":
-                    using (var con = new SQLiteConnection(ConnectionString))
+                //DB接続
+                con.Open();
+                //変更種別ごとにコマンド生成
+                using (var cmd = con.CreateCommand())
+                {
+                    switch (ChangeGenreComboBox.Text)
                     {
-                        //DB接続
-                        con.Open();
-
-                        using (var cmd = con.CreateCommand())
-                        {
-
+                        case "変更":
                             //変更用クエリ作成
                             cmd.CommandText = "update DECK " +
                                 "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
@@ -58,22 +56,9 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
-
-                        //DB切断
-                        con.Close();
-                    }
-                    break;
-                case "追加":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
-
-                        int id = 0;
-                        string Qid;
-                        using (var cmd = con.CreateCommand())
-                        {
+                            break;
+                        case "追加":
+                            int id = 0;
                             //ID取得用コマンド生成
                             cmd.CommandText = "select ID from DECK";
                             using (var reader = cmd.ExecuteReader())
@@ -85,7 +70,7 @@ namespace VersusLog
                                 }
                                 id += 1;
                             }
-                            Qid = id.ToString();
+                            string Qid = id.ToString();
 
                             //追加用クエリ作成
                             cmd.CommandText = "insert into DECK " +
@@ -98,7 +83,7 @@ namespace VersusLog
                                 " )";
 
                             //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
+                            count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
                             {
@@ -108,27 +93,14 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
-
-                        //DB切断
-                        con.Close();
-                    }
-                    break;
-                case "削除":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
-
-                        using (var cmd = con.CreateCommand())
-                        {
-
+                            break;
+                        case "削除":
                             //追加用クエリ作成
                             cmd.CommandText = "delete from DECK " +
                                 "where ID = " + IDTextBox.Text;
 
                             //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
+                            count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
                             {
@@ -138,14 +110,13 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
-
-                        //DB切断
-                        con.Close();
+                            break;
+                        default:
+                            break;
                     }
-                    break;
-                default:
-                    break;
+                    //DB切断
+                    con.Close();
+                }
             }
         }
 
@@ -228,18 +199,9 @@ namespace VersusLog
                             while (reader.Read())
                             {
                                 MajorclassTextBox.Text = reader.GetString(0); //デッキ大分類
-                                if (reader.IsDBNull(1) == false)
-                                {
-                                    SmallclassTextBox.Text = reader.GetString(1); //デッキ小分類
-                                }
-                                if (reader.IsDBNull(2) == false)
-                                {
-                                    Decktype1TextBox.Text = reader.GetString(2); //デッキタイプ1
-                                }
-                                if (reader.IsDBNull(3) == false)
-                                {
-                                    Decktype2TextBox.Text = reader.GetString(3); //デッキタイプ2
-                                }
+                                SmallclassTextBox.Text = (reader.IsDBNull(1)) ? null : reader.GetString(1); //デッキ小分類
+                                Decktype1TextBox.Text = (reader.IsDBNull(2)) ? null : reader.GetString(2); //デッキタイプ1
+                                Decktype2TextBox.Text = (reader.IsDBNull(3)) ? null : reader.GetString(3); //デッキタイプ2
                             }
                         }
                     }
