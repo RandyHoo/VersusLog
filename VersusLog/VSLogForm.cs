@@ -93,16 +93,26 @@ namespace VersusLog
                     //戦績ログ(絞込無し)取得用クエリ作成
                     cmd.CommandText = "select VSLOG.ID, VSLOG.VSDATE, MYDECK.MAJORCLASS, MYDECK.SMALLCLASS, ENEMYDECK.MAJORCLASS, ENEMYDECK.SMALLCLASS, VSLOG.WIN, FORMAT.FORMATNAME, VSLOG.PRACEDENCE " +
                         "from VSLOG " +
-                        "inner join DECK as MYDECK on VSLOG.MYDECKID = MYDECK.ID " +
-                        "inner join DECK as ENEMYDECK on VSLOG.ENEMYDECKID = ENEMYDECK.ID " +
-                        "inner join FORMAT on VSLOG.FORMATID = FORMAT.ID";
+                        "left outer join DECK as MYDECK on VSLOG.MYDECKID = MYDECK.ID " +
+                        "left outer join DECK as ENEMYDECK on VSLOG.ENEMYDECKID = ENEMYDECK.ID " +
+                        "left outer join FORMAT on VSLOG.FORMATID = FORMAT.ID";
 
                     using (var reader = cmd.ExecuteReader())
                     {
                         //読み出し
                         while (reader.Read())
                         {
-                            displaylist.Add(new LogData(reader.GetValue(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetValue(6), reader.GetString(7), reader.GetValue(8)));
+                            displaylist.Add(new LogData(
+                                reader.GetValue(0), //ID
+                                reader.GetString(1), //日付
+                                reader.IsDBNull(2) ? null : reader.GetString(2), //自デッキ・大分類
+                                reader.IsDBNull(3) ? null : reader.GetString(3), //自デッキ・小分類
+                                reader.IsDBNull(4) ? null : reader.GetString(4), //相手デッキ・大分類
+                                reader.IsDBNull(5) ? null : reader.GetString(5), //相手デッキ・小分類
+                                reader.GetValue(6), //結果
+                                reader.IsDBNull(7) ? null : reader.GetString(7), //フォーマット
+                                reader.GetValue(8) //先攻後攻
+                                ));
                         }
                         LogGridView.DataSource = displaylist;
 
@@ -314,6 +324,7 @@ namespace VersusLog
     //戦績ログクラス
     class LogData
     {
+        //ID
         public int ID { get; set; }
 
         //日付
@@ -342,17 +353,17 @@ namespace VersusLog
 
         public LogData(object id, string vsdate, string mydeck_majorclass, string mydeck_smallclass, string enemydeck_majorclass, string enemydeck_smallclass, object win, string format, object pracedence)
         {
-            this.ID = (int)(long)id;
+            this.ID = System.Convert.ToInt32(id);
             this.Vsdate = vsdate;
             this.Mydeck_majorclass = mydeck_majorclass;
             this.Mydeck_smallclass = mydeck_smallclass;
             this.Enemydeck_majorclass = enemydeck_majorclass;
             this.Enemydeck_smallclass = enemydeck_smallclass;
             //int(1(true) or 0(false))をstringに変換
-            this.Win = ((int)(long)win == 1) ? "勝ち" : "負け";
+            this.Win = (System.Convert.ToInt32(win) == 1) ? "勝ち" : "負け";
             this.Format = format;
             //int(1(true) or 0(false))をstringに変換
-            this.Pracedence = ((int)(long)pracedence == 1) ? "先行" : "後攻";
+            this.Pracedence = (System.Convert.ToInt32(pracedence) == 1) ? "先行" : "後攻";
         }
     }
 }
