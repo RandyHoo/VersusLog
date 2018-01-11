@@ -94,6 +94,7 @@ namespace VersusLog
                                 "and WIN = 1";
                     using (var reader = cmd.ExecuteReader())
                     {
+                        reader.Read();
                         win = System.Convert.ToInt32(reader.GetValue(0));
                     }
 
@@ -119,6 +120,7 @@ namespace VersusLog
                             "and ENEMYDECKID = " + n.ID;
                         using (var reader = cmd.ExecuteReader())
                         {
+                            reader.Read();
                             tortal_col = System.Convert.ToInt32(reader.GetValue(0));
                         }
 
@@ -129,6 +131,7 @@ namespace VersusLog
                             "and WIN = 1";
                         using (var reader = cmd.ExecuteReader())
                         {
+                            reader.Read();
                             win = System.Convert.ToInt32(reader.GetValue(0));
                         }
 

@@ -129,6 +129,7 @@ namespace VersusLog
                         "and SMALLCLASS = '" + MydeckSmallclassComboBox.Text + "'";
                     using (var reader = cmd.ExecuteReader())
                     {
+                        reader.Read();
                         mydeckid = System.Convert.ToInt32(reader.GetValue(0));
                     }
                     string Qmydeckid = mydeckid.ToString();
