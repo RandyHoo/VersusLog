@@ -13,8 +13,6 @@ namespace VersusLog
 {
     public partial class DeckMasterChangeForm : Form
     {
-        private const string ConnectionString = @"Data Source=vslog.db";
-
         public DeckMasterChangeForm()
         {
             InitializeComponent();
@@ -27,13 +25,13 @@ namespace VersusLog
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
-                //変更種別ごとにコマンド生成
+
                 using (var cmd = con.CreateCommand())
                 {
+                    //変更種別ごとにクエリ作成
                     switch (ChangeGenreComboBox.Text)
                     {
                         case "変更":
@@ -45,7 +43,6 @@ namespace VersusLog
                                 "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
                                 "where ID = " + IDTextBox.Text;
 
-                            //コマンド実行
                             int count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
@@ -57,16 +54,18 @@ namespace VersusLog
                                 MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
                             break;
+
                         case "追加":
                             int id = 0;
-                            //ID取得用コマンド生成
+
+                            //ID取得用クエリ作成
                             cmd.CommandText = "select ID from DECK";
                             using (var reader = cmd.ExecuteReader())
                             {
                                 //最後のレコードのIDを取得する
                                 while (reader.Read())
                                 {
-                                    id = (int)(long)reader.GetValue(0);
+                                    id = System.Convert.ToInt32(reader.GetValue(0));
                                 }
                                 id += 1;
                             }
@@ -82,7 +81,6 @@ namespace VersusLog
                                 " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
                                 " )";
 
-                            //コマンド実行
                             count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
@@ -94,12 +92,12 @@ namespace VersusLog
                                 MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
                             break;
+
                         case "削除":
-                            //追加用クエリ作成
+                            //削除用クエリ作成
                             cmd.CommandText = "delete from DECK " +
                                 "where ID = " + IDTextBox.Text;
 
-                            //コマンド実行
                             count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
@@ -111,10 +109,11 @@ namespace VersusLog
                                 MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
                             break;
+
                         default:
                             break;
                     }
-                    //DB切断
+
                     con.Close();
                 }
             }
@@ -176,26 +175,22 @@ namespace VersusLog
 
         private void IDTextBox_TextChanged(object sender, EventArgs e)
         {
-            //変更の場合元々入っている値をデフォ値にする
+            //変更の場合、元々入っている値をデフォ値にするための処理
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
-                using (var con = new SQLiteConnection(ConnectionString))
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
                 {
-                    //DB接続
                     con.Open();
 
                     using (var cmd = con.CreateCommand())
                     {
-
-                        //クエリ作成
+                        //元々入っている値取得用クエリ
                         cmd.CommandText = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
                             "from DECK " +
                             "where ID = " + IDTextBox.Text;
 
-                        //コマンド実行
                         using (var reader = cmd.ExecuteReader())
                         {
-                            //読み出し
                             while (reader.Read())
                             {
                                 MajorclassTextBox.Text = reader.GetString(0); //デッキ大分類
@@ -206,7 +201,6 @@ namespace VersusLog
                         }
                     }
 
-                    //DB切断
                     con.Close();
                 }
             }
@@ -219,24 +213,28 @@ namespace VersusLog
 
         private void UpdateView()
         {
-            var displaylist = new List<DeckData>(); //表示用リスト
+            var displaylist = new List<DeckData>();
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
+                    //デッキ一覧取得用クエリ作成
                     cmd.CommandText = "select * from DECK";
 
-                    //コマンド実行
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
-                            displaylist.Add(new DeckData(reader.GetValue(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4)));
+                            displaylist.Add(new DeckData(
+                                reader.GetValue(0), //ID
+                                reader.GetString(1), //デッキ大分類
+                                reader.GetString(2), //デッキ小分類
+                                reader.GetString(3), //デッキタイプ1
+                                reader.GetString(4) //デッキタイプ2
+                                ));
                         }
                         DeckMasterGridView.DataSource = displaylist;
 
@@ -255,7 +253,6 @@ namespace VersusLog
                     }
                 }
 
-                //DB切断
                 con.Close();
             }
         }
@@ -263,15 +260,24 @@ namespace VersusLog
         //表示用デッキデータ
         class DeckData
         {
+            //ID
             public int Id { get; set; }
+
+            //デッキ大分類
             public string Majorclass { get; set; }
+
+            //デッキ小分類
             public string Smallclass { get; set; }
+
+            //デッキタイプ1
             public string Decktype1 { get; set; }
+
+            //デッキタイプ2
             public string DeckType2 { get; set; }
 
             public DeckData(object id, string majorclass, string smallclass, string decktype1, string decktype2)
             {
-                this.Id = (int)(long)id;
+                this.Id = System.Convert.ToInt32(id);
                 this.Majorclass = majorclass;
                 this.Smallclass = smallclass;
                 this.Decktype1 = decktype1;

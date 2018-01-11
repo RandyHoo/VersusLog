@@ -13,17 +13,14 @@ namespace VersusLog
 {
     public partial class DeckRecordForm : Form
     {
-        private const string ConnectionString = @"Data Source=vslog.db";
-
         public DeckRecordForm()
         {
             InitializeComponent();
 
             var MyDeckMajorclassDatasource = new List<string>();
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (var cmd = con.CreateCommand())
@@ -33,7 +30,6 @@ namespace VersusLog
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
                             MyDeckMajorclassDatasource.Add(reader.GetString(0));
@@ -42,25 +38,8 @@ namespace VersusLog
                     }
                 }
 
-                //DB切断
                 con.Close();
             }
-        }
-
-        private void MCVSLogGetButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new VSLogForm();
-            ViewForm.Show();
-            this.Hide();
-        }
-
-        private void MCInsertLogButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new InsertLogForm();
-            ViewForm.Show();
-            this.Hide();
         }
 
         private void GetDeckRecordButton_Click(object sender, EventArgs e)
@@ -68,9 +47,8 @@ namespace VersusLog
             var decklist = new List<DeckList>(); //デッキリスト
             var viewlist = new List<ViewList>(); //表示用リスト
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (var cmd = con.CreateCommand())
@@ -80,7 +58,6 @@ namespace VersusLog
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
                             decklist.Add(new DeckList(reader.GetValue(0), reader.GetString(1), reader.GetString(2)));
@@ -90,7 +67,6 @@ namespace VersusLog
 
                     int mydeckid, tortal_col;
                     float win, total;
-                    string deckname;
 
                     //自デッキID取得
                     cmd.CommandText = "select ID from DECK " +
@@ -99,7 +75,7 @@ namespace VersusLog
                     using (var reader = cmd.ExecuteReader())
                     {
                         reader.Read();
-                        mydeckid = (int)(long)reader.GetValue(0);
+                        mydeckid = System.Convert.ToInt32(reader.GetValue(0));
                     }
 
                     //全体の勝率を取得
@@ -109,7 +85,7 @@ namespace VersusLog
                     using (var reader = cmd.ExecuteReader())
                     {
                         reader.Read();
-                        tortal_col = (int)(long)reader.GetValue(0);
+                        tortal_col = System.Convert.ToInt32(reader.GetValue(0));
                     }
 
                     cmd.CommandText = "select count(*) from VSLOG " +
@@ -118,8 +94,7 @@ namespace VersusLog
                                 "and WIN = 1";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        reader.Read();
-                        win = (int)(long)reader.GetValue(0);
+                        win = System.Convert.ToInt32(reader.GetValue(0));
                     }
 
                     if (tortal_col > 0)
@@ -128,10 +103,11 @@ namespace VersusLog
                     }
                     else
                     {
+                        //対戦したことがないことを示すため「-」を入力する
                         total = 999;
                     }
 
-                    deckname = "全体";
+                    string deckname = "全体";
                     viewlist.Add(new ViewList(deckname, (int)total));
 
                     //デッキ毎の勝率を取得
@@ -143,8 +119,7 @@ namespace VersusLog
                             "and ENEMYDECKID = " + n.ID;
                         using (var reader = cmd.ExecuteReader())
                         {
-                            reader.Read();
-                            tortal_col = (int)(long)reader.GetValue(0);
+                            tortal_col = System.Convert.ToInt32(reader.GetValue(0));
                         }
 
                         cmd.CommandText = "select count(*) from VSLOG " +
@@ -154,8 +129,7 @@ namespace VersusLog
                             "and WIN = 1";
                         using (var reader = cmd.ExecuteReader())
                         {
-                            reader.Read();
-                            win = (int)(long)reader.GetValue(0);
+                            win = System.Convert.ToInt32(reader.GetValue(0));
                         }
 
                         if (tortal_col > 0)
@@ -186,7 +160,7 @@ namespace VersusLog
                     DeckRecodeView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                     DeckRecodeView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                 }
-                //DB切断
+
                 con.Close();
             }
         }
@@ -194,33 +168,8 @@ namespace VersusLog
         //自デッキ・大分類変更時に小分類を取得する
         private void MydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
         {
-            var DeckSmallclassDatasource = new List<string>();
-
-            using (var con = new SQLiteConnection(ConnectionString))
-            {
-                //DB接続
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
-                {
-                    //デッキ名取得用クエリ作成
-                    cmd.CommandText = "select SMALLCLASS from DECK " +
-                        "where MAJORCLASS = '" + MydeckMajorclassComboBox.Text + "'";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        //読み出し
-                        while (reader.Read())
-                        {
-                            DeckSmallclassDatasource.Add(reader.GetString(0));
-                        }
-                        MydeckSmallclassComboBox.DataSource = DeckSmallclassDatasource;
-                    }
-                }
-
-                //DB切断
-                con.Close();
-            }
+            //デッキ小分類を取得
+            CommonData.GetDeckSmallclass(MydeckMajorclassComboBox, MydeckSmallclassComboBox);
         }
 
         private void BackMainMenuButton_Click(object sender, EventArgs e)
@@ -246,7 +195,7 @@ namespace VersusLog
 
         public DeckList(object id, string deck_majorclass, string deck_smallclass)
         {
-            this.ID = (int)(long)id;
+            this.ID = System.Convert.ToInt32(id);
             this.Deck_majorclass = deck_majorclass;
             this.Deck_smallclass = deck_smallclass;
         }
@@ -264,7 +213,9 @@ namespace VersusLog
         public ViewList(string deckname, int total)
         {
             this.Deckname = deckname;
+
             this.Total = total.ToString();
+            //999(対戦したことがないことを表す)の場会、「-」を表示させる
             if (this.Total == "999")
             {
                 this.Total = "-";

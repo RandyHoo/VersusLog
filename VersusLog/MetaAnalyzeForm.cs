@@ -13,20 +13,19 @@ namespace VersusLog
 {
     public partial class MetaAnalyzeForm : Form
     {
-        private const string ConnectionString = @"Data Source=vslog.db";
-
         public MetaAnalyzeForm()
         {
             InitializeComponent();
+
+            //期間コンボボックスの要素をセット
             var PeriodDatasource = new List<string> { "指定なし", "この1週間", "今月" };
             PeriodComboBox.DataSource = PeriodDatasource;
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (var cmd = con.CreateCommand())
@@ -38,6 +37,7 @@ namespace VersusLog
                     DateTime dtToday = dtNow.Date;
                     string today = dtToday.ToShortDateString();
 
+                    //変更種別に応じてクエリの条件を生成
                     switch (PeriodComboBox.Text)
                     {
                         case "指定なし":
@@ -48,7 +48,6 @@ namespace VersusLog
                             DateTime dt = DateTime.Parse(workdate);
                             DateTime dtcal = dt.AddDays(-7);
                             workdate = dtcal.ToShortDateString();
-
                             wheretext = " where VSDATE between '" + workdate + "' and '" + today + "' ";
                             break;
                         case "今月":
@@ -71,7 +70,7 @@ namespace VersusLog
                     using (var reader = cmd.ExecuteReader())
                     {
                         reader.Read();
-                        moredeckid = (int)(long)reader.GetValue(0);
+                        moredeckid = System.Convert.ToInt32(reader.GetValue(0));
                     }
 
                     //最頻相手デッキ名取得
@@ -86,7 +85,6 @@ namespace VersusLog
                     MetaAnalyzeDeckText.Text = moredeck;
                 }
 
-                //DB切断
                 con.Close();
             }
         }

@@ -13,15 +13,15 @@ namespace VersusLog
 {
     public partial class FormatMasterChangeForm : Form
     {
-        private const string ConnectionString = @"Data Source=vslog.db";
-
         public FormatMasterChangeForm()
         {
             InitializeComponent();
 
+            //変更種別コンボボックスの要素入力
             var ChangeGenreDatasource = new List<string> { "変更", "追加", "削除" };
             ChangeGenreComboBox.DataSource = ChangeGenreDatasource;
 
+            //フォーマット一覧の表示更新
             UpdateView();
         }
 
@@ -38,9 +38,8 @@ namespace VersusLog
             //変更の場合元々入っている値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
-                using (var con = new SQLiteConnection(ConnectionString))
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
                 {
-                    //DB接続
                     con.Open();
 
                     using (var cmd = con.CreateCommand())
@@ -51,21 +50,18 @@ namespace VersusLog
                             "from FORMAT " +
                             "where ID = " + IDTextBox.Text;
 
-                        //コマンド実行
                         using (var reader = cmd.ExecuteReader())
                         {
-                            //読み出し
                             while (reader.Read())
                             {
                                 if (reader.IsDBNull(0) == false)
                                 {
-                                    FormatNameTextBox.Text = reader.GetString(0); //デッキ小分類
+                                    FormatNameTextBox.Text = reader.GetString(0); //フォーマット名
                                 }
                             }
                         }
                     }
 
-                    //DB切断
                     con.Close();
                 }
             }
@@ -73,18 +69,16 @@ namespace VersusLog
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            //変更種別ごとにコマンド生成
-            switch (ChangeGenreComboBox.Text)
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                case "変更":
-                    using (var con = new SQLiteConnection(ConnectionString))
+                con.Open();
+
+                using (var cmd = con.CreateCommand())
+                {
+                    //変更種別ごとにコマンド生成
+                    switch (ChangeGenreComboBox.Text)
                     {
-                        //DB接続
-                        con.Open();
-
-                        using (var cmd = con.CreateCommand())
-                        {
-
+                        case "変更":
                             //変更用クエリ作成
                             cmd.CommandText = "update FORMAT " +
                                 "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
@@ -101,22 +95,11 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
+                            break;
 
-                        //DB切断
-                        con.Close();
-                    }
-                    break;
-                case "追加":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
+                        case "追加":
+                            int id = 0;
 
-                        int id = 0;
-                        string Qid;
-                        using (var cmd = con.CreateCommand())
-                        {
                             //ID取得用コマンド生成
                             cmd.CommandText = "select ID from FORMAT";
                             using (var reader = cmd.ExecuteReader())
@@ -124,11 +107,11 @@ namespace VersusLog
                                 //最後のレコードのIDを取得する
                                 while (reader.Read())
                                 {
-                                    id = (int)(long)reader.GetValue(0);
+                                    id = System.Convert.ToInt32(reader.GetValue(0));
                                 }
                                 id += 1;
                             }
-                            Qid = id.ToString();
+                            string Qid = id.ToString();
 
                             //追加用クエリ作成
                             cmd.CommandText = "insert into FORMAT " +
@@ -138,7 +121,7 @@ namespace VersusLog
                                 ")";
 
                             //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
+                            count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
                             {
@@ -148,27 +131,15 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
+                            break;
 
-                        //DB切断
-                        con.Close();
-                    }
-                    break;
-                case "削除":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
-
-                        using (var cmd = con.CreateCommand())
-                        {
-
-                            //追加用クエリ作成
+                        case "削除":
+                            //削除用クエリ作成
                             cmd.CommandText = "delete from FORMAT " +
                                 "where ID = " + IDTextBox.Text;
 
                             //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
+                            count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
                             {
@@ -178,14 +149,14 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
+                            break;
 
-                        //DB切断
-                        con.Close();
+                        default:
+                            break;
                     }
-                    break;
-                default:
-                    break;
+
+                    con.Close();
+                }
             }
         }
 
@@ -219,24 +190,25 @@ namespace VersusLog
 
         private void UpdateView()
         {
-            var displaylist = new List<FormatData>(); //表示用リスト
+            var displaylist = new List<FormatData>();
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
+                    //フォーマット一覧取得用クエリ作成
                     cmd.CommandText = "select * from FORMAT";
 
-                    //コマンド実行
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
-                            displaylist.Add(new FormatData(reader.GetValue(0), reader.GetString(1)));
+                            displaylist.Add(new FormatData(
+                                reader.GetValue(0), //ID
+                                reader.GetString(1) //フォーマット名
+                                ));
                         }
                         FormatMasterGridView.DataSource = displaylist;
 
@@ -255,26 +227,29 @@ namespace VersusLog
                     }
                 }
 
-                //DB切断
                 con.Close();
             }
         }
 
-        //表示用デッキデータ
+        //表示用フォーマットデータ
         class FormatData
         {
+            //ID
             public int Id { get; set; }
+
+            //フォーマット名
             public string Formatname { get; set; }
 
             public FormatData(object id, string formatname)
             {
-                this.Id = (int)(long)id;
+                this.Id = System.Convert.ToInt32(id);
                 this.Formatname = formatname;
             }
         }
 
         private void UpdateViewButton_Click(object sender, EventArgs e)
         {
+            //フォーマット一覧の表示更新
             UpdateView();
         }
     }

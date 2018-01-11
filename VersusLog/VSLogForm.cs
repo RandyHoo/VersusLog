@@ -13,8 +13,6 @@ namespace VersusLog
 {
     public partial class VSLogForm : Form
     {
-        private const string ConnectionString = @"Data Source=vslog.db";
-
         public VSLogForm()
         {
             InitializeComponent();
@@ -23,9 +21,8 @@ namespace VersusLog
             var EnemyDeckMajorclassDatasource = new List<string>();
             var FormatDatasource = new List<string>();
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (var cmd = con.CreateCommand())
@@ -33,9 +30,9 @@ namespace VersusLog
                     //デッキ名取得用クエリ作成
                     cmd.CommandText = "select distinct MAJORCLASS from DECK";
 
+                    //自デッキ、相手デッキ 大分類コンボボックスの要素としてセット
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
                             MyDeckMajorclassDatasource.Add(reader.GetString(0));
@@ -48,9 +45,9 @@ namespace VersusLog
                     //フォーマット名取得用クエリ作成
                     cmd.CommandText = "select FORMATNAME from FORMAT";
 
+                    //フォーマットコンボボックスの要素としてセット
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
                             FormatDatasource.Add(reader.GetString(0));
@@ -59,7 +56,6 @@ namespace VersusLog
                     }
                 }
 
-                //DB切断
                 con.Close();
             }
 
@@ -75,17 +71,17 @@ namespace VersusLog
             PracedenceDatasource.Add("後攻");
             PracedenceComboBox.DataSource = PracedenceDatasource;
 
+            //変更種別コンボボックスの要素入力
             var ChangeGenreDatasource = new List<string> { "変更", "削除" };
             ChangeGenreComboBox.DataSource = ChangeGenreDatasource;
         }
 
         private void DataGetButton_Click(object sender, EventArgs e)
         {
-            var displaylist = new List<LogData>(); //表示用リスト
+            var displaylist = new List<LogData>();
 
-            using (var con = new SQLiteConnection(ConnectionString))
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                //DB接続
                 con.Open();
 
                 using (var cmd = con.CreateCommand())
@@ -99,7 +95,6 @@ namespace VersusLog
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        //読み出し
                         while (reader.Read())
                         {
                             displaylist.Add(new LogData(
@@ -132,7 +127,6 @@ namespace VersusLog
                     }
                 }
 
-                //DB切断
                 con.Close();
             }
         }
@@ -147,73 +141,28 @@ namespace VersusLog
 
         private void MydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
         {
-            var DeckSmallclassDatasource = new List<string>();
-
-            using (var con = new SQLiteConnection(ConnectionString))
-            {
-                //DB接続
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
-                {
-                    //デッキ名取得用クエリ作成
-                    cmd.CommandText = "select SMALLCLASS from DECK " +
-                        "where MAJORCLASS = '" + MydeckMajorclassComboBox.Text + "'";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        //読み出し
-                        while (reader.Read())
-                        {
-                            DeckSmallclassDatasource.Add(reader.GetString(0));
-                        }
-                        MydeckSmallclassComboBox.DataSource = DeckSmallclassDatasource;
-                    }
-                }
-            }
+            //デッキ小分類を取得しセット
+            CommonData.GetDeckSmallclass(MydeckMajorclassComboBox, MydeckSmallclassComboBox);
         }
 
         private void EnemydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
         {
-            var DeckSmallclassDatasource = new List<string>();
-
-            using (var con = new SQLiteConnection(ConnectionString))
-            {
-                //DB接続
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
-                {
-                    //デッキ名取得用クエリ作成
-                    cmd.CommandText = "select SMALLCLASS from DECK " +
-                        "where MAJORCLASS = '" + EnemydeckMajorclassComboBox.Text + "'";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        //読み出し
-                        while (reader.Read())
-                        {
-                            DeckSmallclassDatasource.Add(reader.GetString(0));
-                        }
-                        EnemydeckSmallclassComboBox.DataSource = DeckSmallclassDatasource;
-                    }
-                }
-            }
+            //デッキ小分類を取得しセット
+            CommonData.GetDeckSmallclass(EnemydeckMajorclassComboBox, EnemydeckSmallclassComboBox);
         }
 
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            //変更種別ごとにコマンド生成
-            switch (ChangeGenreComboBox.Text)
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                case "変更":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
+                con.Open();
 
-                        using (var cmd = con.CreateCommand())
-                        {
+                using (var cmd = con.CreateCommand())
+                {
+                    //変更種別ごとにコマンド生成
+                    switch (ChangeGenreComboBox.Text)
+                    {
+                        case "変更":
                             int mydeckid = 0, enemydeckid = 0, formatid = 0;
                             string Qmydeckid, Qenemydeckid, Qwin, Qformatid, Qpracedence;
 
@@ -225,7 +174,7 @@ namespace VersusLog
                             {
                                 while (reader.Read())
                                 {
-                                    mydeckid = (int)(long)reader.GetValue(0);
+                                    mydeckid = System.Convert.ToInt32(reader.GetValue(0));
                                 }
                             }
                             Qmydeckid = mydeckid.ToString();
@@ -238,24 +187,27 @@ namespace VersusLog
                             {
                                 while (reader.Read())
                                 {
-                                    enemydeckid = (int)(long)reader.GetValue(0);
+                                    enemydeckid = System.Convert.ToInt32(reader.GetValue(0));
                                 }
                             }
                             Qenemydeckid = enemydeckid.ToString();
 
+                            //結果
                             Qwin = (WinComboBox.Text == "勝ち") ? "1" : "0";
 
+                            //フォーマットID
                             cmd.CommandText = "select ID from FORMAT " +
                                 "where FORMATNAME = '" + FormatComboBox.Text + "'";
                             using (var reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
                                 {
-                                    formatid = (int)(long)reader.GetValue(0);
+                                    formatid = System.Convert.ToInt32(reader.GetValue(0));
                                 }
                             }
                             Qformatid = formatid.ToString();
 
+                            //先攻後攻
                             Qpracedence = (PracedenceComboBox.Text == "先行") ? "1" : "0";
 
                             //変更用クエリ作成
@@ -268,7 +220,6 @@ namespace VersusLog
                                 "PRACEDENCE = " + Qpracedence + " " +
                                 "where ID = " + IDTextBox.Text;
 
-                            //コマンド実行
                             int count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
@@ -279,27 +230,13 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
-
-                        //DB切断
-                        con.Close();
-                    }
-                    break;
-                case "削除":
-                    using (var con = new SQLiteConnection(ConnectionString))
-                    {
-                        //DB接続
-                        con.Open();
-
-                        using (var cmd = con.CreateCommand())
-                        {
-
-                            //追加用クエリ作成
+                            break;
+                        case "削除":
+                            //削除用クエリ作成
                             cmd.CommandText = "delete from VSLOG " +
                                 "where ID = " + IDTextBox.Text;
 
-                            //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
+                            count = cmd.ExecuteNonQuery();
 
                             if (count > 0)
                             {
@@ -309,61 +246,61 @@ namespace VersusLog
                             {
                                 MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
-                        }
+                            break;
 
-                        //DB切断
-                        con.Close();
+                        default:
+                            break;
                     }
-                    break;
-                default:
-                    break;
+
+                    con.Close();
+                }
             }
         }
-    }
 
-    //戦績ログクラス
-    class LogData
-    {
-        //ID
-        public int ID { get; set; }
-
-        //日付
-        public string Vsdate { get; set; }
-
-        //自デッキ・大分類
-        public string Mydeck_majorclass { get; set; }
-
-        //自デッキ・小分類
-        public string Mydeck_smallclass { get; set; }
-
-        //相手デッキ・大分類
-        public string Enemydeck_majorclass { get; set; }
-
-        //相手デッキ・小分類
-        public string Enemydeck_smallclass { get; set; }
-
-        //結果("勝ち" or "負け")
-        public string Win { get; set; }
-
-        //フォーマット
-        public string Format { get; set; }
-
-        //先行後攻("先行" or "後攻")
-        public string Pracedence { get; set; }
-
-        public LogData(object id, string vsdate, string mydeck_majorclass, string mydeck_smallclass, string enemydeck_majorclass, string enemydeck_smallclass, object win, string format, object pracedence)
+        //戦績ログクラス
+        class LogData
         {
-            this.ID = System.Convert.ToInt32(id);
-            this.Vsdate = vsdate;
-            this.Mydeck_majorclass = mydeck_majorclass;
-            this.Mydeck_smallclass = mydeck_smallclass;
-            this.Enemydeck_majorclass = enemydeck_majorclass;
-            this.Enemydeck_smallclass = enemydeck_smallclass;
-            //int(1(true) or 0(false))をstringに変換
-            this.Win = (System.Convert.ToInt32(win) == 1) ? "勝ち" : "負け";
-            this.Format = format;
-            //int(1(true) or 0(false))をstringに変換
-            this.Pracedence = (System.Convert.ToInt32(pracedence) == 1) ? "先行" : "後攻";
+            //ID
+            public int ID { get; set; }
+
+            //日付
+            public string Vsdate { get; set; }
+
+            //自デッキ・大分類
+            public string Mydeck_majorclass { get; set; }
+
+            //自デッキ・小分類
+            public string Mydeck_smallclass { get; set; }
+
+            //相手デッキ・大分類
+            public string Enemydeck_majorclass { get; set; }
+
+            //相手デッキ・小分類
+            public string Enemydeck_smallclass { get; set; }
+
+            //結果("勝ち" or "負け")
+            public string Win { get; set; }
+
+            //フォーマット
+            public string Format { get; set; }
+
+            //先行後攻("先行" or "後攻")
+            public string Pracedence { get; set; }
+
+            public LogData(object id, string vsdate, string mydeck_majorclass, string mydeck_smallclass, string enemydeck_majorclass, string enemydeck_smallclass, object win, string format, object pracedence)
+            {
+                this.ID = System.Convert.ToInt32(id);
+                this.Vsdate = vsdate;
+                this.Mydeck_majorclass = mydeck_majorclass;
+                this.Mydeck_smallclass = mydeck_smallclass;
+                this.Enemydeck_majorclass = enemydeck_majorclass;
+                this.Enemydeck_smallclass = enemydeck_smallclass;
+                //int(1(true) or 0(false))を変換
+                this.Win = (System.Convert.ToInt32(win) == 1) ? "勝ち" : "負け";
+                this.Format = format;
+                //int(1(true) or 0(false))を変換
+                this.Pracedence = (System.Convert.ToInt32(pracedence) == 1) ? "先行" : "後攻";
+            }
         }
     }
 }
