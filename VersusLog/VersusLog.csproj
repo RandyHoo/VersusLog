@@ -81,6 +81,12 @@
     <Compile Include="DeckMasterChangeForm.Designer.cs">
       <DependentUpon>DeckMasterChangeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SQLForm.Designer.cs">
+      <DependentUpon>SQLForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VSLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeckMasterChangeForm.resx">
       <DependentUpon>DeckMasterChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLForm.resx">
+      <DependentUpon>SQLForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSLogForm.resx">
       <DependentUpon>VSLogForm.cs</DependentUpon>

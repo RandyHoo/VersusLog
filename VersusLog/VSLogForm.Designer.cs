@@ -653,7 +653,7 @@
             this.ClientSize = new System.Drawing.Size(1115, 654);
             this.Controls.Add(this.tabControl1);
             this.Name = "VSLogForm";
-            this.Text = "VersusLog -戦績ログ-";
+            this.Text = "VersusLog";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

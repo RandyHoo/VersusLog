@@ -40,5 +40,13 @@ namespace VersusLog
             ViewForm.Show();
             this.Hide();
         }
+
+        private void MCSQLButton_Click(object sender, EventArgs e)
+        {
+            //表示フォーム切り替え
+            Form ViewForm = new SQLForm();
+            ViewForm.Show();
+            this.Hide();
+        }
     }
 }
