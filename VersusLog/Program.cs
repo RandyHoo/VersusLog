@@ -22,10 +22,21 @@ namespace VersusLog
         }
     }
 
+    /// <summary>
+    /// 共通データ・メソッドクラス
+    /// </summary>
     public class CommonData
     {
+        /// <summary>
+        /// DB接続先情報
+        /// </summary>
         public const string ConnectionString = @"Data Source=vslog.db";
 
+        /// <summary>
+        /// デッキ小分類取得処理
+        /// </summary>
+        /// <param name="MajorclassComboBox">デッキ大分類コンボボックス</param>
+        /// <param name="SmallclassComboBox">デッキ小分類コンボボックス</param>
         public static void GetDeckSmallclass(ComboBox MajorclassComboBox, ComboBox SmallclassComboBox)
         {
             var DeckSmallclassDatasource = new List<string>();
