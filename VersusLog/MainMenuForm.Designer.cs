@@ -66,11 +66,11 @@
             // 
             // MCSQLButton
             // 
-            this.MCSQLButton.Location = new System.Drawing.Point(12, 55);
+            this.MCSQLButton.Location = new System.Drawing.Point(173, 100);
             this.MCSQLButton.Name = "MCSQLButton";
             this.MCSQLButton.Size = new System.Drawing.Size(125, 31);
             this.MCSQLButton.TabIndex = 10;
-            this.MCSQLButton.Text = "SQL実行";
+            this.MCSQLButton.Text = "マスタインポート";
             this.MCSQLButton.UseVisualStyleBackColor = true;
             this.MCSQLButton.Click += new System.EventHandler(this.MCSQLButton_Click);
             // 
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 101);
+            this.ClientSize = new System.Drawing.Size(324, 141);
             this.Controls.Add(this.MCSQLButton);
             this.Controls.Add(this.MCFormatMasterChangeButton);
             this.Controls.Add(this.MCDeckMasterChangeButton);

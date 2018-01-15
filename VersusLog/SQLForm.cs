@@ -26,28 +26,19 @@ namespace VersusLog
 
                 using (var cmd = con.CreateCommand())
                 {
-                    /*try
-                    {*/
-                    //クエリ作成
-                    cmd.CommandText = SQLTextBox.Text;
-
-                    using (var reader = cmd.ExecuteReader())
+                    try
                     {
-                        int readcount = 0;
-                        string text = "";
-                        while (reader.Read())
-                        {
-                            Console.WriteLine(reader.GetString(readcount));
-                            ResultTextBox.Text = text;
-                            readcount += 1;
-                        }
+                        //クエリ作成、実行
+                        cmd.CommandText = SQLTextBox.Text;
+                        int count = cmd.ExecuteNonQuery();
+                        MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
-                    /*}
                     catch
                     {
                         MessageBox.Show("SQLエラーです", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    }*/
+                    }
                 }
+
                 con.Close();
             }
         }
@@ -58,11 +49,6 @@ namespace VersusLog
             Form ViewForm = new MainMenuForm();
             ViewForm.Show();
             this.Hide();
-        }
-
-        private void ClearButton_Click(object sender, EventArgs e)
-        {
-            ResultTextBox.Text = "";
         }
     }
 }
