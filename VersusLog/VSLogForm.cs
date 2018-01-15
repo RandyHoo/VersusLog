@@ -637,7 +637,7 @@ namespace VersusLog
                             break;
                         case "今月":
                             worktext = today.Substring(0, 7);
-                            wheretext = "where VSDATE like '" + worktext + "%' ";
+                            wheretext = " where VSDATE like '" + worktext + "%' ";
                             break;
                         default:
                             wheretext = " ";
@@ -647,8 +647,8 @@ namespace VersusLog
 
                     //最頻相手デッキID取得
                     cmd.CommandText = "select ENEMYDECKID from VSLOG " + wheretext +
-                        "group by ENEMYDECKID " +
-                        "having count(*) >= (select count(*) from VSLOG group by ENEMYDECKID)";
+                        "group by ENEMYDECKID having count(*) >= (select max(cnt) from ( select count(*) as cnt from VSLOG" + wheretext +
+                         "group by ENEMYDECKID))";
 
                     int moredeckid;
                     string moredeck;
