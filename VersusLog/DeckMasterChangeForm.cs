@@ -17,12 +17,28 @@ namespace VersusLog
         {
             InitializeComponent();
 
+            //初期化処理
+            DeckChangeMasterInit();
+        }
+
+        /// <summary>
+        /// デッキマスタ初期化処理
+        /// </summary>
+        private void DeckChangeMasterInit()
+        {
+            //変更種別コンボボックスの要素入力
             var ChangeGenreDatasource = new List<string> { "変更", "追加", "削除" };
             ChangeGenreComboBox.DataSource = ChangeGenreDatasource;
 
+            //デッキマスタ表示
             UpdateView();
         }
 
+        /// <summary>
+        /// 実行ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
@@ -119,6 +135,11 @@ namespace VersusLog
             }
         }
 
+        /// <summary>
+        /// 変更種別変更時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeGenreComboBox_TextChanged(object sender, EventArgs e)
         {
             //変更種別ごとに入力規制
@@ -165,6 +186,11 @@ namespace VersusLog
             }
         }
 
+        /// <summary>
+        /// メインメニューに戻るボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackMainMenuButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
@@ -173,9 +199,15 @@ namespace VersusLog
             this.Hide();
         }
 
+
+        /// <summary>
+        /// ID変更時デフォルト値入力処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IDTextBox_TextChanged(object sender, EventArgs e)
         {
-            //変更の場合、元々入っている値をデフォ値にするための処理
+            //変更の場合元々入っている値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
                 using (var con = new SQLiteConnection(CommonData.ConnectionString))
@@ -206,11 +238,19 @@ namespace VersusLog
             }
         }
 
+        /// <summary>
+        /// 表示更新ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateViewButton_Click(object sender, EventArgs e)
         {
             UpdateView();
         }
 
+        /// <summary>
+        /// 表示更新処理
+        /// </summary>
         private void UpdateView()
         {
             var displaylist = new List<DeckData>();
@@ -256,33 +296,53 @@ namespace VersusLog
                 con.Close();
             }
         }
+    }
 
-        //表示用デッキデータ
-        class DeckData
+    /// <summary>
+    /// デッキデータクラス
+    /// </summary>
+    class DeckData
+    {
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int Id { get; set; }
+        
+        /// <summary>
+        /// デッキ大分類
+        /// </summary>
+        public string Majorclass { get; set; }
+        
+        /// <summary>
+        /// デッキ小分類
+        /// </summary>
+        public string Smallclass { get; set; }
+        
+        /// <summary>
+        /// デッキタイプ1
+        /// </summary>
+        public string Decktype1 { get; set; }
+        
+        /// <summary>
+        /// デッキタイプ2
+        /// </summary>
+        public string DeckType2 { get; set; }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="majorclass">デッキ大分類</param>
+        /// <param name="smallclass">デッキ小分類</param>
+        /// <param name="decktype1">デッキタイプ1</param>
+        /// <param name="decktype2">デッキタイプ2</param>
+        public DeckData(object id, string majorclass, string smallclass, string decktype1, string decktype2)
         {
-            //ID
-            public int Id { get; set; }
-
-            //デッキ大分類
-            public string Majorclass { get; set; }
-
-            //デッキ小分類
-            public string Smallclass { get; set; }
-
-            //デッキタイプ1
-            public string Decktype1 { get; set; }
-
-            //デッキタイプ2
-            public string DeckType2 { get; set; }
-
-            public DeckData(object id, string majorclass, string smallclass, string decktype1, string decktype2)
-            {
-                this.Id = System.Convert.ToInt32(id);
-                this.Majorclass = majorclass;
-                this.Smallclass = smallclass;
-                this.Decktype1 = decktype1;
-                this.DeckType2 = decktype2;
-            }
+            this.Id = System.Convert.ToInt32(id);
+            this.Majorclass = majorclass;
+            this.Smallclass = smallclass;
+            this.Decktype1 = decktype1;
+            this.DeckType2 = decktype2;
         }
     }
 }

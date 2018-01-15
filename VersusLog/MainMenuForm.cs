@@ -17,36 +17,56 @@ namespace VersusLog
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 戦績ログ遷移処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MCVSLogButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new VSLogForm();
             ViewForm.Show();
-            this.Hide();
+            Hide();
         }
 
+        /// <summary>
+        /// デッキマスタ変更遷移処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MCDeckMasterChangeButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new DeckMasterChangeForm();
             ViewForm.Show();
-            this.Hide();
+            Hide();
         }
 
+        /// <summary>
+        /// フォーマットマスタ変更遷移処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MCFormatMasterChangeButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new FormatMasterChangeForm();
             ViewForm.Show();
-            this.Hide();
+            Hide();
         }
 
+        /// <summary>
+        /// SQL実行遷移処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MCSQLButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new SQLForm();
             ViewForm.Show();
-            this.Hide();
+            Hide();
         }
     }
 }

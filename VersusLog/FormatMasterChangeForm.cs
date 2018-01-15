@@ -17,14 +17,28 @@ namespace VersusLog
         {
             InitializeComponent();
 
+            //初期化処理
+            FormatMasterChangeFormInit();
+        }
+
+        /// <summary>
+        /// フォーマットマスタ初期化処理
+        /// </summary>
+        private void FormatMasterChangeFormInit()
+        {
             //変更種別コンボボックスの要素入力
             var ChangeGenreDatasource = new List<string> { "変更", "追加", "削除" };
             ChangeGenreComboBox.DataSource = ChangeGenreDatasource;
 
-            //フォーマット一覧の表示更新
+            //フォーマットマスタ表示
             UpdateView();
         }
 
+        /// <summary>
+        /// メインメニューに戻るボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackMainMenuButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
@@ -33,40 +47,11 @@ namespace VersusLog
             this.Hide();
         }
 
-        private void IDTextBox_TextChanged(object sender, EventArgs e)
-        {
-            //変更の場合元々入っている値をデフォ値にする
-            if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
-            {
-                using (var con = new SQLiteConnection(CommonData.ConnectionString))
-                {
-                    con.Open();
-
-                    using (var cmd = con.CreateCommand())
-                    {
-
-                        //クエリ作成
-                        cmd.CommandText = "select FORMATNAME " +
-                            "from FORMAT " +
-                            "where ID = " + IDTextBox.Text;
-
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                if (reader.IsDBNull(0) == false)
-                                {
-                                    FormatNameTextBox.Text = reader.GetString(0); //フォーマット名
-                                }
-                            }
-                        }
-                    }
-
-                    con.Close();
-                }
-            }
-        }
-
+        /// <summary>
+        /// 実行ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
@@ -160,6 +145,51 @@ namespace VersusLog
             }
         }
 
+
+        /// <summary>
+        /// ID変更時デフォルト値入力処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void IDTextBox_TextChanged(object sender, EventArgs e)
+        {
+            //変更の場合元々入っている値をデフォ値にする
+            if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
+            {
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
+                {
+                    con.Open();
+
+                    using (var cmd = con.CreateCommand())
+                    {
+
+                        //クエリ作成
+                        cmd.CommandText = "select FORMATNAME " +
+                            "from FORMAT " +
+                            "where ID = " + IDTextBox.Text;
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                if (reader.IsDBNull(0) == false)
+                                {
+                                    FormatNameTextBox.Text = reader.GetString(0); //フォーマット名
+                                }
+                            }
+                        }
+                    }
+
+                    con.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 変更種別変更時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChangeGenreComboBox_TextChanged(object sender, EventArgs e)
         {
             //変更種別ごとに入力規制
@@ -188,6 +218,9 @@ namespace VersusLog
             }
         }
 
+        /// <summary>
+        /// 表示更新処理
+        /// </summary>
         private void UpdateView()
         {
             var displaylist = new List<FormatData>();
@@ -231,26 +264,42 @@ namespace VersusLog
             }
         }
 
-        //表示用フォーマットデータ
-        class FormatData
-        {
-            //ID
-            public int Id { get; set; }
-
-            //フォーマット名
-            public string Formatname { get; set; }
-
-            public FormatData(object id, string formatname)
-            {
-                this.Id = System.Convert.ToInt32(id);
-                this.Formatname = formatname;
-            }
-        }
-
+        /// <summary>
+        /// 表示更新ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateViewButton_Click(object sender, EventArgs e)
         {
-            //フォーマット一覧の表示更新
+            //フォーマットマスタ更新
             UpdateView();
+        }
+    }
+
+    /// <summary>
+    /// フォーマットデータクラス
+    /// </summary>
+    class FormatData
+    {
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// フォーマット名
+        /// </summary>
+        public string Formatname { get; set; }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="formatname">フォーマット名</param>
+        public FormatData(object id, string formatname)
+        {
+            this.Id = System.Convert.ToInt32(id);
+            this.Formatname = formatname;
         }
     }
 }

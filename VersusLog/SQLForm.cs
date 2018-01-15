@@ -18,6 +18,11 @@ namespace VersusLog
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 実行ボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
@@ -43,12 +48,17 @@ namespace VersusLog
             }
         }
 
+        /// <summary>
+        /// メインメニューに戻るボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackMainMenuButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new MainMenuForm();
             ViewForm.Show();
-            this.Hide();
+            Hide();
         }
     }
 }
