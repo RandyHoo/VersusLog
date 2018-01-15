@@ -61,12 +61,9 @@ C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\EntityFramework.SqlS
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.xml
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csprojResolveAssemblyReference.cache
-C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.DeckRecordForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.FormatMasterChangeForm.resources
-C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.InsertLogForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.MainMenuForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.DeckMasterChangeForm.resources
-C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.MetaAnalyzeForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.VSLogForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.Properties.Resources.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.GenerateResource.Cache

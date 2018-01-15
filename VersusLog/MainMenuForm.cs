@@ -17,34 +17,10 @@ namespace VersusLog
             InitializeComponent();
         }
 
-        private void MCInsertLogButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new InsertLogForm();
-            ViewForm.Show();
-            this.Hide();
-        }
-
         private void MCVSLogButton_Click(object sender, EventArgs e)
         {
             //表示フォーム切り替え
             Form ViewForm = new VSLogForm();
-            ViewForm.Show();
-            this.Hide();
-        }
-
-        private void MCDeckRecordButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new DeckRecordForm();
-            ViewForm.Show();
-            this.Hide();
-        }
-
-        private void MCDeckAnalyzeButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new MetaAnalyzeForm();
             ViewForm.Show();
             this.Hide();
         }

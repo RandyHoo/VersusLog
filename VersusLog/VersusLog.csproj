@@ -63,23 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeckRecodeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DeckRecodeForm.Designer.cs">
-      <DependentUpon>DeckRecodeForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormatMasterChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormatMasterChangeForm.Designer.cs">
       <DependentUpon>FormatMasterChangeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InsertLogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InsertLogForm.Designer.cs">
-      <DependentUpon>InsertLogForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenuForm.cs">
       <SubType>Form</SubType>
@@ -93,12 +81,6 @@
     <Compile Include="DeckMasterChangeForm.Designer.cs">
       <DependentUpon>DeckMasterChangeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MetaAnalyzeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MetaAnalyzeForm.Designer.cs">
-      <DependentUpon>MetaAnalyzeForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="VSLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,23 +89,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DeckRecodeForm.resx">
-      <DependentUpon>DeckRecodeForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormatMasterChangeForm.resx">
       <DependentUpon>FormatMasterChangeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InsertLogForm.resx">
-      <DependentUpon>InsertLogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeckMasterChangeForm.resx">
       <DependentUpon>DeckMasterChangeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MetaAnalyzeForm.resx">
-      <DependentUpon>MetaAnalyzeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSLogForm.resx">
       <DependentUpon>VSLogForm.cs</DependentUpon>

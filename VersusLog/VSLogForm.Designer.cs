@@ -28,305 +28,707 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DataGetButton = new System.Windows.Forms.Button();
-            this.LogGridView = new System.Windows.Forms.DataGridView();
-            this.BackMainMenuButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.VLDateTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.VLFormatComboBox = new System.Windows.Forms.ComboBox();
+            this.VLEnemydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
+            this.VLEnemydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
+            this.VLMydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
+            this.VLMydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
+            this.VLPracedenceComboBox = new System.Windows.Forms.ComboBox();
+            this.VLWinComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.ChangeGenreLabel = new System.Windows.Forms.Label();
-            this.ChangeGenreComboBox = new System.Windows.Forms.ComboBox();
-            this.DoneButton = new System.Windows.Forms.Button();
+            this.VLChangeGenreComboBox = new System.Windows.Forms.ComboBox();
+            this.VLDoneButton = new System.Windows.Forms.Button();
             this.DeckType2Label = new System.Windows.Forms.Label();
             this.DeckType1Label = new System.Windows.Forms.Label();
             this.MydeckSmallclassLabel = new System.Windows.Forms.Label();
             this.mydeckMajorclassLabel = new System.Windows.Forms.Label();
-            this.IDTextBox = new System.Windows.Forms.TextBox();
+            this.VLIDTextBox = new System.Windows.Forms.TextBox();
             this.IDLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.WinComboBox = new System.Windows.Forms.ComboBox();
-            this.PracedenceComboBox = new System.Windows.Forms.ComboBox();
-            this.MydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
-            this.MydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
-            this.EnemydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
-            this.EnemydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
-            this.FormatComboBox = new System.Windows.Forms.ComboBox();
-            this.DateTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.LogGridView)).BeginInit();
+            this.BackMainMenuButton = new System.Windows.Forms.Button();
+            this.VLDataGetButton = new System.Windows.Forms.Button();
+            this.VLLogGridView = new System.Windows.Forms.DataGridView();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ILLogInsertButton = new System.Windows.Forms.Button();
+            this.PracedenceLabel = new System.Windows.Forms.Label();
+            this.ILPracedenceComboBox = new System.Windows.Forms.ComboBox();
+            this.FormatLabel = new System.Windows.Forms.Label();
+            this.ILFormatComboBox = new System.Windows.Forms.ComboBox();
+            this.WinLabel = new System.Windows.Forms.Label();
+            this.ILWinComboBox = new System.Windows.Forms.ComboBox();
+            this.EnemydeckSmallclassLabel = new System.Windows.Forms.Label();
+            this.ILEnemydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
+            this.EnemydeckMajorclassLabel = new System.Windows.Forms.Label();
+            this.ILEnemydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
+            this.ILMydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ILMydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
+            this.ILDateTextBox = new System.Windows.Forms.TextBox();
+            this.DateLabel = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DRDeckRecodeView = new System.Windows.Forms.DataGridView();
+            this.DRGetDeckRecordButton = new System.Windows.Forms.Button();
+            this.DRMydeckSmallclassComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.DRMydeckMajorclassComboBox = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.MAPeriodComboBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.MAMetaAnalyzeDeckText = new System.Windows.Forms.Label();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VLLogGridView)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DRDeckRecodeView)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // DataGetButton
+            // tabControl1
             // 
-            this.DataGetButton.Location = new System.Drawing.Point(185, 504);
-            this.DataGetButton.Name = "DataGetButton";
-            this.DataGetButton.Size = new System.Drawing.Size(122, 32);
-            this.DataGetButton.TabIndex = 0;
-            this.DataGetButton.Text = "ログ取得";
-            this.DataGetButton.UseVisualStyleBackColor = true;
-            this.DataGetButton.Click += new System.EventHandler(this.DataGetButton_Click);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(0, 1);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1117, 657);
+            this.tabControl1.TabIndex = 58;
             // 
-            // LogGridView
+            // tabPage1
             // 
-            this.LogGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.LogGridView.Location = new System.Drawing.Point(318, 12);
-            this.LogGridView.Name = "LogGridView";
-            this.LogGridView.RowTemplate.Height = 21;
-            this.LogGridView.Size = new System.Drawing.Size(780, 622);
-            this.LogGridView.TabIndex = 1;
+            this.tabPage1.Controls.Add(this.VLDateTextBox);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.VLFormatComboBox);
+            this.tabPage1.Controls.Add(this.VLEnemydeckSmallclassComboBox);
+            this.tabPage1.Controls.Add(this.VLEnemydeckMajorclassComboBox);
+            this.tabPage1.Controls.Add(this.VLMydeckSmallclassComboBox);
+            this.tabPage1.Controls.Add(this.VLMydeckMajorclassComboBox);
+            this.tabPage1.Controls.Add(this.VLPracedenceComboBox);
+            this.tabPage1.Controls.Add(this.VLWinComboBox);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.ChangeGenreLabel);
+            this.tabPage1.Controls.Add(this.VLChangeGenreComboBox);
+            this.tabPage1.Controls.Add(this.VLDoneButton);
+            this.tabPage1.Controls.Add(this.DeckType2Label);
+            this.tabPage1.Controls.Add(this.DeckType1Label);
+            this.tabPage1.Controls.Add(this.MydeckSmallclassLabel);
+            this.tabPage1.Controls.Add(this.mydeckMajorclassLabel);
+            this.tabPage1.Controls.Add(this.VLIDTextBox);
+            this.tabPage1.Controls.Add(this.IDLabel);
+            this.tabPage1.Controls.Add(this.BackMainMenuButton);
+            this.tabPage1.Controls.Add(this.VLDataGetButton);
+            this.tabPage1.Controls.Add(this.VLLogGridView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1109, 631);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "戦績ログ";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // BackMainMenuButton
+            // VLDateTextBox
             // 
-            this.BackMainMenuButton.Location = new System.Drawing.Point(7, 607);
-            this.BackMainMenuButton.Name = "BackMainMenuButton";
-            this.BackMainMenuButton.Size = new System.Drawing.Size(122, 27);
-            this.BackMainMenuButton.TabIndex = 2;
-            this.BackMainMenuButton.Text = "メインメニューに戻る";
-            this.BackMainMenuButton.UseVisualStyleBackColor = true;
-            this.BackMainMenuButton.Click += new System.EventHandler(this.BackMainMenuButton_Click);
+            this.VLDateTextBox.Location = new System.Drawing.Point(18, 121);
+            this.VLDateTextBox.Name = "VLDateTextBox";
+            this.VLDateTextBox.Size = new System.Drawing.Size(126, 19);
+            this.VLDateTextBox.TabIndex = 80;
             // 
-            // ChangeGenreLabel
+            // label4
             // 
-            this.ChangeGenreLabel.AutoSize = true;
-            this.ChangeGenreLabel.Location = new System.Drawing.Point(8, 14);
-            this.ChangeGenreLabel.Name = "ChangeGenreLabel";
-            this.ChangeGenreLabel.Size = new System.Drawing.Size(53, 12);
-            this.ChangeGenreLabel.TabIndex = 42;
-            this.ChangeGenreLabel.Text = "変更種別";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 106);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 79;
+            this.label4.Text = "日付";
             // 
-            // ChangeGenreComboBox
+            // VLFormatComboBox
             // 
-            this.ChangeGenreComboBox.FormattingEnabled = true;
-            this.ChangeGenreComboBox.Location = new System.Drawing.Point(7, 29);
-            this.ChangeGenreComboBox.Name = "ChangeGenreComboBox";
-            this.ChangeGenreComboBox.Size = new System.Drawing.Size(121, 20);
-            this.ChangeGenreComboBox.TabIndex = 41;
+            this.VLFormatComboBox.FormattingEnabled = true;
+            this.VLFormatComboBox.Location = new System.Drawing.Point(18, 331);
+            this.VLFormatComboBox.Name = "VLFormatComboBox";
+            this.VLFormatComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLFormatComboBox.TabIndex = 78;
             // 
-            // DoneButton
+            // VLEnemydeckSmallclassComboBox
             // 
-            this.DoneButton.Location = new System.Drawing.Point(214, 447);
-            this.DoneButton.Name = "DoneButton";
-            this.DoneButton.Size = new System.Drawing.Size(86, 27);
-            this.DoneButton.TabIndex = 36;
-            this.DoneButton.Text = "Done";
-            this.DoneButton.UseVisualStyleBackColor = true;
-            this.DoneButton.Click += new System.EventHandler(this.DoneButton_Click);
+            this.VLEnemydeckSmallclassComboBox.FormattingEnabled = true;
+            this.VLEnemydeckSmallclassComboBox.Location = new System.Drawing.Point(190, 225);
+            this.VLEnemydeckSmallclassComboBox.Name = "VLEnemydeckSmallclassComboBox";
+            this.VLEnemydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLEnemydeckSmallclassComboBox.TabIndex = 77;
             // 
-            // DeckType2Label
+            // VLEnemydeckMajorclassComboBox
             // 
-            this.DeckType2Label.AutoSize = true;
-            this.DeckType2Label.Location = new System.Drawing.Point(179, 212);
-            this.DeckType2Label.Name = "DeckType2Label";
-            this.DeckType2Label.Size = new System.Drawing.Size(98, 12);
-            this.DeckType2Label.TabIndex = 35;
-            this.DeckType2Label.Text = "相手デッキ・小分類";
+            this.VLEnemydeckMajorclassComboBox.FormattingEnabled = true;
+            this.VLEnemydeckMajorclassComboBox.Location = new System.Drawing.Point(18, 225);
+            this.VLEnemydeckMajorclassComboBox.Name = "VLEnemydeckMajorclassComboBox";
+            this.VLEnemydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLEnemydeckMajorclassComboBox.TabIndex = 76;
+            this.VLEnemydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.EnemydeckMajorclassComboBox_TextChanged);
             // 
-            // DeckType1Label
+            // VLMydeckSmallclassComboBox
             // 
-            this.DeckType1Label.AutoSize = true;
-            this.DeckType1Label.Location = new System.Drawing.Point(5, 212);
-            this.DeckType1Label.Name = "DeckType1Label";
-            this.DeckType1Label.Size = new System.Drawing.Size(98, 12);
-            this.DeckType1Label.TabIndex = 34;
-            this.DeckType1Label.Text = "相手デッキ・大分類";
+            this.VLMydeckSmallclassComboBox.FormattingEnabled = true;
+            this.VLMydeckSmallclassComboBox.Location = new System.Drawing.Point(190, 169);
+            this.VLMydeckSmallclassComboBox.Name = "VLMydeckSmallclassComboBox";
+            this.VLMydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLMydeckSmallclassComboBox.TabIndex = 75;
             // 
-            // MydeckSmallclassLabel
+            // VLMydeckMajorclassComboBox
             // 
-            this.MydeckSmallclassLabel.AutoSize = true;
-            this.MydeckSmallclassLabel.Location = new System.Drawing.Point(177, 156);
-            this.MydeckSmallclassLabel.Name = "MydeckSmallclassLabel";
-            this.MydeckSmallclassLabel.Size = new System.Drawing.Size(86, 12);
-            this.MydeckSmallclassLabel.TabIndex = 33;
-            this.MydeckSmallclassLabel.Text = "自デッキ・小分類";
+            this.VLMydeckMajorclassComboBox.FormattingEnabled = true;
+            this.VLMydeckMajorclassComboBox.Location = new System.Drawing.Point(18, 169);
+            this.VLMydeckMajorclassComboBox.Name = "VLMydeckMajorclassComboBox";
+            this.VLMydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLMydeckMajorclassComboBox.TabIndex = 74;
+            this.VLMydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.MydeckMajorclassComboBox_TextChanged);
             // 
-            // mydeckMajorclassLabel
+            // VLPracedenceComboBox
             // 
-            this.mydeckMajorclassLabel.AutoSize = true;
-            this.mydeckMajorclassLabel.Location = new System.Drawing.Point(5, 156);
-            this.mydeckMajorclassLabel.Name = "mydeckMajorclassLabel";
-            this.mydeckMajorclassLabel.Size = new System.Drawing.Size(86, 12);
-            this.mydeckMajorclassLabel.TabIndex = 32;
-            this.mydeckMajorclassLabel.Text = "自デッキ・大分類";
+            this.VLPracedenceComboBox.FormattingEnabled = true;
+            this.VLPracedenceComboBox.Location = new System.Drawing.Point(17, 387);
+            this.VLPracedenceComboBox.Name = "VLPracedenceComboBox";
+            this.VLPracedenceComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLPracedenceComboBox.TabIndex = 73;
             // 
-            // IDTextBox
+            // VLWinComboBox
             // 
-            this.IDTextBox.Location = new System.Drawing.Point(7, 78);
-            this.IDTextBox.Name = "IDTextBox";
-            this.IDTextBox.Size = new System.Drawing.Size(126, 19);
-            this.IDTextBox.TabIndex = 31;
-            // 
-            // IDLabel
-            // 
-            this.IDLabel.AutoSize = true;
-            this.IDLabel.Location = new System.Drawing.Point(5, 63);
-            this.IDLabel.Name = "IDLabel";
-            this.IDLabel.Size = new System.Drawing.Size(16, 12);
-            this.IDLabel.TabIndex = 30;
-            this.IDLabel.Text = "ID";
+            this.VLWinComboBox.FormattingEnabled = true;
+            this.VLWinComboBox.Location = new System.Drawing.Point(18, 278);
+            this.VLWinComboBox.Name = "VLWinComboBox";
+            this.VLWinComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLWinComboBox.TabIndex = 72;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 374);
+            this.label1.Location = new System.Drawing.Point(16, 372);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 46;
+            this.label1.TabIndex = 71;
             this.label1.Text = "先行後攻";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 318);
+            this.label2.Location = new System.Drawing.Point(16, 316);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 12);
-            this.label2.TabIndex = 45;
+            this.label2.TabIndex = 70;
             this.label2.Text = "フォーマット";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 265);
+            this.label3.Location = new System.Drawing.Point(16, 263);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 43;
+            this.label3.TabIndex = 69;
             this.label3.Text = "結果";
             // 
-            // WinComboBox
+            // ChangeGenreLabel
             // 
-            this.WinComboBox.FormattingEnabled = true;
-            this.WinComboBox.Location = new System.Drawing.Point(7, 280);
-            this.WinComboBox.Name = "WinComboBox";
-            this.WinComboBox.Size = new System.Drawing.Size(121, 20);
-            this.WinComboBox.TabIndex = 49;
+            this.ChangeGenreLabel.AutoSize = true;
+            this.ChangeGenreLabel.Location = new System.Drawing.Point(19, 12);
+            this.ChangeGenreLabel.Name = "ChangeGenreLabel";
+            this.ChangeGenreLabel.Size = new System.Drawing.Size(53, 12);
+            this.ChangeGenreLabel.TabIndex = 68;
+            this.ChangeGenreLabel.Text = "変更種別";
             // 
-            // PracedenceComboBox
+            // VLChangeGenreComboBox
             // 
-            this.PracedenceComboBox.FormattingEnabled = true;
-            this.PracedenceComboBox.Location = new System.Drawing.Point(6, 389);
-            this.PracedenceComboBox.Name = "PracedenceComboBox";
-            this.PracedenceComboBox.Size = new System.Drawing.Size(121, 20);
-            this.PracedenceComboBox.TabIndex = 50;
+            this.VLChangeGenreComboBox.FormattingEnabled = true;
+            this.VLChangeGenreComboBox.Location = new System.Drawing.Point(18, 27);
+            this.VLChangeGenreComboBox.Name = "VLChangeGenreComboBox";
+            this.VLChangeGenreComboBox.Size = new System.Drawing.Size(121, 20);
+            this.VLChangeGenreComboBox.TabIndex = 67;
             // 
-            // MydeckMajorclassComboBox
+            // VLDoneButton
             // 
-            this.MydeckMajorclassComboBox.FormattingEnabled = true;
-            this.MydeckMajorclassComboBox.Location = new System.Drawing.Point(7, 171);
-            this.MydeckMajorclassComboBox.Name = "MydeckMajorclassComboBox";
-            this.MydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
-            this.MydeckMajorclassComboBox.TabIndex = 51;
-            this.MydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.MydeckMajorclassComboBox_TextChanged);
+            this.VLDoneButton.Location = new System.Drawing.Point(225, 445);
+            this.VLDoneButton.Name = "VLDoneButton";
+            this.VLDoneButton.Size = new System.Drawing.Size(86, 27);
+            this.VLDoneButton.TabIndex = 66;
+            this.VLDoneButton.Text = "Done";
+            this.VLDoneButton.UseVisualStyleBackColor = true;
+            this.VLDoneButton.Click += new System.EventHandler(this.DoneButton_Click);
             // 
-            // MydeckSmallclassComboBox
+            // DeckType2Label
             // 
-            this.MydeckSmallclassComboBox.FormattingEnabled = true;
-            this.MydeckSmallclassComboBox.Location = new System.Drawing.Point(179, 171);
-            this.MydeckSmallclassComboBox.Name = "MydeckSmallclassComboBox";
-            this.MydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
-            this.MydeckSmallclassComboBox.TabIndex = 52;
+            this.DeckType2Label.AutoSize = true;
+            this.DeckType2Label.Location = new System.Drawing.Point(190, 210);
+            this.DeckType2Label.Name = "DeckType2Label";
+            this.DeckType2Label.Size = new System.Drawing.Size(98, 12);
+            this.DeckType2Label.TabIndex = 65;
+            this.DeckType2Label.Text = "相手デッキ・小分類";
             // 
-            // EnemydeckMajorclassComboBox
+            // DeckType1Label
             // 
-            this.EnemydeckMajorclassComboBox.FormattingEnabled = true;
-            this.EnemydeckMajorclassComboBox.Location = new System.Drawing.Point(7, 227);
-            this.EnemydeckMajorclassComboBox.Name = "EnemydeckMajorclassComboBox";
-            this.EnemydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
-            this.EnemydeckMajorclassComboBox.TabIndex = 53;
-            this.EnemydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.EnemydeckMajorclassComboBox_TextChanged);
+            this.DeckType1Label.AutoSize = true;
+            this.DeckType1Label.Location = new System.Drawing.Point(16, 210);
+            this.DeckType1Label.Name = "DeckType1Label";
+            this.DeckType1Label.Size = new System.Drawing.Size(98, 12);
+            this.DeckType1Label.TabIndex = 64;
+            this.DeckType1Label.Text = "相手デッキ・大分類";
             // 
-            // EnemydeckSmallclassComboBox
+            // MydeckSmallclassLabel
             // 
-            this.EnemydeckSmallclassComboBox.FormattingEnabled = true;
-            this.EnemydeckSmallclassComboBox.Location = new System.Drawing.Point(179, 227);
-            this.EnemydeckSmallclassComboBox.Name = "EnemydeckSmallclassComboBox";
-            this.EnemydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
-            this.EnemydeckSmallclassComboBox.TabIndex = 54;
+            this.MydeckSmallclassLabel.AutoSize = true;
+            this.MydeckSmallclassLabel.Location = new System.Drawing.Point(188, 154);
+            this.MydeckSmallclassLabel.Name = "MydeckSmallclassLabel";
+            this.MydeckSmallclassLabel.Size = new System.Drawing.Size(86, 12);
+            this.MydeckSmallclassLabel.TabIndex = 63;
+            this.MydeckSmallclassLabel.Text = "自デッキ・小分類";
             // 
-            // FormatComboBox
+            // mydeckMajorclassLabel
             // 
-            this.FormatComboBox.FormattingEnabled = true;
-            this.FormatComboBox.Location = new System.Drawing.Point(7, 333);
-            this.FormatComboBox.Name = "FormatComboBox";
-            this.FormatComboBox.Size = new System.Drawing.Size(121, 20);
-            this.FormatComboBox.TabIndex = 55;
+            this.mydeckMajorclassLabel.AutoSize = true;
+            this.mydeckMajorclassLabel.Location = new System.Drawing.Point(16, 154);
+            this.mydeckMajorclassLabel.Name = "mydeckMajorclassLabel";
+            this.mydeckMajorclassLabel.Size = new System.Drawing.Size(86, 12);
+            this.mydeckMajorclassLabel.TabIndex = 62;
+            this.mydeckMajorclassLabel.Text = "自デッキ・大分類";
             // 
-            // DateTextBox
+            // VLIDTextBox
             // 
-            this.DateTextBox.Location = new System.Drawing.Point(7, 123);
-            this.DateTextBox.Name = "DateTextBox";
-            this.DateTextBox.Size = new System.Drawing.Size(126, 19);
-            this.DateTextBox.TabIndex = 57;
+            this.VLIDTextBox.Location = new System.Drawing.Point(18, 76);
+            this.VLIDTextBox.Name = "VLIDTextBox";
+            this.VLIDTextBox.Size = new System.Drawing.Size(126, 19);
+            this.VLIDTextBox.TabIndex = 61;
             // 
-            // label4
+            // IDLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 56;
-            this.label4.Text = "日付";
+            this.IDLabel.AutoSize = true;
+            this.IDLabel.Location = new System.Drawing.Point(16, 61);
+            this.IDLabel.Name = "IDLabel";
+            this.IDLabel.Size = new System.Drawing.Size(16, 12);
+            this.IDLabel.TabIndex = 60;
+            this.IDLabel.Text = "ID";
+            // 
+            // BackMainMenuButton
+            // 
+            this.BackMainMenuButton.Location = new System.Drawing.Point(6, 592);
+            this.BackMainMenuButton.Name = "BackMainMenuButton";
+            this.BackMainMenuButton.Size = new System.Drawing.Size(122, 27);
+            this.BackMainMenuButton.TabIndex = 59;
+            this.BackMainMenuButton.Text = "メインメニューに戻る";
+            this.BackMainMenuButton.UseVisualStyleBackColor = true;
+            this.BackMainMenuButton.Click += new System.EventHandler(this.BackMainMenuButton_Click);
+            // 
+            // VLDataGetButton
+            // 
+            this.VLDataGetButton.Location = new System.Drawing.Point(196, 502);
+            this.VLDataGetButton.Name = "VLDataGetButton";
+            this.VLDataGetButton.Size = new System.Drawing.Size(122, 32);
+            this.VLDataGetButton.TabIndex = 58;
+            this.VLDataGetButton.Text = "ログ取得";
+            this.VLDataGetButton.UseVisualStyleBackColor = true;
+            this.VLDataGetButton.Click += new System.EventHandler(this.DataGetButton_Click);
+            // 
+            // VLLogGridView
+            // 
+            this.VLLogGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.VLLogGridView.Location = new System.Drawing.Point(348, 12);
+            this.VLLogGridView.Name = "VLLogGridView";
+            this.VLLogGridView.RowTemplate.Height = 21;
+            this.VLLogGridView.Size = new System.Drawing.Size(751, 607);
+            this.VLLogGridView.TabIndex = 2;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.ILLogInsertButton);
+            this.tabPage2.Controls.Add(this.PracedenceLabel);
+            this.tabPage2.Controls.Add(this.ILPracedenceComboBox);
+            this.tabPage2.Controls.Add(this.FormatLabel);
+            this.tabPage2.Controls.Add(this.ILFormatComboBox);
+            this.tabPage2.Controls.Add(this.WinLabel);
+            this.tabPage2.Controls.Add(this.ILWinComboBox);
+            this.tabPage2.Controls.Add(this.EnemydeckSmallclassLabel);
+            this.tabPage2.Controls.Add(this.ILEnemydeckSmallclassComboBox);
+            this.tabPage2.Controls.Add(this.EnemydeckMajorclassLabel);
+            this.tabPage2.Controls.Add(this.ILEnemydeckMajorclassComboBox);
+            this.tabPage2.Controls.Add(this.ILMydeckSmallclassComboBox);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.ILMydeckMajorclassComboBox);
+            this.tabPage2.Controls.Add(this.ILDateTextBox);
+            this.tabPage2.Controls.Add(this.DateLabel);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1109, 631);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "ログ入力";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ILLogInsertButton
+            // 
+            this.ILLogInsertButton.Location = new System.Drawing.Point(346, 279);
+            this.ILLogInsertButton.Name = "ILLogInsertButton";
+            this.ILLogInsertButton.Size = new System.Drawing.Size(125, 31);
+            this.ILLogInsertButton.TabIndex = 34;
+            this.ILLogInsertButton.Text = "ログ入力";
+            this.ILLogInsertButton.UseVisualStyleBackColor = true;
+            this.ILLogInsertButton.Click += new System.EventHandler(this.LogInsertButton_Click);
+            // 
+            // PracedenceLabel
+            // 
+            this.PracedenceLabel.AutoSize = true;
+            this.PracedenceLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.PracedenceLabel.Location = new System.Drawing.Point(15, 270);
+            this.PracedenceLabel.Name = "PracedenceLabel";
+            this.PracedenceLabel.Size = new System.Drawing.Size(53, 12);
+            this.PracedenceLabel.TabIndex = 33;
+            this.PracedenceLabel.Text = "先行後攻";
+            // 
+            // ILPracedenceComboBox
+            // 
+            this.ILPracedenceComboBox.FormattingEnabled = true;
+            this.ILPracedenceComboBox.Location = new System.Drawing.Point(17, 285);
+            this.ILPracedenceComboBox.Name = "ILPracedenceComboBox";
+            this.ILPracedenceComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILPracedenceComboBox.TabIndex = 32;
+            // 
+            // FormatLabel
+            // 
+            this.FormatLabel.AutoSize = true;
+            this.FormatLabel.Location = new System.Drawing.Point(15, 217);
+            this.FormatLabel.Name = "FormatLabel";
+            this.FormatLabel.Size = new System.Drawing.Size(55, 12);
+            this.FormatLabel.TabIndex = 31;
+            this.FormatLabel.Text = "フォーマット";
+            // 
+            // ILFormatComboBox
+            // 
+            this.ILFormatComboBox.FormattingEnabled = true;
+            this.ILFormatComboBox.Location = new System.Drawing.Point(17, 232);
+            this.ILFormatComboBox.Name = "ILFormatComboBox";
+            this.ILFormatComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILFormatComboBox.TabIndex = 30;
+            // 
+            // WinLabel
+            // 
+            this.WinLabel.AutoSize = true;
+            this.WinLabel.Location = new System.Drawing.Point(15, 169);
+            this.WinLabel.Name = "WinLabel";
+            this.WinLabel.Size = new System.Drawing.Size(29, 12);
+            this.WinLabel.TabIndex = 29;
+            this.WinLabel.Text = "結果";
+            // 
+            // ILWinComboBox
+            // 
+            this.ILWinComboBox.FormattingEnabled = true;
+            this.ILWinComboBox.Location = new System.Drawing.Point(17, 184);
+            this.ILWinComboBox.Name = "ILWinComboBox";
+            this.ILWinComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILWinComboBox.TabIndex = 28;
+            // 
+            // EnemydeckSmallclassLabel
+            // 
+            this.EnemydeckSmallclassLabel.AutoSize = true;
+            this.EnemydeckSmallclassLabel.Location = new System.Drawing.Point(189, 120);
+            this.EnemydeckSmallclassLabel.Name = "EnemydeckSmallclassLabel";
+            this.EnemydeckSmallclassLabel.Size = new System.Drawing.Size(98, 12);
+            this.EnemydeckSmallclassLabel.TabIndex = 27;
+            this.EnemydeckSmallclassLabel.Text = "相手デッキ・小分類";
+            // 
+            // ILEnemydeckSmallclassComboBox
+            // 
+            this.ILEnemydeckSmallclassComboBox.FormattingEnabled = true;
+            this.ILEnemydeckSmallclassComboBox.Location = new System.Drawing.Point(189, 135);
+            this.ILEnemydeckSmallclassComboBox.Name = "ILEnemydeckSmallclassComboBox";
+            this.ILEnemydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILEnemydeckSmallclassComboBox.TabIndex = 26;
+            // 
+            // EnemydeckMajorclassLabel
+            // 
+            this.EnemydeckMajorclassLabel.AutoSize = true;
+            this.EnemydeckMajorclassLabel.Location = new System.Drawing.Point(17, 120);
+            this.EnemydeckMajorclassLabel.Name = "EnemydeckMajorclassLabel";
+            this.EnemydeckMajorclassLabel.Size = new System.Drawing.Size(98, 12);
+            this.EnemydeckMajorclassLabel.TabIndex = 25;
+            this.EnemydeckMajorclassLabel.Text = "相手デッキ・大分類";
+            // 
+            // ILEnemydeckMajorclassComboBox
+            // 
+            this.ILEnemydeckMajorclassComboBox.FormattingEnabled = true;
+            this.ILEnemydeckMajorclassComboBox.Location = new System.Drawing.Point(17, 135);
+            this.ILEnemydeckMajorclassComboBox.Name = "ILEnemydeckMajorclassComboBox";
+            this.ILEnemydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILEnemydeckMajorclassComboBox.TabIndex = 24;
+            this.ILEnemydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.ILEnemydeckMajorclassComboBox_TextChanged);
+            // 
+            // ILMydeckSmallclassComboBox
+            // 
+            this.ILMydeckSmallclassComboBox.FormattingEnabled = true;
+            this.ILMydeckSmallclassComboBox.Location = new System.Drawing.Point(189, 79);
+            this.ILMydeckSmallclassComboBox.Name = "ILMydeckSmallclassComboBox";
+            this.ILMydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILMydeckSmallclassComboBox.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(187, 64);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 12);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "自デッキ・小分類";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 64);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 12);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "自デッキ・大分類";
+            // 
+            // ILMydeckMajorclassComboBox
+            // 
+            this.ILMydeckMajorclassComboBox.FormattingEnabled = true;
+            this.ILMydeckMajorclassComboBox.Location = new System.Drawing.Point(17, 79);
+            this.ILMydeckMajorclassComboBox.Name = "ILMydeckMajorclassComboBox";
+            this.ILMydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ILMydeckMajorclassComboBox.TabIndex = 20;
+            this.ILMydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.ILMydeckMajorclassComboBox_TextChanged);
+            // 
+            // ILDateTextBox
+            // 
+            this.ILDateTextBox.Location = new System.Drawing.Point(17, 26);
+            this.ILDateTextBox.Name = "ILDateTextBox";
+            this.ILDateTextBox.Size = new System.Drawing.Size(126, 19);
+            this.ILDateTextBox.TabIndex = 19;
+            // 
+            // DateLabel
+            // 
+            this.DateLabel.AutoSize = true;
+            this.DateLabel.Location = new System.Drawing.Point(15, 11);
+            this.DateLabel.Name = "DateLabel";
+            this.DateLabel.Size = new System.Drawing.Size(29, 12);
+            this.DateLabel.TabIndex = 18;
+            this.DateLabel.Text = "日付";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.DRDeckRecodeView);
+            this.tabPage3.Controls.Add(this.DRGetDeckRecordButton);
+            this.tabPage3.Controls.Add(this.DRMydeckSmallclassComboBox);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.DRMydeckMajorclassComboBox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1109, 631);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "デッキ戦績";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // DRDeckRecodeView
+            // 
+            this.DRDeckRecodeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DRDeckRecodeView.Location = new System.Drawing.Point(18, 83);
+            this.DRDeckRecodeView.Name = "DRDeckRecodeView";
+            this.DRDeckRecodeView.RowTemplate.Height = 21;
+            this.DRDeckRecodeView.Size = new System.Drawing.Size(562, 425);
+            this.DRDeckRecodeView.TabIndex = 22;
+            // 
+            // DRGetDeckRecordButton
+            // 
+            this.DRGetDeckRecordButton.Location = new System.Drawing.Point(357, 41);
+            this.DRGetDeckRecordButton.Name = "DRGetDeckRecordButton";
+            this.DRGetDeckRecordButton.Size = new System.Drawing.Size(82, 36);
+            this.DRGetDeckRecordButton.TabIndex = 21;
+            this.DRGetDeckRecordButton.Text = "戦績表示";
+            this.DRGetDeckRecordButton.UseVisualStyleBackColor = true;
+            this.DRGetDeckRecordButton.Click += new System.EventHandler(this.DRGetDeckRecordButton_Click);
+            // 
+            // DRMydeckSmallclassComboBox
+            // 
+            this.DRMydeckSmallclassComboBox.FormattingEnabled = true;
+            this.DRMydeckSmallclassComboBox.Location = new System.Drawing.Point(192, 28);
+            this.DRMydeckSmallclassComboBox.Name = "DRMydeckSmallclassComboBox";
+            this.DRMydeckSmallclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.DRMydeckSmallclassComboBox.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(190, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 12);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "自デッキ・小分類";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 12);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "自デッキ・大分類";
+            // 
+            // DRMydeckMajorclassComboBox
+            // 
+            this.DRMydeckMajorclassComboBox.FormattingEnabled = true;
+            this.DRMydeckMajorclassComboBox.Location = new System.Drawing.Point(18, 28);
+            this.DRMydeckMajorclassComboBox.Name = "DRMydeckMajorclassComboBox";
+            this.DRMydeckMajorclassComboBox.Size = new System.Drawing.Size(121, 20);
+            this.DRMydeckMajorclassComboBox.TabIndex = 17;
+            this.DRMydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.DRMydeckMajorclassComboBox_TextChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.MAPeriodComboBox);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Controls.Add(this.groupBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1109, 631);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "メタ分析";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // MAPeriodComboBox
+            // 
+            this.MAPeriodComboBox.FormattingEnabled = true;
+            this.MAPeriodComboBox.Location = new System.Drawing.Point(20, 28);
+            this.MAPeriodComboBox.Name = "MAPeriodComboBox";
+            this.MAPeriodComboBox.Size = new System.Drawing.Size(121, 20);
+            this.MAPeriodComboBox.TabIndex = 7;
+            this.MAPeriodComboBox.TextChanged += new System.EventHandler(this.MAPeriodComboBox_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 13);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "期間指定";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.MAMetaAnalyzeDeckText);
+            this.groupBox1.Font = new System.Drawing.Font("MS UI Gothic", 10F);
+            this.groupBox1.Location = new System.Drawing.Point(20, 71);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(258, 65);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "最多デッキ";
+            // 
+            // MAMetaAnalyzeDeckText
+            // 
+            this.MAMetaAnalyzeDeckText.AutoSize = true;
+            this.MAMetaAnalyzeDeckText.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MAMetaAnalyzeDeckText.Location = new System.Drawing.Point(6, 26);
+            this.MAMetaAnalyzeDeckText.Name = "MAMetaAnalyzeDeckText";
+            this.MAMetaAnalyzeDeckText.Size = new System.Drawing.Size(73, 20);
+            this.MAMetaAnalyzeDeckText.TabIndex = 2;
+            this.MAMetaAnalyzeDeckText.Text = "default";
             // 
             // VSLogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1109, 658);
-            this.Controls.Add(this.DateTextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.FormatComboBox);
-            this.Controls.Add(this.EnemydeckSmallclassComboBox);
-            this.Controls.Add(this.EnemydeckMajorclassComboBox);
-            this.Controls.Add(this.MydeckSmallclassComboBox);
-            this.Controls.Add(this.MydeckMajorclassComboBox);
-            this.Controls.Add(this.PracedenceComboBox);
-            this.Controls.Add(this.WinComboBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.ChangeGenreLabel);
-            this.Controls.Add(this.ChangeGenreComboBox);
-            this.Controls.Add(this.DoneButton);
-            this.Controls.Add(this.DeckType2Label);
-            this.Controls.Add(this.DeckType1Label);
-            this.Controls.Add(this.MydeckSmallclassLabel);
-            this.Controls.Add(this.mydeckMajorclassLabel);
-            this.Controls.Add(this.IDTextBox);
-            this.Controls.Add(this.IDLabel);
-            this.Controls.Add(this.BackMainMenuButton);
-            this.Controls.Add(this.LogGridView);
-            this.Controls.Add(this.DataGetButton);
+            this.ClientSize = new System.Drawing.Size(1115, 654);
+            this.Controls.Add(this.tabControl1);
             this.Name = "VSLogForm";
             this.Text = "VersusLog -戦績ログ-";
-            ((System.ComponentModel.ISupportInitialize)(this.LogGridView)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VLLogGridView)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DRDeckRecodeView)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button DataGetButton;
-        private System.Windows.Forms.DataGridView LogGridView;
-        private System.Windows.Forms.Button BackMainMenuButton;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TextBox VLDateTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox VLFormatComboBox;
+        private System.Windows.Forms.ComboBox VLEnemydeckSmallclassComboBox;
+        private System.Windows.Forms.ComboBox VLEnemydeckMajorclassComboBox;
+        private System.Windows.Forms.ComboBox VLMydeckSmallclassComboBox;
+        private System.Windows.Forms.ComboBox VLMydeckMajorclassComboBox;
+        private System.Windows.Forms.ComboBox VLPracedenceComboBox;
+        private System.Windows.Forms.ComboBox VLWinComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label ChangeGenreLabel;
-        private System.Windows.Forms.ComboBox ChangeGenreComboBox;
-        private System.Windows.Forms.Button DoneButton;
+        private System.Windows.Forms.ComboBox VLChangeGenreComboBox;
+        private System.Windows.Forms.Button VLDoneButton;
         private System.Windows.Forms.Label DeckType2Label;
         private System.Windows.Forms.Label DeckType1Label;
         private System.Windows.Forms.Label MydeckSmallclassLabel;
         private System.Windows.Forms.Label mydeckMajorclassLabel;
-        private System.Windows.Forms.TextBox IDTextBox;
+        private System.Windows.Forms.TextBox VLIDTextBox;
         private System.Windows.Forms.Label IDLabel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox WinComboBox;
-        private System.Windows.Forms.ComboBox PracedenceComboBox;
-        private System.Windows.Forms.ComboBox MydeckMajorclassComboBox;
-        private System.Windows.Forms.ComboBox MydeckSmallclassComboBox;
-        private System.Windows.Forms.ComboBox EnemydeckMajorclassComboBox;
-        private System.Windows.Forms.ComboBox EnemydeckSmallclassComboBox;
-        private System.Windows.Forms.ComboBox FormatComboBox;
-        private System.Windows.Forms.TextBox DateTextBox;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button BackMainMenuButton;
+        private System.Windows.Forms.Button VLDataGetButton;
+        private System.Windows.Forms.DataGridView VLLogGridView;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button ILLogInsertButton;
+        private System.Windows.Forms.Label PracedenceLabel;
+        private System.Windows.Forms.ComboBox ILPracedenceComboBox;
+        private System.Windows.Forms.Label FormatLabel;
+        private System.Windows.Forms.ComboBox ILFormatComboBox;
+        private System.Windows.Forms.Label WinLabel;
+        private System.Windows.Forms.ComboBox ILWinComboBox;
+        private System.Windows.Forms.Label EnemydeckSmallclassLabel;
+        private System.Windows.Forms.ComboBox ILEnemydeckSmallclassComboBox;
+        private System.Windows.Forms.Label EnemydeckMajorclassLabel;
+        private System.Windows.Forms.ComboBox ILEnemydeckMajorclassComboBox;
+        private System.Windows.Forms.ComboBox ILMydeckSmallclassComboBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox ILMydeckMajorclassComboBox;
+        private System.Windows.Forms.TextBox ILDateTextBox;
+        private System.Windows.Forms.Label DateLabel;
+        private System.Windows.Forms.DataGridView DRDeckRecodeView;
+        private System.Windows.Forms.Button DRGetDeckRecordButton;
+        private System.Windows.Forms.ComboBox DRMydeckSmallclassComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox DRMydeckMajorclassComboBox;
+        private System.Windows.Forms.ComboBox MAPeriodComboBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label MAMetaAnalyzeDeckText;
     }
 }
 
