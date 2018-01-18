@@ -120,3 +120,4 @@ C:\Users\NPC-013\Desktop\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.CoreComp
 C:\Users\NPC-013\Desktop\VersusLog\VersusLog\obj\Debug\VersusLog.exe
 C:\Users\NPC-013\Desktop\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.SQLForm.resources
+C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csprojResolveAssemblyReference.cache
