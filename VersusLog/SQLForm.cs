@@ -18,26 +18,33 @@ namespace VersusLog
         /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            if (SQLFormInputCheck())
             {
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
                 {
-                    try
-                    {
-                        //クエリ作成、実行
-                        cmd.CommandText = SQLTextBox.Text;
-                        int count = cmd.ExecuteNonQuery();
-                        MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("SQLエラーです", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    }
-                }
+                    con.Open();
 
-                con.Close();
+                    using (var cmd = con.CreateCommand())
+                    {
+                        try
+                        {
+                            //クエリ作成、実行
+                            cmd.CommandText = SQLTextBox.Text;
+                            int count = cmd.ExecuteNonQuery();
+                            MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("SQLエラーです", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        }
+                    }
+
+                    con.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("SQL文が記載されていません。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -52,6 +59,16 @@ namespace VersusLog
             Form ViewForm = new MainMenuForm();
             ViewForm.Show();
             Hide();
+        }
+
+        /// <summary>
+        /// 入力チェック
+        /// </summary>
+        /// <returns>チェック結果</returns>
+        private bool SQLFormInputCheck()
+        {
+            if (string.IsNullOrEmpty(SQLTextBox.Text)) { return false; } //SQL文
+            return true;
         }
     }
 }

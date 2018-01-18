@@ -48,93 +48,87 @@ namespace VersusLog
         /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            if (FormatMasterChangeFormCheck())
             {
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
                 {
-                    //変更種別ごとにコマンド生成
-                    switch (ChangeGenreComboBox.Text)
+                    con.Open();
+
+                    using (var cmd = con.CreateCommand())
                     {
-                        case "変更":
-                            //変更用クエリ作成
-                            cmd.CommandText = "update FORMAT " +
-                                "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
-                                "where ID = " + IDTextBox.Text;
+                        //変更種別ごとにコマンド生成
+                        switch (ChangeGenreComboBox.Text)
+                        {
+                            case "変更":
+                                //変更用クエリ作成
+                                cmd.CommandText = "update FORMAT " +
+                                    "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
+                                    "where ID = " + IDTextBox.Text;
 
-                            //コマンド実行
-                            int count = cmd.ExecuteNonQuery();
-
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
-
-                        case "追加":
-                            int id = 0;
-
-                            //ID取得用コマンド生成
-                            cmd.CommandText = "select ID from FORMAT";
-                            using (var reader = cmd.ExecuteReader())
-                            {
-                                //最後のレコードのIDを取得する
-                                while (reader.Read())
+                                if (cmd.ExecuteNonQuery() > 0)
                                 {
-                                    id = System.Convert.ToInt32(reader.GetValue(0));
+                                    MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                                 }
-                                id += 1;
-                            }
-                            string Qid = id.ToString();
+                                else
+                                {
+                                    MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
 
-                            //追加用クエリ作成
-                            cmd.CommandText = "insert into FORMAT " +
-                                "values( " +
-                                " " + Qid + "," + //ID
-                                " '" + FormatNameTextBox.Text + "' " + //フォーマット名
-                                ")";
+                            case "追加":
+                                int id = 0;
 
-                            //コマンド実行
-                            count = cmd.ExecuteNonQuery();
+                                //ID取得用コマンド生成
+                                cmd.CommandText = "select ID from FORMAT";
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    //最後のレコードのIDを取得する
+                                    while (reader.Read())
+                                    {
+                                        id = System.Convert.ToInt32(reader.GetValue(0));
+                                    }
+                                    id += 1;
+                                }
+                                string Qid = id.ToString();
 
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
+                                //追加用クエリ作成
+                                cmd.CommandText = "insert into FORMAT " +
+                                    "values( " +
+                                    " " + Qid + "," + //ID
+                                    " '" + FormatNameTextBox.Text + "' " + //フォーマット名
+                                    ")";
 
-                        case "削除":
-                            //削除用クエリ作成
-                            cmd.CommandText = "delete from FORMAT " +
-                                "where ID = " + IDTextBox.Text;
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
 
-                            //コマンド実行
-                            count = cmd.ExecuteNonQuery();
+                            case "削除":
+                                //削除用クエリ作成
+                                cmd.CommandText = "delete from FORMAT " +
+                                    "where ID = " + IDTextBox.Text;
 
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
+                                if (cmd.ExecuteNonQuery() > 0)
+                                {
+                                    MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
 
-                        default:
-                            break;
+                            default:
+                                break;
+                        }
+
+                        con.Close();
                     }
-
-                    con.Close();
                 }
             }
         }
@@ -267,6 +261,37 @@ namespace VersusLog
         {
             //フォーマットマスタ更新
             UpdateView();
+        }
+
+        /// <summary>
+        /// 入力チェック
+        /// </summary>
+        /// <remarks>変更種別に応じてチェック</remarks>
+        /// <returns>チェック結果</returns>
+        private bool FormatMasterChangeFormCheck()
+        {
+            //変更種別
+            if (ChangeGenreComboBox.Text != null)
+            {
+                switch (ChangeGenreComboBox.Text)
+                {
+                    case "変更":
+                        if (string.IsNullOrEmpty(IDTextBox.Text)) { return false; } //ID
+                        if (string.IsNullOrEmpty(FormatNameTextBox.Text)) { return false; } //フォーマット名
+                        break;
+                    case "追加":
+                        if (string.IsNullOrEmpty(FormatNameTextBox.Text)) { return false; } //フォーマット名
+                        break;
+                    case "削除":
+                        if (string.IsNullOrEmpty(IDTextBox.Text)) { return false; } //ID
+                        break;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 

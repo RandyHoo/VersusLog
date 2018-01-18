@@ -341,7 +341,6 @@ namespace VersusLog
             {
                 return false;
             }
-
         }
         #endregion
 
