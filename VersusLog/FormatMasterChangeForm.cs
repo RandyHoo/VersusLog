@@ -131,6 +131,10 @@ namespace VersusLog
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("入力項目不足です。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
         }
 
 

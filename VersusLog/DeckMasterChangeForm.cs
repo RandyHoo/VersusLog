@@ -35,97 +35,104 @@ namespace VersusLog
         /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            if (DeckMasterChangeFormInputCheck())
             {
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
+                using (var con = new SQLiteConnection(CommonData.ConnectionString))
                 {
-                    //変更種別ごとにクエリ作成
-                    switch (ChangeGenreComboBox.Text)
+                    con.Open();
+
+                    using (var cmd = con.CreateCommand())
                     {
-                        case "変更":
-                            //変更用クエリ作成
-                            cmd.CommandText = "update DECK " +
-                                "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
-                                "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
-                                "DECKTYPE1 = '" + Decktype1TextBox.Text + "', " +
-                                "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
-                                "where ID = " + IDTextBox.Text;
+                        //変更種別ごとにクエリ作成
+                        switch (ChangeGenreComboBox.Text)
+                        {
+                            case "変更":
+                                //変更用クエリ作成
+                                cmd.CommandText = "update DECK " +
+                                    "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
+                                    "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
+                                    "DECKTYPE1 = '" + Decktype1TextBox.Text + "', " +
+                                    "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
+                                    "where ID = " + IDTextBox.Text;
 
-                            int count = cmd.ExecuteNonQuery();
+                                int count = cmd.ExecuteNonQuery();
 
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
-
-                        case "追加":
-                            int id = 0;
-
-                            //ID取得用クエリ作成
-                            cmd.CommandText = "select ID from DECK";
-                            using (var reader = cmd.ExecuteReader())
-                            {
-                                //最後のレコードのIDを取得する
-                                while (reader.Read())
+                                if (count > 0)
                                 {
-                                    id = System.Convert.ToInt32(reader.GetValue(0));
+                                    MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                                 }
-                                id += 1;
-                            }
-                            string Qid = id.ToString();
+                                else
+                                {
+                                    MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
 
-                            //追加用クエリ作成
-                            cmd.CommandText = "insert into DECK " +
-                                "values( " +
-                                " " + Qid + "," + //ID
-                                " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
-                                " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
-                                " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
-                                " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
-                                " )";
+                            case "追加":
+                                int id = 0;
 
-                            count = cmd.ExecuteNonQuery();
+                                //ID取得用クエリ作成
+                                cmd.CommandText = "select ID from DECK";
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    //最後のレコードのIDを取得する
+                                    while (reader.Read())
+                                    {
+                                        id = System.Convert.ToInt32(reader.GetValue(0));
+                                    }
+                                    id += 1;
+                                }
+                                string Qid = id.ToString();
 
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
+                                //追加用クエリ作成
+                                cmd.CommandText = "insert into DECK " +
+                                    "values( " +
+                                    " " + Qid + "," + //ID
+                                    " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
+                                    " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
+                                    " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
+                                    " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
+                                    " )";
 
-                        case "削除":
-                            //削除用クエリ作成
-                            cmd.CommandText = "delete from DECK " +
-                                "where ID = " + IDTextBox.Text;
+                                count = cmd.ExecuteNonQuery();
 
-                            count = cmd.ExecuteNonQuery();
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
 
-                            if (count > 0)
-                            {
-                                MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                            }
-                            else
-                            {
-                                MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            }
-                            break;
+                            case "削除":
+                                //削除用クエリ作成
+                                cmd.CommandText = "delete from DECK " +
+                                    "where ID = " + IDTextBox.Text;
 
-                        default:
-                            break;
+                                count = cmd.ExecuteNonQuery();
+
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                }
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        con.Close();
                     }
-
-                    con.Close();
                 }
+            }
+            else
+            {
+                MessageBox.Show("入力項目不足です。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -338,22 +345,22 @@ namespace VersusLog
         /// ID
         /// </summary>
         public int Id { get; set; }
-        
+
         /// <summary>
         /// デッキ大分類
         /// </summary>
         public string Majorclass { get; set; }
-        
+
         /// <summary>
         /// デッキ小分類
         /// </summary>
         public string Smallclass { get; set; }
-        
+
         /// <summary>
         /// デッキタイプ1
         /// </summary>
         public string Decktype1 { get; set; }
-        
+
         /// <summary>
         /// デッキタイプ2
         /// </summary>
