@@ -60,7 +60,6 @@ C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\EntityFramework.xml
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.xml
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.dll.config
-C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csprojResolveAssemblyReference.cache
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.FormatMasterChangeForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.MainMenuForm.resources
 C:\Users\BP-030\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.DeckMasterChangeForm.resources

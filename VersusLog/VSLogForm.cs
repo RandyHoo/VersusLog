@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
@@ -23,6 +17,24 @@ namespace VersusLog
             DeckRecodeFormInit();   //デッキ戦績
             MetaAnalyzeFormInit();  //メタ分析
         }
+
+
+        /// <summary>
+        /// メインメニューに戻るボタン押下時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackMainMenuButton_Click(object sender, EventArgs e)
+        {
+            //表示フォーム切り替え
+            Form ViewForm = new MainMenuForm();
+            ViewForm.Show();
+            Hide();
+        }
+
+
+
+        #region 戦績ログ
 
         /// <summary>
         /// 戦績ログ初期化処理
@@ -92,112 +104,6 @@ namespace VersusLog
         }
 
         /// <summary>
-        /// ログ入力初期化処理
-        /// </summary>
-        private void InsertLogFormInit()
-        {
-            var MyDeckMajorclassDatasource = new List<string>();
-            var EnemyDeckMajorclassDatasource = new List<string>();
-            var FormatDatasource = new List<string>();
-
-            using (var con = new SQLiteConnection(CommonData.ConnectionString))
-            {
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
-                {
-                    //デッキ名取得用クエリ作成
-                    cmd.CommandText = "select distinct MAJORCLASS from DECK";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            MyDeckMajorclassDatasource.Add(reader.GetString(0));
-                            EnemyDeckMajorclassDatasource.Add(reader.GetString(0));
-                        }
-                        ILMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
-                        ILEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
-                    }
-
-                    //フォーマット名取得用クエリ作成
-                    cmd.CommandText = "select FORMATNAME from FORMAT";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            FormatDatasource.Add(reader.GetString(0));
-                        }
-                        ILFormatComboBox.DataSource = FormatDatasource;
-                    }
-                }
-
-                con.Close();
-            }
-
-            //結果コンボボックスの要素入力
-            var WinDatasource = new List<string>();
-            WinDatasource.Add("勝ち");
-            WinDatasource.Add("負け");
-            ILWinComboBox.DataSource = WinDatasource;
-
-            //先行後攻コンボボックスの要素入力
-            var PracedenceDatasource = new List<string>();
-            PracedenceDatasource.Add("先行");
-            PracedenceDatasource.Add("後攻");
-            ILPracedenceComboBox.DataSource = PracedenceDatasource;
-
-            //日付のデフォ値(今日の日付)を入力
-            DateTime dtNow = DateTime.Now;
-            DateTime dtToday = dtNow.Date;
-            ILDateTextBox.Text = dtToday.ToShortDateString();
-        }
-
-        /// <summary>
-        /// デッキ戦績初期化処理
-        /// </summary>
-        private void DeckRecodeFormInit()
-        {
-            var DRMyDeckMajorclassDatasource = new List<string>();
-
-            using (var con = new SQLiteConnection(CommonData.ConnectionString))
-            {
-                con.Open();
-
-                using (var cmd = con.CreateCommand())
-                {
-                    //デッキ名取得用クエリ作成
-                    cmd.CommandText = "select distinct MAJORCLASS from DECK";
-
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            DRMyDeckMajorclassDatasource.Add(reader.GetString(0));
-                        }
-                        DRMydeckMajorclassComboBox.DataSource = DRMyDeckMajorclassDatasource;
-                    }
-                }
-
-                con.Close();
-            }
-        }
-
-        /// <summary>
-        /// メタ分析初期化処理
-        /// </summary>
-        private void MetaAnalyzeFormInit()
-        {
-            //期間コンボボックスの要素をセット
-            var PeriodDatasource = new List<string> { "指定なし", "この1週間", "今月" };
-            MAPeriodComboBox.DataSource = PeriodDatasource;
-        }
-
-
-
-        //戦績ログ
-        /// <summary>
         /// 戦績ログ:データ取得ボタン押下時処理
         /// </summary>
         /// <param name="sender"></param>
@@ -263,19 +169,6 @@ namespace VersusLog
 
                 con.Close();
             }
-        }
-
-        /// <summary>
-        /// メインメニューに戻るボタン押下時処理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BackMainMenuButton_Click(object sender, EventArgs e)
-        {
-            //表示フォーム切り替え
-            Form ViewForm = new MainMenuForm();
-            ViewForm.Show();
-            Hide();
         }
 
         /// <summary>
@@ -410,10 +303,74 @@ namespace VersusLog
                 }
             }
         }
+        #endregion
 
 
 
-        //ログ入力
+        #region ログ入力
+
+        /// <summary>
+        /// ログ入力初期化処理
+        /// </summary>
+        private void InsertLogFormInit()
+        {
+            var MyDeckMajorclassDatasource = new List<string>();
+            var EnemyDeckMajorclassDatasource = new List<string>();
+            var FormatDatasource = new List<string>();
+
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            {
+                con.Open();
+
+                using (var cmd = con.CreateCommand())
+                {
+                    //デッキ名取得用クエリ作成
+                    cmd.CommandText = "select distinct MAJORCLASS from DECK";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MyDeckMajorclassDatasource.Add(reader.GetString(0));
+                            EnemyDeckMajorclassDatasource.Add(reader.GetString(0));
+                        }
+                        ILMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
+                        ILEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
+                    }
+
+                    //フォーマット名取得用クエリ作成
+                    cmd.CommandText = "select FORMATNAME from FORMAT";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            FormatDatasource.Add(reader.GetString(0));
+                        }
+                        ILFormatComboBox.DataSource = FormatDatasource;
+                    }
+                }
+
+                con.Close();
+            }
+
+            //結果コンボボックスの要素入力
+            var WinDatasource = new List<string>();
+            WinDatasource.Add("勝ち");
+            WinDatasource.Add("負け");
+            ILWinComboBox.DataSource = WinDatasource;
+
+            //先行後攻コンボボックスの要素入力
+            var PracedenceDatasource = new List<string>();
+            PracedenceDatasource.Add("先行");
+            PracedenceDatasource.Add("後攻");
+            ILPracedenceComboBox.DataSource = PracedenceDatasource;
+
+            //日付のデフォ値(今日の日付)を入力
+            DateTime dtNow = DateTime.Now;
+            DateTime dtToday = dtNow.Date;
+            ILDateTextBox.Text = dtToday.ToShortDateString();
+        }
 
         /// <summary>
         /// ログ入力:自デッキ大分類入力時処理
@@ -538,10 +495,42 @@ namespace VersusLog
                 }
             }
         }
+        #endregion
 
 
 
-        //デッキ戦績
+        #region デッキ戦績
+
+        /// <summary>
+        /// デッキ戦績初期化処理
+        /// </summary>
+        private void DeckRecodeFormInit()
+        {
+            var DRMyDeckMajorclassDatasource = new List<string>();
+
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            {
+                con.Open();
+
+                using (var cmd = con.CreateCommand())
+                {
+                    //デッキ名取得用クエリ作成
+                    cmd.CommandText = "select distinct MAJORCLASS from DECK";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DRMyDeckMajorclassDatasource.Add(reader.GetString(0));
+                        }
+                        DRMydeckMajorclassComboBox.DataSource = DRMyDeckMajorclassDatasource;
+                    }
+                }
+
+                con.Close();
+            }
+        }
+
         /// <summary>
         /// デッキ戦績:戦績表示ボタン押下時処理
         /// </summary>
@@ -683,10 +672,22 @@ namespace VersusLog
             //デッキ小分類を取得
             CommonData.GetDeckSmallclass(DRMydeckMajorclassComboBox, DRMydeckSmallclassComboBox);
         }
+        #endregion
 
 
 
-        //メタ分析
+        #region メタ分析
+
+        /// <summary>
+        /// メタ分析初期化処理
+        /// </summary>
+        private void MetaAnalyzeFormInit()
+        {
+            //期間コンボボックスの要素をセット
+            var PeriodDatasource = new List<string> { "指定なし", "この1週間", "今月" };
+            MAPeriodComboBox.DataSource = PeriodDatasource;
+        }
+
         /// <summary>
         /// メタ分析:変更種別変更時処理
         /// </summary>
@@ -759,7 +760,11 @@ namespace VersusLog
             }
         }
     }
+    #endregion
 
+
+
+    #region データセットクラス
     /// <summary>
     /// 戦績ログクラス
     /// </summary>
@@ -910,4 +915,5 @@ namespace VersusLog
             }
         }
     }
+    #endregion
 }
