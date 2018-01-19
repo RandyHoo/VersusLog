@@ -44,7 +44,9 @@
             this.ChangeGenreComboBox = new System.Windows.Forms.ComboBox();
             this.ChangeGenreLabel = new System.Windows.Forms.Label();
             this.UpdateViewButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.DeckMasterGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // DeckMasterGridView
@@ -53,12 +55,12 @@
             this.DeckMasterGridView.Location = new System.Drawing.Point(12, 12);
             this.DeckMasterGridView.Name = "DeckMasterGridView";
             this.DeckMasterGridView.RowTemplate.Height = 21;
-            this.DeckMasterGridView.Size = new System.Drawing.Size(778, 281);
+            this.DeckMasterGridView.Size = new System.Drawing.Size(502, 281);
             this.DeckMasterGridView.TabIndex = 2;
             // 
             // BackMainMenuButton
             // 
-            this.BackMainMenuButton.Location = new System.Drawing.Point(668, 483);
+            this.BackMainMenuButton.Location = new System.Drawing.Point(392, 575);
             this.BackMainMenuButton.Name = "BackMainMenuButton";
             this.BackMainMenuButton.Size = new System.Drawing.Size(122, 27);
             this.BackMainMenuButton.TabIndex = 3;
@@ -69,7 +71,7 @@
             // DeckType2Label
             // 
             this.DeckType2Label.AutoSize = true;
-            this.DeckType2Label.Location = new System.Drawing.Point(186, 472);
+            this.DeckType2Label.Location = new System.Drawing.Point(178, 128);
             this.DeckType2Label.Name = "DeckType2Label";
             this.DeckType2Label.Size = new System.Drawing.Size(64, 12);
             this.DeckType2Label.TabIndex = 20;
@@ -78,7 +80,7 @@
             // DeckType1Label
             // 
             this.DeckType1Label.AutoSize = true;
-            this.DeckType1Label.Location = new System.Drawing.Point(12, 472);
+            this.DeckType1Label.Location = new System.Drawing.Point(4, 128);
             this.DeckType1Label.Name = "DeckType1Label";
             this.DeckType1Label.Size = new System.Drawing.Size(64, 12);
             this.DeckType1Label.TabIndex = 18;
@@ -87,7 +89,7 @@
             // DeckSmallclassLabel
             // 
             this.DeckSmallclassLabel.AutoSize = true;
-            this.DeckSmallclassLabel.Location = new System.Drawing.Point(184, 416);
+            this.DeckSmallclassLabel.Location = new System.Drawing.Point(176, 72);
             this.DeckSmallclassLabel.Name = "DeckSmallclassLabel";
             this.DeckSmallclassLabel.Size = new System.Drawing.Size(74, 12);
             this.DeckSmallclassLabel.TabIndex = 15;
@@ -96,7 +98,7 @@
             // DeckMajorclassLabel
             // 
             this.DeckMajorclassLabel.AutoSize = true;
-            this.DeckMajorclassLabel.Location = new System.Drawing.Point(12, 416);
+            this.DeckMajorclassLabel.Location = new System.Drawing.Point(4, 72);
             this.DeckMajorclassLabel.Name = "DeckMajorclassLabel";
             this.DeckMajorclassLabel.Size = new System.Drawing.Size(74, 12);
             this.DeckMajorclassLabel.TabIndex = 14;
@@ -104,7 +106,7 @@
             // 
             // IDTextBox
             // 
-            this.IDTextBox.Location = new System.Drawing.Point(14, 378);
+            this.IDTextBox.Location = new System.Drawing.Point(6, 34);
             this.IDTextBox.Name = "IDTextBox";
             this.IDTextBox.Size = new System.Drawing.Size(126, 19);
             this.IDTextBox.TabIndex = 12;
@@ -113,7 +115,7 @@
             // IDLabel
             // 
             this.IDLabel.AutoSize = true;
-            this.IDLabel.Location = new System.Drawing.Point(12, 363);
+            this.IDLabel.Location = new System.Drawing.Point(4, 19);
             this.IDLabel.Name = "IDLabel";
             this.IDLabel.Size = new System.Drawing.Size(16, 12);
             this.IDLabel.TabIndex = 11;
@@ -121,7 +123,7 @@
             // 
             // DoneButton
             // 
-            this.DoneButton.Location = new System.Drawing.Point(360, 487);
+            this.DoneButton.Location = new System.Drawing.Point(244, 547);
             this.DoneButton.Name = "DoneButton";
             this.DoneButton.Size = new System.Drawing.Size(86, 27);
             this.DoneButton.TabIndex = 23;
@@ -131,28 +133,28 @@
             // 
             // MajorclassTextBox
             // 
-            this.MajorclassTextBox.Location = new System.Drawing.Point(14, 432);
+            this.MajorclassTextBox.Location = new System.Drawing.Point(6, 88);
             this.MajorclassTextBox.Name = "MajorclassTextBox";
             this.MajorclassTextBox.Size = new System.Drawing.Size(126, 19);
             this.MajorclassTextBox.TabIndex = 24;
             // 
             // SmallclassTextBox
             // 
-            this.SmallclassTextBox.Location = new System.Drawing.Point(186, 432);
+            this.SmallclassTextBox.Location = new System.Drawing.Point(178, 88);
             this.SmallclassTextBox.Name = "SmallclassTextBox";
             this.SmallclassTextBox.Size = new System.Drawing.Size(126, 19);
             this.SmallclassTextBox.TabIndex = 25;
             // 
             // Decktype1TextBox
             // 
-            this.Decktype1TextBox.Location = new System.Drawing.Point(14, 491);
+            this.Decktype1TextBox.Location = new System.Drawing.Point(6, 147);
             this.Decktype1TextBox.Name = "Decktype1TextBox";
             this.Decktype1TextBox.Size = new System.Drawing.Size(126, 19);
             this.Decktype1TextBox.TabIndex = 26;
             // 
             // Decktype2TextBox
             // 
-            this.Decktype2TextBox.Location = new System.Drawing.Point(186, 491);
+            this.Decktype2TextBox.Location = new System.Drawing.Point(178, 147);
             this.Decktype2TextBox.Name = "Decktype2TextBox";
             this.Decktype2TextBox.Size = new System.Drawing.Size(126, 19);
             this.Decktype2TextBox.TabIndex = 27;
@@ -177,7 +179,7 @@
             // 
             // UpdateViewButton
             // 
-            this.UpdateViewButton.Location = new System.Drawing.Point(668, 301);
+            this.UpdateViewButton.Location = new System.Drawing.Point(392, 299);
             this.UpdateViewButton.Name = "UpdateViewButton";
             this.UpdateViewButton.Size = new System.Drawing.Size(122, 28);
             this.UpdateViewButton.TabIndex = 30;
@@ -185,30 +187,42 @@
             this.UpdateViewButton.UseVisualStyleBackColor = true;
             this.UpdateViewButton.Click += new System.EventHandler(this.UpdateViewButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.IDTextBox);
+            this.groupBox1.Controls.Add(this.IDLabel);
+            this.groupBox1.Controls.Add(this.DeckMajorclassLabel);
+            this.groupBox1.Controls.Add(this.DeckSmallclassLabel);
+            this.groupBox1.Controls.Add(this.Decktype2TextBox);
+            this.groupBox1.Controls.Add(this.DeckType1Label);
+            this.groupBox1.Controls.Add(this.Decktype1TextBox);
+            this.groupBox1.Controls.Add(this.DeckType2Label);
+            this.groupBox1.Controls.Add(this.SmallclassTextBox);
+            this.groupBox1.Controls.Add(this.MajorclassTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 358);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(318, 183);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "入力";
+            // 
             // DeckMasterChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 524);
+            this.ClientSize = new System.Drawing.Size(525, 614);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.UpdateViewButton);
             this.Controls.Add(this.ChangeGenreLabel);
             this.Controls.Add(this.ChangeGenreComboBox);
-            this.Controls.Add(this.Decktype2TextBox);
-            this.Controls.Add(this.Decktype1TextBox);
-            this.Controls.Add(this.SmallclassTextBox);
-            this.Controls.Add(this.MajorclassTextBox);
             this.Controls.Add(this.DoneButton);
-            this.Controls.Add(this.DeckType2Label);
-            this.Controls.Add(this.DeckType1Label);
-            this.Controls.Add(this.DeckSmallclassLabel);
-            this.Controls.Add(this.DeckMajorclassLabel);
-            this.Controls.Add(this.IDTextBox);
-            this.Controls.Add(this.IDLabel);
             this.Controls.Add(this.BackMainMenuButton);
             this.Controls.Add(this.DeckMasterGridView);
             this.Name = "DeckMasterChangeForm";
             this.Text = "VersusLog -デッキマスタ変更-";
             ((System.ComponentModel.ISupportInitialize)(this.DeckMasterGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,5 +246,6 @@
         private System.Windows.Forms.ComboBox ChangeGenreComboBox;
         private System.Windows.Forms.Label ChangeGenreLabel;
         private System.Windows.Forms.Button UpdateViewButton;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

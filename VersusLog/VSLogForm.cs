@@ -84,7 +84,7 @@ namespace VersusLog
                         }
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
@@ -177,7 +177,7 @@ namespace VersusLog
                         VLLogGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
@@ -317,7 +317,7 @@ namespace VersusLog
 
                         }
                     }
-                    catch (System.Data.SQLite.SQLiteException ex)
+                    catch (System.Data.SQLite.SQLiteException)
                     {
                         MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
@@ -416,7 +416,7 @@ namespace VersusLog
                     }
 
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
@@ -566,7 +566,7 @@ namespace VersusLog
                             }
                         }
                     }
-                    catch (System.Data.SQLite.SQLiteException ex)
+                    catch (System.Data.SQLite.SQLiteException)
                     {
                         MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
@@ -630,7 +630,7 @@ namespace VersusLog
                         }
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
@@ -770,7 +770,7 @@ namespace VersusLog
                             DRDeckRecodeView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                         }
                     }
-                    catch (System.Data.SQLite.SQLiteException ex)
+                    catch (System.Data.SQLite.SQLiteException)
                     {
                         MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
@@ -891,13 +891,18 @@ namespace VersusLog
                         MAMetaAnalyzeDeckText.Text = moredeck;
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
 
                 con.Close();
             }
+        }
+
+        private void DeckType2Label_Click(object sender, EventArgs e)
+        {
+
         }
     }
     #endregion

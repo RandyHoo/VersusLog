@@ -129,7 +129,7 @@ namespace VersusLog
                             }
                         }
                     }
-                    catch (System.Data.SQLite.SQLiteException ex)
+                    catch (System.Data.SQLite.SQLiteException)
                     {
                         MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
@@ -243,7 +243,7 @@ namespace VersusLog
                             }
                         }
                     }
-                    catch (System.Data.SQLite.SQLiteException ex)
+                    catch (System.Data.SQLite.SQLiteException)
                     {
                         MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
@@ -311,7 +311,7 @@ namespace VersusLog
                         }
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException ex)
+                catch (System.Data.SQLite.SQLiteException)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }

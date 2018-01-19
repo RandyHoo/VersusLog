@@ -38,12 +38,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.FormatNameTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.FormatMasterGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BackMainMenuButton
             // 
-            this.BackMainMenuButton.Location = new System.Drawing.Point(303, 353);
+            this.BackMainMenuButton.Location = new System.Drawing.Point(303, 377);
             this.BackMainMenuButton.Name = "BackMainMenuButton";
             this.BackMainMenuButton.Size = new System.Drawing.Size(122, 27);
             this.BackMainMenuButton.TabIndex = 3;
@@ -73,7 +75,7 @@
             // ChangeGenreLabel
             // 
             this.ChangeGenreLabel.AutoSize = true;
-            this.ChangeGenreLabel.Location = new System.Drawing.Point(13, 253);
+            this.ChangeGenreLabel.Location = new System.Drawing.Point(13, 249);
             this.ChangeGenreLabel.Name = "ChangeGenreLabel";
             this.ChangeGenreLabel.Size = new System.Drawing.Size(53, 12);
             this.ChangeGenreLabel.TabIndex = 37;
@@ -82,7 +84,7 @@
             // ChangeGenreComboBox
             // 
             this.ChangeGenreComboBox.FormattingEnabled = true;
-            this.ChangeGenreComboBox.Location = new System.Drawing.Point(12, 268);
+            this.ChangeGenreComboBox.Location = new System.Drawing.Point(12, 264);
             this.ChangeGenreComboBox.Name = "ChangeGenreComboBox";
             this.ChangeGenreComboBox.Size = new System.Drawing.Size(121, 20);
             this.ChangeGenreComboBox.TabIndex = 36;
@@ -90,7 +92,7 @@
             // 
             // DoneButton
             // 
-            this.DoneButton.Location = new System.Drawing.Point(182, 353);
+            this.DoneButton.Location = new System.Drawing.Point(174, 377);
             this.DoneButton.Name = "DoneButton";
             this.DoneButton.Size = new System.Drawing.Size(86, 27);
             this.DoneButton.TabIndex = 34;
@@ -100,7 +102,7 @@
             // 
             // IDTextBox
             // 
-            this.IDTextBox.Location = new System.Drawing.Point(12, 312);
+            this.IDTextBox.Location = new System.Drawing.Point(5, 30);
             this.IDTextBox.Name = "IDTextBox";
             this.IDTextBox.Size = new System.Drawing.Size(126, 19);
             this.IDTextBox.TabIndex = 32;
@@ -109,7 +111,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 297);
+            this.label1.Location = new System.Drawing.Point(6, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 12);
             this.label1.TabIndex = 31;
@@ -118,7 +120,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 342);
+            this.label2.Location = new System.Drawing.Point(6, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 12);
             this.label2.TabIndex = 33;
@@ -126,29 +128,41 @@
             // 
             // FormatNameTextBox
             // 
-            this.FormatNameTextBox.Location = new System.Drawing.Point(12, 357);
+            this.FormatNameTextBox.Location = new System.Drawing.Point(5, 75);
             this.FormatNameTextBox.Name = "FormatNameTextBox";
             this.FormatNameTextBox.Size = new System.Drawing.Size(126, 19);
             this.FormatNameTextBox.TabIndex = 35;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.IDTextBox);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.FormatNameTextBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 294);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(156, 110);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "入力";
             // 
             // FormatMasterChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 392);
+            this.ClientSize = new System.Drawing.Size(438, 413);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.UpdateViewButton);
             this.Controls.Add(this.ChangeGenreLabel);
             this.Controls.Add(this.ChangeGenreComboBox);
-            this.Controls.Add(this.FormatNameTextBox);
             this.Controls.Add(this.DoneButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.IDTextBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.FormatMasterGridView);
             this.Controls.Add(this.BackMainMenuButton);
             this.Name = "FormatMasterChangeForm";
             this.Text = "VersusLog -フォーマットマスタ変更-";
             ((System.ComponentModel.ISupportInitialize)(this.FormatMasterGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,5 +180,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox FormatNameTextBox;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
