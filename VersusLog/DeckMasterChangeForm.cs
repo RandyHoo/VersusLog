@@ -41,93 +41,100 @@ namespace VersusLog
                 {
                     con.Open();
 
-                    using (var cmd = con.CreateCommand())
+                    try
                     {
-                        //変更種別ごとにクエリ作成
-                        switch (ChangeGenreComboBox.Text)
+                        using (var cmd = con.CreateCommand())
                         {
-                            case "変更":
-                                //変更用クエリ作成
-                                cmd.CommandText = "update DECK " +
-                                    "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
-                                    "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
-                                    "DECKTYPE1 = '" + Decktype1TextBox.Text + "', " +
-                                    "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
-                                    "where ID = " + IDTextBox.Text;
+                            //変更種別ごとにクエリ作成
+                            switch (ChangeGenreComboBox.Text)
+                            {
+                                case "変更":
+                                    //変更用クエリ作成
+                                    cmd.CommandText = "update DECK " +
+                                        "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
+                                        "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
+                                        "DECKTYPE1 = '" + Decktype1TextBox.Text + "', " +
+                                        "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
+                                        "where ID = " + IDTextBox.Text;
 
-                                int count = cmd.ExecuteNonQuery();
+                                    int count = cmd.ExecuteNonQuery();
 
-                                if (count > 0)
-                                {
-                                    MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
-
-                            case "追加":
-                                int id = 0;
-
-                                //ID取得用クエリ作成
-                                cmd.CommandText = "select ID from DECK";
-                                using (var reader = cmd.ExecuteReader())
-                                {
-                                    //最後のレコードのIDを取得する
-                                    while (reader.Read())
+                                    if (count > 0)
                                     {
-                                        id = System.Convert.ToInt32(reader.GetValue(0));
+                                        MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                                     }
-                                    id += 1;
-                                }
-                                string Qid = id.ToString();
+                                    else
+                                    {
+                                        MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
 
-                                //追加用クエリ作成
-                                cmd.CommandText = "insert into DECK " +
-                                    "values( " +
-                                    " " + Qid + "," + //ID
-                                    " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
-                                    " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
-                                    " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
-                                    " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
-                                    " )";
+                                case "追加":
+                                    int id = 0;
 
-                                count = cmd.ExecuteNonQuery();
+                                    //ID取得用クエリ作成
+                                    cmd.CommandText = "select ID from DECK";
+                                    using (var reader = cmd.ExecuteReader())
+                                    {
+                                        //最後のレコードのIDを取得する
+                                        while (reader.Read())
+                                        {
+                                            id = System.Convert.ToInt32(reader.GetValue(0));
+                                        }
+                                        id += 1;
+                                    }
+                                    string Qid = id.ToString();
 
-                                if (count > 0)
-                                {
-                                    MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
+                                    //追加用クエリ作成
+                                    cmd.CommandText = "insert into DECK " +
+                                        "values( " +
+                                        " " + Qid + "," + //ID
+                                        " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
+                                        " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
+                                        " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
+                                        " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
+                                        " )";
 
-                            case "削除":
-                                //削除用クエリ作成
-                                cmd.CommandText = "delete from DECK " +
-                                    "where ID = " + IDTextBox.Text;
+                                    count = cmd.ExecuteNonQuery();
 
-                                count = cmd.ExecuteNonQuery();
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
 
-                                if (count > 0)
-                                {
-                                    MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
+                                case "削除":
+                                    //削除用クエリ作成
+                                    cmd.CommandText = "delete from DECK " +
+                                        "where ID = " + IDTextBox.Text;
 
-                            default:
-                                break;
+                                    count = cmd.ExecuteNonQuery();
+
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
-
-                        con.Close();
                     }
+                    catch (System.Data.SQLite.SQLiteException ex)
+                    {
+                        MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+
+                    con.Close();
                 }
             }
             else
@@ -215,23 +222,30 @@ namespace VersusLog
                 {
                     con.Open();
 
-                    using (var cmd = con.CreateCommand())
+                    try
                     {
-                        //元々入っている値取得用クエリ
-                        cmd.CommandText = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
-                            "from DECK " +
-                            "where ID = " + IDTextBox.Text;
-
-                        using (var reader = cmd.ExecuteReader())
+                        using (var cmd = con.CreateCommand())
                         {
-                            while (reader.Read())
+                            //元々入っている値取得用クエリ
+                            cmd.CommandText = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
+                                "from DECK " +
+                                "where ID = " + IDTextBox.Text;
+
+                            using (var reader = cmd.ExecuteReader())
                             {
-                                MajorclassTextBox.Text = reader.GetString(0); //デッキ大分類
-                                SmallclassTextBox.Text = (reader.IsDBNull(1)) ? null : reader.GetString(1); //デッキ小分類
-                                Decktype1TextBox.Text = (reader.IsDBNull(2)) ? null : reader.GetString(2); //デッキタイプ1
-                                Decktype2TextBox.Text = (reader.IsDBNull(3)) ? null : reader.GetString(3); //デッキタイプ2
+                                while (reader.Read())
+                                {
+                                    MajorclassTextBox.Text = reader.GetString(0); //デッキ大分類
+                                    SmallclassTextBox.Text = (reader.IsDBNull(1)) ? null : reader.GetString(1); //デッキ小分類
+                                    Decktype1TextBox.Text = (reader.IsDBNull(2)) ? null : reader.GetString(2); //デッキタイプ1
+                                    Decktype2TextBox.Text = (reader.IsDBNull(3)) ? null : reader.GetString(3); //デッキタイプ2
+                                }
                             }
                         }
+                    }
+                    catch (System.Data.SQLite.SQLiteException ex)
+                    {
+                        MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
 
                     con.Close();
@@ -260,38 +274,46 @@ namespace VersusLog
             {
                 con.Open();
 
-                using (SQLiteCommand cmd = con.CreateCommand())
+                try
                 {
-                    //デッキ一覧取得用クエリ作成
-                    cmd.CommandText = "select * from DECK";
-
-                    using (var reader = cmd.ExecuteReader())
+                    using (SQLiteCommand cmd = con.CreateCommand())
                     {
-                        while (reader.Read())
+                        //デッキ一覧取得用クエリ作成
+                        cmd.CommandText = "select * from DECK";
+
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            displaylist.Add(new DeckData(
-                                reader.GetValue(0), //ID
-                                reader.GetString(1), //デッキ大分類
-                                reader.GetString(2), //デッキ小分類
-                                reader.GetString(3), //デッキタイプ1
-                                reader.GetString(4) //デッキタイプ2
-                                ));
+                            while (reader.Read())
+                            {
+                                displaylist.Add(new DeckData(
+                                    reader.GetValue(0), //ID
+                                    reader.GetString(1), //デッキ大分類
+                                    reader.GetString(2), //デッキ小分類
+                                    reader.GetString(3), //デッキタイプ1
+                                    reader.GetString(4) //デッキタイプ2
+                                    ));
+                            }
+                            DeckMasterGridView.DataSource = displaylist;
+
+
+                            //LogGridViewの列ヘッダーの表示を日本語にする
+                            var cheaderlist = new List<string> { "ID", "デッキ大分類", "デッキ小分類", "デッキタイプ1", "デッキタイプ2" };
+                            for (int i = 0; i < DeckMasterGridView.Columns.Count; i++)
+                            {
+                                DeckMasterGridView.Columns[i].HeaderText = cheaderlist[i];
+                            }
+
+                            //表示幅の自動修正をON
+                            DeckMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            DeckMasterGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                            DeckMasterGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
                         }
-                        DeckMasterGridView.DataSource = displaylist;
-
-                        //LogGridViewの列ヘッダーの表示を日本語にする
-                        var cheaderlist = new List<string> { "ID", "デッキ大分類", "デッキ小分類", "デッキタイプ1", "デッキタイプ2" };
-                        for (int i = 0; i < DeckMasterGridView.Columns.Count; i++)
-                        {
-                            DeckMasterGridView.Columns[i].HeaderText = cheaderlist[i];
-                        }
-
-                        //表示幅の自動修正をON
-                        DeckMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                        DeckMasterGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                        DeckMasterGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
                     }
+                }
+                catch (System.Data.SQLite.SQLiteException ex)
+                {
+                    MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
 
                 con.Close();

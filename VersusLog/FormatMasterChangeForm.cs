@@ -54,81 +54,88 @@ namespace VersusLog
                 {
                     con.Open();
 
-                    using (var cmd = con.CreateCommand())
+                    try
                     {
-                        //変更種別ごとにコマンド生成
-                        switch (ChangeGenreComboBox.Text)
+                        using (var cmd = con.CreateCommand())
                         {
-                            case "変更":
-                                //変更用クエリ作成
-                                cmd.CommandText = "update FORMAT " +
-                                    "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
-                                    "where ID = " + IDTextBox.Text;
+                            //変更種別ごとにコマンド生成
+                            switch (ChangeGenreComboBox.Text)
+                            {
+                                case "変更":
+                                    //変更用クエリ作成
+                                    cmd.CommandText = "update FORMAT " +
+                                        "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
+                                        "where ID = " + IDTextBox.Text;
 
-                                if (cmd.ExecuteNonQuery() > 0)
-                                {
-                                    MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
-
-                            case "追加":
-                                int id = 0;
-
-                                //ID取得用コマンド生成
-                                cmd.CommandText = "select ID from FORMAT";
-                                using (var reader = cmd.ExecuteReader())
-                                {
-                                    //最後のレコードのIDを取得する
-                                    while (reader.Read())
+                                    if (cmd.ExecuteNonQuery() > 0)
                                     {
-                                        id = System.Convert.ToInt32(reader.GetValue(0));
+                                        MessageBox.Show("DBが変更されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                                     }
-                                    id += 1;
-                                }
-                                string Qid = id.ToString();
+                                    else
+                                    {
+                                        MessageBox.Show("DBを変更できませんでした。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
 
-                                //追加用クエリ作成
-                                cmd.CommandText = "insert into FORMAT " +
-                                    "values( " +
-                                    " " + Qid + "," + //ID
-                                    " '" + FormatNameTextBox.Text + "' " + //フォーマット名
-                                    ")";
+                                case "追加":
+                                    int id = 0;
 
-                                if (cmd.ExecuteNonQuery() > 0)
-                                {
-                                    MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
+                                    //ID取得用コマンド生成
+                                    cmd.CommandText = "select ID from FORMAT";
+                                    using (var reader = cmd.ExecuteReader())
+                                    {
+                                        //最後のレコードのIDを取得する
+                                        while (reader.Read())
+                                        {
+                                            id = System.Convert.ToInt32(reader.GetValue(0));
+                                        }
+                                        id += 1;
+                                    }
+                                    string Qid = id.ToString();
 
-                            case "削除":
-                                //削除用クエリ作成
-                                cmd.CommandText = "delete from FORMAT " +
-                                    "where ID = " + IDTextBox.Text;
+                                    //追加用クエリ作成
+                                    cmd.CommandText = "insert into FORMAT " +
+                                        "values( " +
+                                        " " + Qid + "," + //ID
+                                        " '" + FormatNameTextBox.Text + "' " + //フォーマット名
+                                        ")";
 
-                                if (cmd.ExecuteNonQuery() > 0)
-                                {
-                                    MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                                }
-                                break;
+                                    if (cmd.ExecuteNonQuery() > 0)
+                                    {
+                                        MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("DBに追加できませんでした。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
 
-                            default:
-                                break;
+                                case "削除":
+                                    //削除用クエリ作成
+                                    cmd.CommandText = "delete from FORMAT " +
+                                        "where ID = " + IDTextBox.Text;
+
+                                    if (cmd.ExecuteNonQuery() > 0)
+                                    {
+                                        MessageBox.Show("DBから削除されました。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("DBから削除できませんでした。", "削除結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
                         }
-
-                        con.Close();
                     }
+                    catch (System.Data.SQLite.SQLiteException ex)
+                    {
+                        MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+
+                    con.Close();
                 }
             }
             else
@@ -152,24 +159,31 @@ namespace VersusLog
                 {
                     con.Open();
 
-                    using (var cmd = con.CreateCommand())
+                    try
                     {
-
-                        //クエリ作成
-                        cmd.CommandText = "select FORMATNAME " +
-                            "from FORMAT " +
-                            "where ID = " + IDTextBox.Text;
-
-                        using (var reader = cmd.ExecuteReader())
+                        using (var cmd = con.CreateCommand())
                         {
-                            while (reader.Read())
+
+                            //クエリ作成
+                            cmd.CommandText = "select FORMATNAME " +
+                                "from FORMAT " +
+                                "where ID = " + IDTextBox.Text;
+
+                            using (var reader = cmd.ExecuteReader())
                             {
-                                if (reader.IsDBNull(0) == false)
+                                while (reader.Read())
                                 {
-                                    FormatNameTextBox.Text = reader.GetString(0); //フォーマット名
+                                    if (reader.IsDBNull(0) == false)
+                                    {
+                                        FormatNameTextBox.Text = reader.GetString(0); //フォーマット名
+                                    }
                                 }
                             }
                         }
+                    }
+                    catch (System.Data.SQLite.SQLiteException ex)
+                    {
+                        MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
 
                     con.Close();
@@ -221,35 +235,43 @@ namespace VersusLog
             {
                 con.Open();
 
-                using (SQLiteCommand cmd = con.CreateCommand())
+                try
                 {
-                    //フォーマット一覧取得用クエリ作成
-                    cmd.CommandText = "select * from FORMAT";
-
-                    using (var reader = cmd.ExecuteReader())
+                    using (SQLiteCommand cmd = con.CreateCommand())
                     {
-                        while (reader.Read())
+                        //フォーマット一覧取得用クエリ作成
+                        cmd.CommandText = "select * from FORMAT";
+
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            displaylist.Add(new FormatData(
-                                reader.GetValue(0), //ID
-                                reader.GetString(1) //フォーマット名
-                                ));
+                            while (reader.Read())
+                            {
+                                displaylist.Add(new FormatData(
+                                    reader.GetValue(0), //ID
+                                    reader.GetString(1) //フォーマット名
+                                    ));
+                            }
+                            FormatMasterGridView.DataSource = displaylist;
+
+
+                            //LogGridViewの列ヘッダーの表示を日本語にする
+                            var cheaderlist = new List<string> { "ID", "フォーマット名" };
+                            for (int i = 0; i < FormatMasterGridView.Columns.Count; i++)
+                            {
+                                FormatMasterGridView.Columns[i].HeaderText = cheaderlist[i];
+                            }
+
+                            //表示幅の自動修正をON
+                            FormatMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            FormatMasterGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                            FormatMasterGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
                         }
-                        FormatMasterGridView.DataSource = displaylist;
-
-                        //LogGridViewの列ヘッダーの表示を日本語にする
-                        var cheaderlist = new List<string> { "ID", "フォーマット名" };
-                        for (int i = 0; i < FormatMasterGridView.Columns.Count; i++)
-                        {
-                            FormatMasterGridView.Columns[i].HeaderText = cheaderlist[i];
-                        }
-
-                        //表示幅の自動修正をON
-                        FormatMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                        FormatMasterGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-                        FormatMasterGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
                     }
+                }
+                catch (System.Data.SQLite.SQLiteException ex)
+                {
+                    MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
 
                 con.Close();
