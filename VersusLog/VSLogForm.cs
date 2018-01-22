@@ -899,11 +899,6 @@ namespace VersusLog
                 con.Close();
             }
         }
-
-        private void DeckType2Label_Click(object sender, EventArgs e)
-        {
-
-        }
     }
     #endregion
 
