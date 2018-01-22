@@ -7,6 +7,9 @@ namespace VersusLog
 {
     public partial class VSLogForm : Form
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public VSLogForm()
         {
             InitializeComponent();

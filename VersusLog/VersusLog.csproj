@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonData.cs" />
     <Compile Include="FormatMasterChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
