@@ -36,9 +36,10 @@
             // 
             // MCVSLogButton
             // 
+            this.MCVSLogButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
             this.MCVSLogButton.Location = new System.Drawing.Point(12, 12);
             this.MCVSLogButton.Name = "MCVSLogButton";
-            this.MCVSLogButton.Size = new System.Drawing.Size(125, 31);
+            this.MCVSLogButton.Size = new System.Drawing.Size(146, 39);
             this.MCVSLogButton.TabIndex = 6;
             this.MCVSLogButton.Text = "戦績ログ";
             this.MCVSLogButton.UseVisualStyleBackColor = true;
@@ -46,9 +47,10 @@
             // 
             // MCDeckMasterChangeButton
             // 
-            this.MCDeckMasterChangeButton.Location = new System.Drawing.Point(173, 12);
+            this.MCDeckMasterChangeButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.MCDeckMasterChangeButton.Location = new System.Drawing.Point(164, 14);
             this.MCDeckMasterChangeButton.Name = "MCDeckMasterChangeButton";
-            this.MCDeckMasterChangeButton.Size = new System.Drawing.Size(125, 30);
+            this.MCDeckMasterChangeButton.Size = new System.Drawing.Size(146, 37);
             this.MCDeckMasterChangeButton.TabIndex = 8;
             this.MCDeckMasterChangeButton.Text = "デッキマスタ変更";
             this.MCDeckMasterChangeButton.UseVisualStyleBackColor = true;
@@ -56,9 +58,10 @@
             // 
             // MCFormatMasterChangeButton
             // 
-            this.MCFormatMasterChangeButton.Location = new System.Drawing.Point(173, 55);
+            this.MCFormatMasterChangeButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.MCFormatMasterChangeButton.Location = new System.Drawing.Point(164, 57);
             this.MCFormatMasterChangeButton.Name = "MCFormatMasterChangeButton";
-            this.MCFormatMasterChangeButton.Size = new System.Drawing.Size(125, 30);
+            this.MCFormatMasterChangeButton.Size = new System.Drawing.Size(146, 37);
             this.MCFormatMasterChangeButton.TabIndex = 9;
             this.MCFormatMasterChangeButton.Text = "フォーマットマスタ変更";
             this.MCFormatMasterChangeButton.UseVisualStyleBackColor = true;
@@ -66,9 +69,10 @@
             // 
             // MCSQLButton
             // 
-            this.MCSQLButton.Location = new System.Drawing.Point(173, 100);
+            this.MCSQLButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.MCSQLButton.Location = new System.Drawing.Point(164, 100);
             this.MCSQLButton.Name = "MCSQLButton";
-            this.MCSQLButton.Size = new System.Drawing.Size(125, 31);
+            this.MCSQLButton.Size = new System.Drawing.Size(146, 39);
             this.MCSQLButton.TabIndex = 10;
             this.MCSQLButton.Text = "マスタインポート";
             this.MCSQLButton.UseVisualStyleBackColor = true;
@@ -76,13 +80,14 @@
             // 
             // MainMenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 141);
+            this.ClientSize = new System.Drawing.Size(324, 148);
             this.Controls.Add(this.MCSQLButton);
             this.Controls.Add(this.MCFormatMasterChangeButton);
             this.Controls.Add(this.MCDeckMasterChangeButton);
             this.Controls.Add(this.MCVSLogButton);
+            this.Font = new System.Drawing.Font("Meiryo UI", 9F);
             this.Name = "MainMenuForm";
             this.Text = "VersusLog -メインメニュー-";
             this.ResumeLayout(false);

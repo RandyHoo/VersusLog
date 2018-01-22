@@ -37,25 +37,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Meiryo UI", 9F);
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 12);
+            this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "SQL文";
             // 
             // SQLTextBox
             // 
-            this.SQLTextBox.Location = new System.Drawing.Point(12, 24);
+            this.SQLTextBox.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.SQLTextBox.Location = new System.Drawing.Point(12, 28);
+            this.SQLTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SQLTextBox.Multiline = true;
             this.SQLTextBox.Name = "SQLTextBox";
-            this.SQLTextBox.Size = new System.Drawing.Size(704, 469);
+            this.SQLTextBox.Size = new System.Drawing.Size(821, 585);
             this.SQLTextBox.TabIndex = 1;
             // 
             // BackMainMenuButton
             // 
-            this.BackMainMenuButton.Location = new System.Drawing.Point(722, 466);
+            this.BackMainMenuButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.BackMainMenuButton.Location = new System.Drawing.Point(840, 580);
+            this.BackMainMenuButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BackMainMenuButton.Name = "BackMainMenuButton";
-            this.BackMainMenuButton.Size = new System.Drawing.Size(122, 27);
+            this.BackMainMenuButton.Size = new System.Drawing.Size(142, 34);
             this.BackMainMenuButton.TabIndex = 4;
             this.BackMainMenuButton.Text = "メインメニューに戻る";
             this.BackMainMenuButton.UseVisualStyleBackColor = true;
@@ -63,9 +68,11 @@
             // 
             // DoneButton
             // 
-            this.DoneButton.Location = new System.Drawing.Point(722, 24);
+            this.DoneButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.DoneButton.Location = new System.Drawing.Point(840, 28);
+            this.DoneButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DoneButton.Name = "DoneButton";
-            this.DoneButton.Size = new System.Drawing.Size(122, 27);
+            this.DoneButton.Size = new System.Drawing.Size(142, 34);
             this.DoneButton.TabIndex = 67;
             this.DoneButton.Text = "SQL文実行";
             this.DoneButton.UseVisualStyleBackColor = true;
@@ -73,13 +80,15 @@
             // 
             // SQLForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(859, 501);
+            this.ClientSize = new System.Drawing.Size(1002, 626);
             this.Controls.Add(this.DoneButton);
             this.Controls.Add(this.BackMainMenuButton);
             this.Controls.Add(this.SQLTextBox);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SQLForm";
             this.Text = "VersusLog -上級機能:マスタインポート-";
             this.ResumeLayout(false);
