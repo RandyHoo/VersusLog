@@ -203,6 +203,7 @@
             this.VLEnemydeckMajorclassComboBox.Name = "VLEnemydeckMajorclassComboBox";
             this.VLEnemydeckMajorclassComboBox.Size = new System.Drawing.Size(140, 23);
             this.VLEnemydeckMajorclassComboBox.TabIndex = 94;
+            this.VLEnemydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.VLEnemydeckMajorclassComboBox_TextChanged);
             // 
             // VLMydeckSmallclassComboBox
             // 
@@ -221,6 +222,7 @@
             this.VLMydeckMajorclassComboBox.Name = "VLMydeckMajorclassComboBox";
             this.VLMydeckMajorclassComboBox.Size = new System.Drawing.Size(140, 23);
             this.VLMydeckMajorclassComboBox.TabIndex = 92;
+            this.VLMydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.VLMydeckMajorclassComboBox_TextChanged);
             // 
             // VLPracedenceComboBox
             // 
@@ -385,11 +387,11 @@
             // 
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.ILLogInsertButton);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1295, 795);
+            this.tabPage2.Size = new System.Drawing.Size(1295, 793);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ログ入力";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -511,6 +513,7 @@
             this.ILEnemydeckMajorclassComboBox.Name = "ILEnemydeckMajorclassComboBox";
             this.ILEnemydeckMajorclassComboBox.Size = new System.Drawing.Size(140, 23);
             this.ILEnemydeckMajorclassComboBox.TabIndex = 40;
+            this.ILEnemydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.ILEnemydeckMajorclassComboBox_TextChanged);
             // 
             // ILMydeckSmallclassComboBox
             // 
@@ -547,6 +550,7 @@
             this.ILMydeckMajorclassComboBox.Name = "ILMydeckMajorclassComboBox";
             this.ILMydeckMajorclassComboBox.Size = new System.Drawing.Size(140, 23);
             this.ILMydeckMajorclassComboBox.TabIndex = 36;
+            this.ILMydeckMajorclassComboBox.TextChanged += new System.EventHandler(this.ILMydeckMajorclassComboBox_TextChanged);
             // 
             // ILDateTextBox
             // 
@@ -581,11 +585,11 @@
             this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Controls.Add(this.DRDeckRecodeView);
             this.tabPage3.Controls.Add(this.DRGetDeckRecordButton);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage3.Size = new System.Drawing.Size(1295, 795);
+            this.tabPage3.Size = new System.Drawing.Size(1295, 793);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "デッキ戦績";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -668,11 +672,11 @@
             this.tabPage4.Controls.Add(this.MAPeriodComboBox);
             this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.groupBox1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage4.Size = new System.Drawing.Size(1295, 795);
+            this.tabPage4.Size = new System.Drawing.Size(1295, 793);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "メタ分析";
             this.tabPage4.UseVisualStyleBackColor = true;

@@ -194,7 +194,7 @@ namespace VersusLog
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
+        private void VLMydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
         {
             //デッキ小分類を取得しセット
             CommonData.GetDeckSmallclass(VLMydeckMajorclassComboBox, VLMydeckSmallclassComboBox);
@@ -205,7 +205,7 @@ namespace VersusLog
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EnemydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
+        private void VLEnemydeckMajorclassComboBox_TextChanged(object sender, EventArgs e)
         {
             //デッキ小分類を取得しセット
             CommonData.GetDeckSmallclass(VLEnemydeckMajorclassComboBox, VLEnemydeckSmallclassComboBox);
@@ -831,6 +831,15 @@ namespace VersusLog
         /// <param name="e"></param>
         private void MAPeriodComboBox_TextChanged(object sender, EventArgs e)
         {
+            MoreDeckAnalyze();
+            //MetaDeckAnalyze();
+        }
+
+        /// <summary>
+        /// メタ分析:最多デッキ分析処理
+        /// </summary>
+        private void MoreDeckAnalyze()
+        {
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
                 con.Open();
@@ -901,6 +910,75 @@ namespace VersusLog
 
                 con.Close();
             }
+        }
+
+        /// <summary>
+        /// メタ分析:環境メタデッキ分析処理
+        /// </summary>
+        private void MetaDeckAnalyze()
+        {
+            //1.ログから多い順にデッキ5つを抜き出し、リストに格納。
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            {
+                con.Open();
+
+                try
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        string wheretext, worktext;
+
+                        //今日の日付取得
+                        DateTime dtNow = DateTime.Now;
+                        DateTime dtToday = dtNow.Date;
+                        string today = dtToday.ToShortDateString();
+
+                        //変更種別に応じてクエリの条件を生成
+                        switch (MAPeriodComboBox.Text)
+                        {
+                            case "指定なし":
+                                wheretext = " ";
+                                break;
+                            case "この1週間":
+                                string workdate = today.ToString();
+                                DateTime dt = DateTime.Parse(workdate);
+                                DateTime dtcal = dt.AddDays(-7);
+                                workdate = dtcal.ToShortDateString();
+                                wheretext = " where VSDATE between '" + workdate + "' and '" + today + "' ";
+                                break;
+                            case "今月":
+                                worktext = today.Substring(0, 7);
+                                wheretext = " where VSDATE like '" + worktext + "%' ";
+                                break;
+                            default:
+                                wheretext = " ";
+                                break;
+
+                        }
+
+                        //最頻相手デッキID取得(改変必須)
+                        cmd.CommandText = "select ENEMYDECKID from VSLOG " + wheretext +
+                            "group by ENEMYDECKID having count(*) >= (select max(cnt) from ( select count(*) as cnt from VSLOG" + wheretext +
+                             "group by ENEMYDECKID))";
+
+                        int moredeckid;
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            reader.Read();
+                            moredeckid = System.Convert.ToInt32(reader.GetValue(0));
+                        }
+                    }
+                }
+                catch (System.Data.SQLite.SQLiteException)
+                {
+                    MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+
+                con.Close();
+            }
+            //2.デッキ一覧を取得し、リスト化してスコア領域を追加し、0に設定(初期化)する
+            //3.MATCHUPテーブルから相手デッキIDをキーにしてレコードを抜き出し、自デッキIDが合致するリストの要素にスコアを加算する
+            //4.リストをスコア順に並び替え、上位5つを表示する
         }
     }
     #endregion
