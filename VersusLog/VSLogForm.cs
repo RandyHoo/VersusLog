@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using System.Data;
 
 namespace VersusLog
 {
@@ -832,7 +833,7 @@ namespace VersusLog
         private void MAPeriodComboBox_TextChanged(object sender, EventArgs e)
         {
             MoreDeckAnalyze();
-            //MetaDeckAnalyze();
+            MetaDeckAnalyze();
         }
 
         /// <summary>
@@ -917,17 +918,19 @@ namespace VersusLog
         /// </summary>
         private void MetaDeckAnalyze()
         {
-            //1.ログから多い順にデッキ5つを抜き出し、リストに格納。
+            List<int> moredeckidList = new List<int>();
+            string wheretext;
+
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
                 con.Open();
-
                 try
                 {
                     using (var cmd = con.CreateCommand())
                     {
-                        string wheretext, worktext;
+                        string worktext;
 
+                        //ログから多い順にデッキ5つを抜き出し、リストに格納
                         //今日の日付取得
                         DateTime dtNow = DateTime.Now;
                         DateTime dtToday = dtNow.Date;
@@ -941,8 +944,8 @@ namespace VersusLog
                                 break;
                             case "この1週間":
                                 string workdate = today.ToString();
-                                DateTime dt = DateTime.Parse(workdate);
-                                DateTime dtcal = dt.AddDays(-7);
+                                DateTime datatime = DateTime.Parse(workdate);
+                                DateTime dtcal = datatime.AddDays(-7);
                                 workdate = dtcal.ToShortDateString();
                                 wheretext = " where VSDATE between '" + workdate + "' and '" + today + "' ";
                                 break;
@@ -956,16 +959,71 @@ namespace VersusLog
 
                         }
 
-                        //最頻相手デッキID取得(改変必須)
-                        cmd.CommandText = "select ENEMYDECKID from VSLOG " + wheretext +
-                            "group by ENEMYDECKID having count(*) >= (select max(cnt) from ( select count(*) as cnt from VSLOG" + wheretext +
-                             "group by ENEMYDECKID))";
+                        //対戦回数が多い順に相手デッキIDを取得
+                        cmd.CommandText = "select ENEMYDECKID, count(*) AS CNT FROM VSLOG " + wheretext +
+                            "group by ENEMYDECKID order by CNT desc";
 
-                        int moredeckid;
                         using (var reader = cmd.ExecuteReader())
                         {
-                            reader.Read();
-                            moredeckid = System.Convert.ToInt32(reader.GetValue(0));
+                            while (reader.Read())
+                            {
+                                moredeckidList.Add(System.Convert.ToInt32(reader.GetValue(0)));
+                            }
+                        }
+
+                        //デッキ一覧を取得し、リスト化してスコア領域を追加し、0に設定(初期化)する
+                        DataTable DeckList = new DataTable();
+
+                        cmd.CommandText = "select ID, MAJORCLASS, SMALLCLASS from DECK";
+                        using (var adapter = new SQLiteDataAdapter(cmd))
+                        {
+                            adapter.Fill(DeckList);
+                        }
+                        DeckList.Columns.Add("score", typeof(int));
+                        for (int i = 0; i < DeckList.Rows.Count; i++)
+                        {
+                            DeckList.Rows[i]["score"] = 0;
+                        }
+
+                        //MATCHUPテーブルから相手デッキIDをキーにしてレコードを抜き出し、自デッキIDが合致するリストの要素にスコアを加算する
+                        foreach (int deckid in moredeckidList)
+                        {
+                            //相手デッキを指定してレコード取得
+                            cmd.CommandText = "select MYDECK_ID, SCORE from MATCHUP where ENEMYDECK_ID = " + Convert.ToString(deckid);
+                            DataTable dt = new DataTable();
+                            using (var adapter = new SQLiteDataAdapter(cmd))
+                            {
+                                adapter.Fill(dt);
+                            }
+
+                            foreach(DataRow row in dt.Rows)
+                            {
+                                int work;
+                                //デッキリストを舐める
+                                for(int i = 0;i < DeckList.Rows.Count; i++)
+                                {
+                                    //自デッキIDが一致したら
+                                    if(Convert.ToInt32(DeckList.Rows[i]["ID"]) == Convert.ToInt32(row["MYDECK_ID"]))
+                                    {
+                                        //一旦保持して加算、その後格納
+                                        work = Convert.ToInt32(DeckList.Rows[i]["SCORE"]);
+                                        work += Convert.ToInt32(row["SCORE"]);
+                                        DeckList.Rows[i]["SCORE"] = work;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        //リストをスコア順に並び替え、上位5つを表示する
+                        DataView dv = new DataView(DeckList);
+                        dv.Sort = "SCORE DESC";
+                        DeckList = dv.ToTable();
+
+                        //test
+                        foreach(DataRow row in DeckList.Rows)
+                        {
+                            Console.WriteLine(row["ID"] + "\n");
                         }
                     }
                 }
@@ -973,12 +1031,8 @@ namespace VersusLog
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
-
                 con.Close();
             }
-            //2.デッキ一覧を取得し、リスト化してスコア領域を追加し、0に設定(初期化)する
-            //3.MATCHUPテーブルから相手デッキIDをキーにしてレコードを抜き出し、自デッキIDが合致するリストの要素にスコアを加算する
-            //4.リストをスコア順に並び替え、上位5つを表示する
         }
     }
     #endregion
