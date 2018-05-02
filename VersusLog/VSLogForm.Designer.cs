@@ -83,10 +83,14 @@
             this.DRDeckRecodeView = new System.Windows.Forms.DataGridView();
             this.DRGetDeckRecordButton = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.MetaDeckAnalyzeLabel = new System.Windows.Forms.Label();
             this.MAPeriodComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MAMetaAnalyzeDeckText = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +101,7 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DRDeckRecodeView)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -669,6 +674,9 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Controls.Add(this.label10);
+            this.tabPage4.Controls.Add(this.groupBox5);
             this.tabPage4.Controls.Add(this.MAPeriodComboBox);
             this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.groupBox1);
@@ -680,6 +688,29 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "メタ分析";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.MetaDeckAnalyzeLabel);
+            this.groupBox5.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.groupBox5.Location = new System.Drawing.Point(23, 191);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox5.Size = new System.Drawing.Size(301, 162);
+            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "おすすめデッキ(※)ランキング";
+            // 
+            // MetaDeckAnalyzeLabel
+            // 
+            this.MetaDeckAnalyzeLabel.AutoSize = true;
+            this.MetaDeckAnalyzeLabel.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MetaDeckAnalyzeLabel.Location = new System.Drawing.Point(6, 22);
+            this.MetaDeckAnalyzeLabel.Name = "MetaDeckAnalyzeLabel";
+            this.MetaDeckAnalyzeLabel.Size = new System.Drawing.Size(70, 24);
+            this.MetaDeckAnalyzeLabel.TabIndex = 2;
+            this.MetaDeckAnalyzeLabel.Text = "default";
             // 
             // MAPeriodComboBox
             // 
@@ -703,7 +734,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.MAMetaAnalyzeDeckText);
-            this.groupBox1.Font = new System.Drawing.Font("MS UI Gothic", 10F);
+            this.groupBox1.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(23, 89);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
@@ -716,12 +747,30 @@
             // MAMetaAnalyzeDeckText
             // 
             this.MAMetaAnalyzeDeckText.AutoSize = true;
-            this.MAMetaAnalyzeDeckText.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MAMetaAnalyzeDeckText.Location = new System.Drawing.Point(7, 32);
+            this.MAMetaAnalyzeDeckText.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MAMetaAnalyzeDeckText.Location = new System.Drawing.Point(6, 34);
             this.MAMetaAnalyzeDeckText.Name = "MAMetaAnalyzeDeckText";
-            this.MAMetaAnalyzeDeckText.Size = new System.Drawing.Size(73, 20);
+            this.MAMetaAnalyzeDeckText.Size = new System.Drawing.Size(70, 24);
             this.MAMetaAnalyzeDeckText.TabIndex = 2;
             this.MAMetaAnalyzeDeckText.Text = "default";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 367);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 15);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "※おすすめデッキとは";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(23, 382);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(409, 15);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "指定した期間の中でマッチしたデッキを分析し、一番勝てるデッキを分析した結果です。";
             // 
             // VSLogForm
             // 
@@ -748,6 +797,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DRDeckRecodeView)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -815,6 +866,10 @@
         private System.Windows.Forms.TextBox ILDateTextBox;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label MetaDeckAnalyzeLabel;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
     }
 }
 

@@ -1019,12 +1019,12 @@ namespace VersusLog
                         DataView dv = new DataView(DeckList);
                         dv.Sort = "SCORE DESC";
                         DeckList = dv.ToTable();
-
-                        //test
-                        foreach(DataRow row in DeckList.Rows)
-                        {
-                            Console.WriteLine(row["ID"] + "\n");
+                        
+                        string str = "";
+                        for(int i = 0;i < 5; i++) {
+                            str += Convert.ToString(i + 1) + "." + DeckList.Rows[i]["MAJORCLASS"] + " " + DeckList.Rows[i]["SMALLCLASS"] + "\n";
                         }
+                        MetaDeckAnalyzeLabel.Text = str;
                     }
                 }
                 catch (System.Data.SQLite.SQLiteException)
