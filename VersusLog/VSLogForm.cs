@@ -1021,7 +1021,8 @@ namespace VersusLog
                         DeckList = dv.ToTable();
                         
                         string str = "";
-                        for(int i = 0;i < 5; i++) {
+                        int displayMax = (DeckList.Rows.Count < 5) ? DeckList.Rows.Count : 5;
+                        for (int i = 0;i < displayMax; i++) {
                             str += Convert.ToString(i + 1) + "." + DeckList.Rows[i]["MAJORCLASS"] + " " + DeckList.Rows[i]["SMALLCLASS"] + "\n";
                         }
                         MetaDeckAnalyzeLabel.Text = str;
