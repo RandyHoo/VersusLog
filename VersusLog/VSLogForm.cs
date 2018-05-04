@@ -849,35 +849,8 @@ namespace VersusLog
                 {
                     using (var cmd = con.CreateCommand())
                     {
-                        string wheretext, worktext;
-
-                        //今日の日付取得
-                        DateTime dtNow = DateTime.Now;
-                        DateTime dtToday = dtNow.Date;
-                        string today = dtToday.ToShortDateString();
-
                         //変更種別に応じてクエリの条件を生成
-                        switch (MAPeriodComboBox.Text)
-                        {
-                            case "指定なし":
-                                wheretext = " ";
-                                break;
-                            case "この1週間":
-                                string workdate = today.ToString();
-                                DateTime dt = DateTime.Parse(workdate);
-                                DateTime dtcal = dt.AddDays(-7);
-                                workdate = dtcal.ToShortDateString();
-                                wheretext = " where VSDATE between '" + workdate + "' and '" + today + "' ";
-                                break;
-                            case "今月":
-                                worktext = today.Substring(0, 7);
-                                wheretext = " where VSDATE like '" + worktext + "%' ";
-                                break;
-                            default:
-                                wheretext = " ";
-                                break;
-
-                        }
+                        string wheretext = createPeriodQuery(MAPeriodComboBox.Text);
 
                         //最頻相手デッキID取得
                         cmd.CommandText = "select ENEMYDECKID from VSLOG " + wheretext +
@@ -919,7 +892,6 @@ namespace VersusLog
         private void MetaDeckAnalyze()
         {
             List<int> moredeckidList = new List<int>();
-            string wheretext;
 
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
@@ -928,39 +900,9 @@ namespace VersusLog
                 {
                     using (var cmd = con.CreateCommand())
                     {
-                        string worktext;
-
                         //ログから多い順にデッキ5つを抜き出し、リストに格納
-                        //今日の日付取得
-                        DateTime dtNow = DateTime.Now;
-                        DateTime dtToday = dtNow.Date;
-                        string today = dtToday.ToShortDateString();
-
-                        //変更種別に応じてクエリの条件を生成
-                        switch (MAPeriodComboBox.Text)
-                        {
-                            case "指定なし":
-                                wheretext = " ";
-                                break;
-                            case "この1週間":
-                                string workdate = today.ToString();
-                                DateTime datatime = DateTime.Parse(workdate);
-                                DateTime dtcal = datatime.AddDays(-7);
-                                workdate = dtcal.ToShortDateString();
-                                wheretext = " where VSDATE between '" + workdate + "' and '" + today + "' ";
-                                break;
-                            case "今月":
-                                worktext = today.Substring(0, 7);
-                                wheretext = " where VSDATE like '" + worktext + "%' ";
-                                break;
-                            default:
-                                wheretext = " ";
-                                break;
-
-                        }
-
                         //対戦回数が多い順に相手デッキIDを取得
-                        cmd.CommandText = "select ENEMYDECKID, count(*) AS CNT FROM VSLOG " + wheretext +
+                        cmd.CommandText = "select ENEMYDECKID, count(*) AS CNT FROM VSLOG " + createPeriodQuery(MAPeriodComboBox.Text) +
                             "group by ENEMYDECKID order by CNT desc";
 
                         using (var reader = cmd.ExecuteReader())
@@ -1034,6 +976,45 @@ namespace VersusLog
                 }
                 con.Close();
             }
+        }
+
+        /// <summary>
+        /// SQL 期間指定文生成
+        /// </summary>
+        /// <param name="word">変更種別</param>
+        /// <returns>SQL where文</returns>
+        public string createPeriodQuery(string word)
+        {
+            string str = "";
+            string worktext;
+
+            //今日の日付取得
+            DateTime dtNow = DateTime.Now;
+            DateTime dtToday = dtNow.Date;
+            string today = dtToday.ToShortDateString();
+
+            //変更種別に応じてwhere文を生成
+            switch (word)
+            {
+                case "指定なし":
+                    str = " ";
+                    break;
+                case "この1週間":
+                    string workdate = today.ToString();
+                    DateTime datatime = DateTime.Parse(workdate);
+                    DateTime dtcal = datatime.AddDays(-7);
+                    workdate = dtcal.ToShortDateString();
+                    str = " where VSDATE between '" + workdate + "' and '" + today + "' ";
+                    break;
+                case "今月":
+                    worktext = today.Substring(0, 7);
+                    str = " where VSDATE like '" + worktext + "%' ";
+                    break;
+                default:
+                    str = " ";
+                    break;
+            }
+            return str;
         }
     }
     #endregion
