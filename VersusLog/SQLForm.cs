@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using System.IO;
+using System.Text;
+using System.Collections.Generic;
 
 namespace VersusLog
 {
@@ -18,29 +21,14 @@ namespace VersusLog
         /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
+            CommonData cd = new CommonData();
+
             if (SQLFormInputCheck())
             {
-                using (var con = new SQLiteConnection(CommonData.ConnectionString))
-                {
-                    con.Open();
-
-                    using (var cmd = con.CreateCommand())
-                    {
-                        try
-                        {
-                            //クエリ作成、実行
-                            cmd.CommandText = SQLTextBox.Text;
-                            int count = cmd.ExecuteNonQuery();
-                            MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("SQLエラーです", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        }
-                    }
-
-                    con.Close();
-                }
+                //クエリ作成、実行
+                string SQLtext = SQLTextBox.Text;
+                int count = cd.executeSQL(SQLtext);
+                MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             else
             {
@@ -69,6 +57,51 @@ namespace VersusLog
         {
             if (string.IsNullOrEmpty(SQLTextBox.Text)) { return false; } //SQL文
             return true;
+        }
+
+        /// <summary>
+        /// ファイル読み出しボタン押下処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenFileButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "SQLファイル(*.sql)|*.sql|すべてのファイル(*.*)|*.*";
+            ofd.Title = "開くSQLファイル(Shift_JIS)を選択してください";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string line = "";
+                List<string> SqlList = new List<string>();
+                bool SqlFailedFlag = false;
+
+                using (StreamReader sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("Shift_JIS")))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        SqlList.Add(line);
+                    }
+
+                    CommonData cd = new CommonData();
+                    foreach (string SQLtext in SqlList)
+                    {
+                        //実行できなかった時
+                        if (0 == cd.executeSQL(SQLtext))
+                        {
+                            MessageBox.Show("SQLを実行出来ませんでした。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            SqlFailedFlag = true;
+                        }
+                    }
+
+                    //全件実行された時
+                    if (!SqlFailedFlag)
+                    {
+                        MessageBox.Show("全件実行されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    }
+                }
+            }
         }
     }
 }

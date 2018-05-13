@@ -32,6 +32,7 @@
             this.SQLTextBox = new System.Windows.Forms.TextBox();
             this.BackMainMenuButton = new System.Windows.Forms.Button();
             this.DoneButton = new System.Windows.Forms.Button();
+            this.OpenFileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -78,11 +79,24 @@
             this.DoneButton.UseVisualStyleBackColor = true;
             this.DoneButton.Click += new System.EventHandler(this.DoneButton_Click);
             // 
+            // OpenFileButton
+            // 
+            this.OpenFileButton.Font = new System.Drawing.Font("Meiryo UI", 9F);
+            this.OpenFileButton.Location = new System.Drawing.Point(840, 70);
+            this.OpenFileButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.OpenFileButton.Name = "OpenFileButton";
+            this.OpenFileButton.Size = new System.Drawing.Size(142, 34);
+            this.OpenFileButton.TabIndex = 68;
+            this.OpenFileButton.Text = "ファイル読み込み";
+            this.OpenFileButton.UseVisualStyleBackColor = true;
+            this.OpenFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
+            // 
             // SQLForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 626);
+            this.Controls.Add(this.OpenFileButton);
             this.Controls.Add(this.DoneButton);
             this.Controls.Add(this.BackMainMenuButton);
             this.Controls.Add(this.SQLTextBox);
@@ -102,5 +116,6 @@
         private System.Windows.Forms.TextBox SQLTextBox;
         private System.Windows.Forms.Button BackMainMenuButton;
         private System.Windows.Forms.Button DoneButton;
+        private System.Windows.Forms.Button OpenFileButton;
     }
 }
