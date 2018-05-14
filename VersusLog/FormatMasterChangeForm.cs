@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Data;
 
@@ -53,13 +52,11 @@ namespace VersusLog
             {
                 string SQLtext = "";
                 CommonData cd = new CommonData();
-                DataTable dt = new DataTable();
 
                 //変更種別ごとにコマンド生成
                 switch (ChangeGenreComboBox.Text)
                 {
                     case "変更":
-                        //変更用クエリ作成
                         SQLtext = "update FORMAT " +
                             "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
                             "where ID = " + IDTextBox.Text;
@@ -75,18 +72,14 @@ namespace VersusLog
                         break;
 
                     case "追加":
-                        int id = 0;
-
-                        //ID取得用コマンド生成
+                        //追加データ用のID生成
                         SQLtext = "select ID from FORMAT";
-                        dt = cd.getDataTable(SQLtext);
-                        id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
-                        string Qid = id.ToString();
-
-                        //追加用クエリ作成
+                        DataTable dt = cd.getDataTable(SQLtext);
+                        int id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+                        
                         SQLtext = "insert into FORMAT " +
                             "values( " +
-                            " " + Qid + "," + //ID
+                            " " + id.ToString() + "," + //ID
                             " '" + FormatNameTextBox.Text + "' " + //フォーマット名
                             ")";
 
@@ -101,7 +94,6 @@ namespace VersusLog
                         break;
 
                     case "削除":
-                        //削除用クエリ作成
                         SQLtext = "delete from FORMAT " +
                             "where ID = " + IDTextBox.Text;
 
@@ -134,20 +126,16 @@ namespace VersusLog
         /// <param name="e"></param>
         private void IDTextBox_TextChanged(object sender, EventArgs e)
         {
-            string SQLtext = "";
             CommonData cd = new CommonData();
-            DataTable dt = new DataTable();
 
             //変更の場合元々入っている値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
-
-                //クエリ作成
-                SQLtext = "select FORMATNAME " +
+                string SQLtext = "select FORMATNAME " +
                     "from FORMAT " +
                     "where ID = " + IDTextBox.Text;
+                DataTable dt = cd.getDataTable(SQLtext);
 
-                dt = cd.getDataTable(SQLtext);
                 if (dt.Rows.Count != 0)
                 {
                     FormatNameTextBox.Text = Convert.ToString(dt.Rows[0][0]); //フォーマット名
@@ -196,11 +184,10 @@ namespace VersusLog
             var displaylist = new List<FormatData>();
             string SQLtext = "";
             CommonData cd = new CommonData();
-            DataTable dt = new DataTable();
 
-            //フォーマット一覧取得用クエリ作成
+            //フォーマット一覧取得
             SQLtext = "select * from FORMAT";
-            dt = cd.getDataTable(SQLtext);
+            DataTable dt = cd.getDataTable(SQLtext);
             foreach (DataRow row in dt.Rows)
             {
                 displaylist.Add(new FormatData(
@@ -210,8 +197,8 @@ namespace VersusLog
             }
 
             FormatMasterGridView.DataSource = displaylist;
-            
-            //LogGridViewの列ヘッダーの表示を日本語にする
+
+            //FormatMasterGridViewの列ヘッダーの表示を日本語にする
             var cheaderlist = new List<string> { "ID", "フォーマット名" };
             for (int i = 0; i < FormatMasterGridView.Columns.Count; i++)
             {

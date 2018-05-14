@@ -27,8 +27,7 @@ namespace VersusLog
             {
                 //クエリ作成、実行
                 string SQLtext = SQLTextBox.Text;
-                int count = cd.executeSQL(SQLtext);
-                MessageBox.Show(count + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                MessageBox.Show(cd.executeSQL(SQLtext) + "件の変更を行いました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             else
             {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Data;
 
@@ -40,13 +39,11 @@ namespace VersusLog
             {
                 string SQLtext = "";
                 CommonData cd = new CommonData();
-                DataTable dt = new DataTable();
 
                 //変更種別ごとにクエリ作成
                 switch (ChangeGenreComboBox.Text)
                 {
                     case "変更":
-                        //変更用クエリ作成
                         SQLtext = "update DECK " +
                             "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
                             "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
@@ -65,19 +62,15 @@ namespace VersusLog
                         break;
 
                     case "追加":
-                        int id = 0;
 
-                        //ID取得用クエリ作成
+                        //追加データ用のID生成
                         SQLtext = "select ID from DECK";
-                        dt = cd.getDataTable(SQLtext);
-                        //最後のレコードのIDを取得する
-                        id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
-                        string Qid = id.ToString();
-
-                        //追加用クエリ作成
+                        DataTable dt = cd.getDataTable(SQLtext);
+                        int id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+                        
                         SQLtext = "insert into DECK " +
                             "values( " +
-                            " " + Qid + "," + //ID
+                            " " + id.ToString() + "," + //ID
                             " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
                             " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
                             " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
@@ -191,18 +184,17 @@ namespace VersusLog
         /// <param name="e"></param>
         private void IDTextBox_TextChanged(object sender, EventArgs e)
         {
-            //変更の場合元々入っている値をデフォ値にする
+            //変更の場合既存の値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
                 string SQLtext = "";
                 CommonData cd = new CommonData();
-                DataTable dt = new DataTable();
 
-                //元々入っている値取得用クエリ
+                //デフォルト値として既存の値を設定
                 SQLtext = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
                     "from DECK " +
                     "where ID = " + IDTextBox.Text;
-                dt = cd.getDataTable(SQLtext);
+                DataTable dt = cd.getDataTable(SQLtext);
 
                 MajorclassTextBox.Text = Convert.ToString(dt.Rows[0][0]); //デッキ大分類
                 SmallclassTextBox.Text = (dt.Rows[0][1] == null) ? null : Convert.ToString(dt.Rows[0][1]); //デッキ小分類
@@ -230,12 +222,10 @@ namespace VersusLog
             var displaylist = new List<DeckData>();
             string SQLtext = "";
             CommonData cd = new CommonData();
-            DataTable dt = new DataTable();
 
-            //デッキ一覧取得用クエリ作成
+            //デッキ一覧取得
             SQLtext = "select * from DECK";
-
-            dt = cd.getDataTable(SQLtext);
+            DataTable dt = cd.getDataTable(SQLtext);
             foreach (DataRow row in dt.Rows)
             {
                 displaylist.Add(new DeckData(
@@ -246,11 +236,10 @@ namespace VersusLog
                         Convert.ToString(row[4]) //デッキタイプ2
                         ));
             }
-
             DeckMasterGridView.DataSource = displaylist;
 
 
-            //LogGridViewの列ヘッダーの表示を日本語にする
+            //DeckMasterGridViewの列ヘッダーの表示を日本語にする
             var cheaderlist = new List<string> { "ID", "デッキ大分類", "デッキ小分類", "デッキタイプ1", "デッキタイプ2" };
             for (int i = 0; i < DeckMasterGridView.Columns.Count; i++)
             {
