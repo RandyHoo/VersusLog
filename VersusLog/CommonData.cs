@@ -111,7 +111,7 @@ namespace VersusLog
         /// DB書き込み処理
         /// </summary>
         /// <param name="sql">SQL</param>
-        /// <returns>処理結果</returns>
+        /// <returns>実行件数(0なら失敗)</returns>
         public int executeSQL(string sql)
         {
             int ret = 0;
@@ -133,6 +133,57 @@ namespace VersusLog
                 }
                 con.Close();
             }
+            return ret;
+        }
+
+        /// <summary>
+        /// DB書き込み処理(複数)
+        /// </summary>
+        /// <remarks>同名処理のオーバーロード</remarks>
+        /// <param name="SQLList">実行SQLリスト</param>
+        /// <returns>実行件数(0なら失敗)</returns>
+        public int executeSQL(List<string> SQLList)
+        {
+            int ret = 0;
+
+            using (var con = new SQLiteConnection(CommonData.ConnectionString))
+            {
+                con.Open();
+                try
+                {
+                    using (var cmd = con.CreateCommand())
+                    {
+                        try
+                        {
+                            cmd.Transaction =  con.BeginTransaction();
+                            foreach (string SQLText in SQLList)
+                            {
+                                cmd.CommandText = SQLText;
+                                cmd.ExecuteNonQuery();
+                                ret += 1;
+                            }
+
+                            //全件実行出来たらコミット
+                            cmd.Transaction.Commit();
+                        }
+                        catch (System.Data.SQLite.SQLiteException)
+                        {
+                            //途中で失敗したらロールバック
+                            cmd.Transaction.Rollback();
+                            MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            ret = 0;
+                        }
+                    }
+
+                }
+                catch (System.Data.SQLite.SQLiteException)
+                {
+                    MessageBox.Show("DBへの接続時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    ret = 0;
+                }
+                con.Close();
+            }
+
             return ret;
         }
     }

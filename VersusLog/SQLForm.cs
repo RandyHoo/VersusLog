@@ -74,7 +74,6 @@ namespace VersusLog
             {
                 string line = "";
                 List<string> SqlList = new List<string>();
-                bool SqlFailedFlag = false;
 
                 using (StreamReader sr = new StreamReader(ofd.FileName, Encoding.GetEncoding("Shift_JIS")))
                 {
@@ -84,20 +83,14 @@ namespace VersusLog
                     }
 
                     CommonData cd = new CommonData();
-                    foreach (string SQLtext in SqlList)
+                    
+                    if (cd.executeSQL(SqlList) != 0)
                     {
-                        //実行できなかった時
-                        if (0 == cd.executeSQL(SQLtext))
-                        {
-                            MessageBox.Show("SQLを実行出来ませんでした。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                            SqlFailedFlag = true;
-                        }
+                        MessageBox.Show("全件実行されました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.None);
                     }
-
-                    //全件実行された時
-                    if (!SqlFailedFlag)
+                    else
                     {
-                        MessageBox.Show("全件実行されました。", "変更結果", MessageBoxButtons.OK, MessageBoxIcon.None);
+                        MessageBox.Show("実行できないSQLが含まれています。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                 }
             }
