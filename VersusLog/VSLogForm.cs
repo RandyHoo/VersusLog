@@ -167,7 +167,7 @@ namespace VersusLog
                 switch (VLChangeGenreComboBox.Text)
                 {
                     case "変更":
-                        string Qwin, Qformatid, Qpracedence;
+                        string Qwin, Qpracedence;
 
                         //自デッキID
                         SQLtext = "select ID from DECK " +
@@ -272,6 +272,61 @@ namespace VersusLog
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 変更種別変更時処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void VLChangeGenreComboBox_TextChanged(object sender, EventArgs e)
+        {
+            //変更種別ごとに入力規制
+            switch (VLChangeGenreComboBox.Text)
+            {
+                case "変更":
+                    VLIDTextBox.Text = "";
+                    VLIDTextBox.ReadOnly = false;
+                    VLDateTextBox.Text = "";
+                    VLDateTextBox.ReadOnly = false;
+                    VLMydeckMajorclassComboBox.Text = "";
+                    VLMydeckMajorclassComboBox.Enabled = true;
+                    VLMydeckSmallclassComboBox.Text = "";
+                    VLMydeckSmallclassComboBox.Enabled = true;
+                    VLEnemydeckMajorclassComboBox.Text = "";
+                    VLEnemydeckMajorclassComboBox.Enabled = true;
+                    VLEnemydeckSmallclassComboBox.Text = "";
+                    VLEnemydeckSmallclassComboBox.Enabled = true;
+                    VLWinComboBox.Text = "";
+                    VLWinComboBox.Enabled = true;
+                    VLFormatComboBox.Text = "";
+                    VLFormatComboBox.Enabled = true;
+                    VLPracedenceComboBox.Text = "";
+                    VLPracedenceComboBox.Enabled = true;
+                    break;
+                case "削除":
+                    VLIDTextBox.Text = "";
+                    VLIDTextBox.ReadOnly = false;
+                    VLDateTextBox.Text = "入力不要";
+                    VLDateTextBox.ReadOnly = true;
+                    VLMydeckMajorclassComboBox.Text = "入力不要";
+                    VLMydeckMajorclassComboBox.Enabled = false;
+                    VLMydeckSmallclassComboBox.Text = "入力不要";
+                    VLMydeckSmallclassComboBox.Enabled = false;
+                    VLEnemydeckMajorclassComboBox.Text = "入力不要";
+                    VLEnemydeckMajorclassComboBox.Enabled = false;
+                    VLEnemydeckSmallclassComboBox.Text = "入力不要";
+                    VLEnemydeckSmallclassComboBox.Enabled = false;
+                    VLWinComboBox.Text = "入力不要";
+                    VLWinComboBox.Enabled = false;
+                    VLFormatComboBox.Text = "入力不要";
+                    VLFormatComboBox.Enabled = false;
+                    VLPracedenceComboBox.Text = "入力不要";
+                    VLPracedenceComboBox.Enabled = false;
+                    break;
+                default:
+                    break;
             }
         }
         #endregion
@@ -523,7 +578,7 @@ namespace VersusLog
                     win = System.Convert.ToInt32(dt.Rows[0][0]);
 
                     deckname = n.Deck_majorclass + " " + n.Deck_smallclass;
-                    
+
                     //対戦したことがないなら「-」を入力する
                     total = (tortal_col > 0) ? (win / tortal_col) * 100 : 999;
                     viewlist.Add(new DeckRecodeViewList(deckname, (int)total));

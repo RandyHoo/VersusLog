@@ -83,14 +83,14 @@
             this.DRDeckRecodeView = new System.Windows.Forms.DataGridView();
             this.DRGetDeckRecordButton = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.MetaDeckAnalyzeLabel = new System.Windows.Forms.Label();
             this.MAPeriodComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MAMetaAnalyzeDeckText = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -344,6 +344,7 @@
             this.VLChangeGenreComboBox.Name = "VLChangeGenreComboBox";
             this.VLChangeGenreComboBox.Size = new System.Drawing.Size(140, 23);
             this.VLChangeGenreComboBox.TabIndex = 67;
+            this.VLChangeGenreComboBox.TextChanged += new System.EventHandler(this.VLChangeGenreComboBox_TextChanged);
             // 
             // VLDoneButton
             // 
@@ -689,6 +690,24 @@
             this.tabPage4.Text = "メタ分析";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(23, 382);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(409, 15);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "指定した期間の中でマッチしたデッキを分析し、一番勝てるデッキを分析した結果です。";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 367);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 15);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "※おすすめデッキとは";
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.MetaDeckAnalyzeLabel);
@@ -753,24 +772,6 @@
             this.MAMetaAnalyzeDeckText.Size = new System.Drawing.Size(70, 24);
             this.MAMetaAnalyzeDeckText.TabIndex = 2;
             this.MAMetaAnalyzeDeckText.Text = "default";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 367);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 15);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "※おすすめデッキとは";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(23, 382);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(409, 15);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "指定した期間の中でマッチしたデッキを分析し、一番勝てるデッキを分析した結果です。";
             // 
             // VSLogForm
             // 
