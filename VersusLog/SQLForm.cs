@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.Windows.Forms;
 using System.IO;
 using System.Text;

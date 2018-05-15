@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Data;
+using System.IO;
 
 namespace VersusLog
 {
@@ -75,7 +73,6 @@ namespace VersusLog
             return str;
         }
 
-
         /// <summary>
         /// DataTable生成処理
         /// </summary>
@@ -98,9 +95,10 @@ namespace VersusLog
                         }
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException)
+                catch (System.Data.SQLite.SQLiteException ex)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    writeErrorLog(ex);
                 }
                 con.Close();
             }
@@ -127,9 +125,10 @@ namespace VersusLog
                         ret = cmd.ExecuteNonQuery();
                     }
                 }
-                catch (System.Data.SQLite.SQLiteException)
+                catch (System.Data.SQLite.SQLiteException ex)
                 {
                     MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    writeErrorLog(ex);
                 }
                 con.Close();
             }
@@ -148,14 +147,14 @@ namespace VersusLog
 
             using (var con = new SQLiteConnection(CommonData.ConnectionString))
             {
-                con.Open();
                 try
                 {
+                    con.Open();
                     using (var cmd = con.CreateCommand())
                     {
                         try
                         {
-                            cmd.Transaction =  con.BeginTransaction();
+                            cmd.Transaction = con.BeginTransaction();
                             foreach (string SQLText in SQLList)
                             {
                                 cmd.CommandText = SQLText;
@@ -166,25 +165,40 @@ namespace VersusLog
                             //全件実行出来たらコミット
                             cmd.Transaction.Commit();
                         }
-                        catch (System.Data.SQLite.SQLiteException)
+                        catch (System.Data.SQLite.SQLiteException ex)
                         {
                             //途中で失敗したらロールバック
                             cmd.Transaction.Rollback();
                             MessageBox.Show("DBへの問い合わせ時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            writeErrorLog(ex);
                             ret = 0;
                         }
                     }
-
+                    con.Close();
                 }
-                catch (System.Data.SQLite.SQLiteException)
+                catch (System.Data.SQLite.SQLiteException ex)
                 {
                     MessageBox.Show("DBへの接続時にエラーが発生しました。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    writeErrorLog(ex);
                     ret = 0;
                 }
-                con.Close();
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// エラーログ書き出し
+        /// </summary>
+        /// <param name="ex"></param>
+        public void writeErrorLog(Exception ex)
+        {
+            StreamWriter stream = new StreamWriter("error.txt", true);
+            stream.WriteLine("[date]\n" + System.DateTime.Now);
+            stream.WriteLine("[message]\n" + ex.Message);
+            stream.WriteLine("[source]\n" + ex.Source);
+            stream.WriteLine();
+            stream.Close();
         }
     }
 }
