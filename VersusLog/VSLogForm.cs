@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using System.Linq;
 
 namespace VersusLog
 {
@@ -111,8 +112,23 @@ namespace VersusLog
                 "left outer join DECK as ENEMYDECK on VSLOG.ENEMYDECKID = ENEMYDECK.ID " +
                 "left outer join FORMAT on VSLOG.FORMATID = FORMAT.ID";
             DataTable dt = cd.getDataTable(SQLtext);
-            dt.DefaultView.AllowNew = false;
-            VLLogGridView.DataSource = dt;
+            //変換
+            var displaylist = new List<LogData>();
+            foreach (DataRow row in dt.Rows)
+            {
+                displaylist.Add(new LogData(
+                    row[0], //ID
+                    Convert.ToString(row[1]), //日付
+                    (row[2] == null) ? null : Convert.ToString(row[2]), //自デッキ・大分類
+                    (row[3] == null) ? null : Convert.ToString(row[3]), //自デッキ・小分類
+                    (row[4] == null) ? null : Convert.ToString(row[4]), //相手デッキ・大分類
+                    (row[5] == null) ? null : Convert.ToString(row[5]), //相手デッキ・小分類
+                    row[6], //結果
+                    (row[7] == null) ? null : Convert.ToString(row[7]), //フォーマット
+                    row[8] //先攻後攻
+                                    ));
+            }
+            VLLogGridView.DataSource = displaylist;
 
             //LogGridViewの列ヘッダーの表示を日本語にする
             var cheaderlist = new List<string> { "ID", "日付", "自デッキ・大分類", "自デッキ・小分類", "相手デッキ・大分類", "相手デッキ・小分類", "結果", "フォーマット", "先行後攻" };
@@ -417,7 +433,7 @@ namespace VersusLog
                 string SQLtext = "select ID from VSLOG";
                 DataTable dt = cd.getDataTable(SQLtext);
                 //最後のレコードのIDを取得する
-                int id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+                int id = (dt.Rows.Count == 0) ? 0 : System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
 
                 //自デッキID
                 SQLtext = "select ID from DECK " +
@@ -746,6 +762,90 @@ namespace VersusLog
 
 
     #region データセットクラス
+    /// <summary>
+    /// 戦績ログクラス
+    /// </summary>
+    class LogData
+    {
+        /// <summary>
+        /// ID
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
+        /// 日付
+        /// </summary>
+        public string Vsdate { get; set; }
+
+        /// <summary>
+        /// 自デッキ・大分類
+        /// </summary>
+        public string Mydeck_majorclass { get; set; }
+
+        /// <summary>
+        /// 自デッキ・小分類
+        /// </summary>
+        public string Mydeck_smallclass { get; set; }
+
+        /// <summary>
+        /// 相手デッキ・大分類
+        /// </summary>
+        public string Enemydeck_majorclass { get; set; }
+
+        /// <summary>
+        /// 相手デッキ・小分類
+        /// </summary>
+        public string Enemydeck_smallclass { get; set; }
+
+        /// <summary>
+        /// 結果
+        /// </summary>
+        /// <remarks>
+        /// "勝ち" or "負け"
+        /// </remarks>
+        public string Win { get; set; }
+
+        /// <summary>
+        /// フォーマット
+        /// </summary>
+        public string Format { get; set; }
+
+        /// <summary>
+        /// 先行後攻
+        /// </summary>
+        /// <remarks>
+        /// "先行" or "後攻"
+        /// </remarks>
+        public string Pracedence { get; set; }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="id">ID</param>
+        /// <param name="vsdate">日付</param>
+        /// <param name="mydeck_majorclass">自デッキ・大分類</param>
+        /// <param name="mydeck_smallclass">自デッキ・小分類</param>
+        /// <param name="enemydeck_majorclass">相手デッキ・大分類</param>
+        /// <param name="enemydeck_smallclass">相手デッキ・小分類</param>
+        /// <param name="win">結果</param>
+        /// <param name="format">フォーマット</param>
+        /// <param name="pracedence">先行後攻</param>
+        public LogData(object id, string vsdate, string mydeck_majorclass, string mydeck_smallclass, string enemydeck_majorclass, string enemydeck_smallclass, object win, string format, object pracedence)
+        {
+            this.ID = System.Convert.ToInt32(id);
+            this.Vsdate = vsdate;
+            this.Mydeck_majorclass = mydeck_majorclass;
+            this.Mydeck_smallclass = mydeck_smallclass;
+            this.Enemydeck_majorclass = enemydeck_majorclass;
+            this.Enemydeck_smallclass = enemydeck_smallclass;
+            //int(1(true) or 0(false))を変換
+            this.Win = (System.Convert.ToInt32(win) == 1) ? "勝ち" : "負け";
+            this.Format = format;
+            //int(1(true) or 0(false))を変換
+            this.Pracedence = (System.Convert.ToInt32(pracedence) == 1) ? "先行" : "後攻";
+        }
+    }
+
     /// <summary>
     /// 戦績ログクラス
     /// </summary>
