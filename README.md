@@ -1,10 +1,14 @@
 # VersusLog  
-対応言語(supported language):日本語  
+
+## About
 汎用のTCG戦績管理ツールです。  
 下記機能を備えています。  
 ・ログ入力、表示機能  
 ・デッキごとの戦績表示機能  
 ・トップメタデッキ分析(1週間、1か月)
+
+## Supported language
+日本語  
 
 ## Screenshots
 ![pre1](https://user-images.githubusercontent.com/24190129/40104073-56b8740a-592a-11e8-9749-2ed3d2d49cff.png)
