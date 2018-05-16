@@ -7,6 +7,9 @@ namespace VersusLog
 {
     public partial class DeckMasterChangeForm : Form
     {
+        CommonData cd = new CommonData();
+        VSLogCommon VSLogCommon = new VSLogCommon();
+
         public DeckMasterChangeForm()
         {
             InitializeComponent();
@@ -38,7 +41,6 @@ namespace VersusLog
             if (DeckMasterChangeFormInputCheck())
             {
                 string SQLtext = "";
-                CommonData cd = new CommonData();
 
                 //変更種別ごとにクエリ作成
                 switch (ChangeGenreComboBox.Text)
@@ -64,9 +66,7 @@ namespace VersusLog
                     case "追加":
 
                         //追加データ用のID生成
-                        SQLtext = "select ID from DECK";
-                        DataTable dt = cd.getDataTable(SQLtext);
-                        int id = (dt.Rows.Count == 0) ? 0 : Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+                        int id = VSLogCommon.getNewID("DECK");
 
                         SQLtext = "insert into DECK " +
                             "values( " +
@@ -186,11 +186,8 @@ namespace VersusLog
             //変更の場合既存の値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
-                string SQLtext = "";
-                CommonData cd = new CommonData();
-
                 //デフォルト値として既存の値を設定
-                SQLtext = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
+                string SQLtext = "select MAJORCLASS, SMALLCLASS, DECKTYPE1, DECKTYPE2 " +
                     "from DECK " +
                     "where ID = " + IDTextBox.Text;
                 DataTable dt = cd.getDataTable(SQLtext);
@@ -219,11 +216,9 @@ namespace VersusLog
         private void UpdateView()
         {
             var displaylist = new List<DeckData>();
-            string SQLtext = "";
-            CommonData cd = new CommonData();
 
             //デッキ一覧取得
-            SQLtext = "select * from DECK";
+            string SQLtext = "select * from DECK";
             DataTable dt = cd.getDataTable(SQLtext);
             foreach (DataRow row in dt.Rows)
             {
@@ -240,10 +235,7 @@ namespace VersusLog
 
             //DeckMasterGridViewの列ヘッダーの表示を日本語にする
             var cheaderlist = new List<string> { "ID", "デッキ大分類", "デッキ小分類", "デッキタイプ1", "デッキタイプ2" };
-            for (int i = 0; i < DeckMasterGridView.Columns.Count; i++)
-            {
-                DeckMasterGridView.Columns[i].HeaderText = cheaderlist[i];
-            }
+            cd.setDataGridViewHeader(cheaderlist, DeckMasterGridView);
 
             //表示幅の自動修正をON
             DeckMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -287,54 +279,6 @@ namespace VersusLog
             {
                 return false;
             }
-        }
-    }
-
-    /// <summary>
-    /// デッキデータクラス
-    /// </summary>
-    class DeckData
-    {
-        /// <summary>
-        /// ID
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// デッキ大分類
-        /// </summary>
-        public string Majorclass { get; set; }
-
-        /// <summary>
-        /// デッキ小分類
-        /// </summary>
-        public string Smallclass { get; set; }
-
-        /// <summary>
-        /// デッキタイプ1
-        /// </summary>
-        public string Decktype1 { get; set; }
-
-        /// <summary>
-        /// デッキタイプ2
-        /// </summary>
-        public string DeckType2 { get; set; }
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="id">ID</param>
-        /// <param name="majorclass">デッキ大分類</param>
-        /// <param name="smallclass">デッキ小分類</param>
-        /// <param name="decktype1">デッキタイプ1</param>
-        /// <param name="decktype2">デッキタイプ2</param>
-        public DeckData(object id, string majorclass, string smallclass, string decktype1, string decktype2)
-        {
-            this.Id = System.Convert.ToInt32(id);
-            this.Majorclass = majorclass;
-            this.Smallclass = smallclass;
-            this.Decktype1 = decktype1;
-            this.DeckType2 = decktype2;
         }
     }
 }

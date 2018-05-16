@@ -64,6 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonData.cs" />
+    <Compile Include="DataSetClass\DeckData.cs" />
+    <Compile Include="DataSetClass\DeckList.cs" />
+    <Compile Include="DataSetClass\DeckRecodeViewList.cs" />
+    <Compile Include="DataSetClass\FormatData.cs" />
+    <Compile Include="DataSetClass\LogData.cs" />
     <Compile Include="FormatMasterChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +93,10 @@
     <Compile Include="SQLForm.Designer.cs">
       <DependentUpon>SQLForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="VSLogCommon\DeckRecodeMethod.cs" />
+    <Compile Include="VSLogCommon\MetaAnalyzeMethod.cs" />
+    <Compile Include="VSLogCommon\VSLogMethod.cs" />
+    <Compile Include="VSLogCommon\VSLogCommon.cs" />
     <Compile Include="VSLogForm.cs">
       <SubType>Form</SubType>
     </Compile>

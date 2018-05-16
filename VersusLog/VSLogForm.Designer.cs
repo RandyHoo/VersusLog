@@ -254,7 +254,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 89;
-            this.label1.Text = "先行後攻";
+            this.label1.Text = "先攻後攻";
             // 
             // label2
             // 
@@ -437,7 +437,7 @@
             this.PracedenceLabel.Name = "PracedenceLabel";
             this.PracedenceLabel.Size = new System.Drawing.Size(55, 15);
             this.PracedenceLabel.TabIndex = 49;
-            this.PracedenceLabel.Text = "先行後攻";
+            this.PracedenceLabel.Text = "先攻後攻";
             // 
             // ILPracedenceComboBox
             // 

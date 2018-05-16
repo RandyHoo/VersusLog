@@ -7,6 +7,9 @@ namespace VersusLog
 {
     public partial class FormatMasterChangeForm : Form
     {
+        CommonData cd = new CommonData();
+        VSLogCommon VSLogCommon = new VSLogCommon();
+
         public FormatMasterChangeForm()
         {
             InitializeComponent();
@@ -51,7 +54,6 @@ namespace VersusLog
             if (FormatMasterChangeFormCheck())
             {
                 string SQLtext = "";
-                CommonData cd = new CommonData();
 
                 //変更種別ごとにコマンド生成
                 switch (ChangeGenreComboBox.Text)
@@ -73,9 +75,7 @@ namespace VersusLog
 
                     case "追加":
                         //追加データ用のID生成
-                        SQLtext = "select ID from FORMAT";
-                        DataTable dt = cd.getDataTable(SQLtext);
-                        int id = (dt.Rows.Count == 0) ? 0 : Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+                        int id = VSLogCommon.getNewID("FORMAT");
 
                         SQLtext = "insert into FORMAT " +
                             "values( " +
@@ -125,8 +125,6 @@ namespace VersusLog
         /// <param name="e"></param>
         private void IDTextBox_TextChanged(object sender, EventArgs e)
         {
-            CommonData cd = new CommonData();
-
             //変更の場合元々入っている値をデフォ値にする
             if (ChangeGenreComboBox.Text == "変更" && IDTextBox.Text != "")
             {
@@ -181,11 +179,9 @@ namespace VersusLog
         private void UpdateView()
         {
             var displaylist = new List<FormatData>();
-            string SQLtext = "";
-            CommonData cd = new CommonData();
 
             //フォーマット一覧取得
-            SQLtext = "select * from FORMAT";
+            string SQLtext = "select * from FORMAT";
             DataTable dt = cd.getDataTable(SQLtext);
             foreach (DataRow row in dt.Rows)
             {
@@ -194,15 +190,11 @@ namespace VersusLog
                     row[1].ToString() //フォーマット名
                     ));
             }
-
             FormatMasterGridView.DataSource = displaylist;
 
             //FormatMasterGridViewの列ヘッダーの表示を日本語にする
             var cheaderlist = new List<string> { "ID", "フォーマット名" };
-            for (int i = 0; i < FormatMasterGridView.Columns.Count; i++)
-            {
-                FormatMasterGridView.Columns[i].HeaderText = cheaderlist[i];
-            }
+            cd.setDataGridViewHeader(cheaderlist, FormatMasterGridView);
 
             //表示幅の自動修正をON
             FormatMasterGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -250,33 +242,6 @@ namespace VersusLog
             {
                 return false;
             }
-        }
-    }
-
-    /// <summary>
-    /// フォーマットデータクラス
-    /// </summary>
-    class FormatData
-    {
-        /// <summary>
-        /// ID
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// フォーマット名
-        /// </summary>
-        public string Formatname { get; set; }
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="id">ID</param>
-        /// <param name="formatname">フォーマット名</param>
-        public FormatData(object id, string formatname)
-        {
-            this.Id = System.Convert.ToInt32(id);
-            this.Formatname = formatname;
         }
     }
 }

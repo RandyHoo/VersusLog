@@ -8,6 +8,8 @@ namespace VersusLog
 {
     public partial class SQLForm : Form
     {
+        CommonData cd = new CommonData();
+
         public SQLForm()
         {
             InitializeComponent();
@@ -20,7 +22,6 @@ namespace VersusLog
         /// <param name="e"></param>
         private void DoneButton_Click(object sender, EventArgs e)
         {
-            CommonData cd = new CommonData();
 
             if (SQLFormInputCheck())
             {
@@ -80,8 +81,6 @@ namespace VersusLog
                     {
                         SqlList.Add(line);
                     }
-
-                    CommonData cd = new CommonData();
                     
                     if (cd.executeSQL(SqlList) != 0)
                     {
