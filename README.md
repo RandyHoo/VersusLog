@@ -8,7 +8,7 @@
 ・トップメタデッキ分析(1週間、1か月)
 
 ## Supported language
-日本語  
+日本語のみ(Japanese Only)  
 
 ## Screenshots
 ![pre1](https://user-images.githubusercontent.com/24190129/40104073-56b8740a-592a-11e8-9749-2ed3d2d49cff.png)
