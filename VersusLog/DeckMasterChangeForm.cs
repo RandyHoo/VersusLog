@@ -45,10 +45,10 @@ namespace VersusLog
                 {
                     case "変更":
                         SQLtext = "update DECK " +
-                            "set MAJORCLASS = '" + MajorclassTextBox.Text + "', " +
-                            "SMALLCLASS = '" + SmallclassTextBox.Text + "', " +
-                            "DECKTYPE1 = '" + Decktype1TextBox.Text + "', " +
-                            "DECKTYPE2 = '" + Decktype2TextBox.Text + "' " +
+                            "set MAJORCLASS = " + cd.surroundApos(MajorclassTextBox.Text) + "," +
+                            "SMALLCLASS = " + cd.surroundApos(SmallclassTextBox.Text) + "," +
+                            "DECKTYPE1 = " + cd.surroundApos(Decktype1TextBox.Text) + "," +
+                            "DECKTYPE2 = " + cd.surroundApos(Decktype2TextBox.Text) + " " +
                             "where ID = " + IDTextBox.Text;
 
                         if (cd.executeSQL(SQLtext) > 0)
@@ -66,16 +66,15 @@ namespace VersusLog
                         //追加データ用のID生成
                         SQLtext = "select ID from DECK";
                         DataTable dt = cd.getDataTable(SQLtext);
-                        int id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
-                        
+                        int id = (dt.Rows.Count == 0) ? 0 : Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+
                         SQLtext = "insert into DECK " +
                             "values( " +
-                            " " + id.ToString() + "," + //ID
-                            " '" + MajorclassTextBox.Text + "'," + //デッキ大分類
-                            " '" + SmallclassTextBox.Text + "'," + //デッキ小分類
-                            " '" + Decktype1TextBox.Text + "'," + //デッキタイプ1
-                            " '" + Decktype2TextBox.Text + "'" + //デッキタイプ2
-                            " )";
+                            id.ToString() + "," +                             //ID
+                            cd.surroundApos(MajorclassTextBox.Text) + "," +   //デッキ大分類
+                            cd.surroundApos(SmallclassTextBox.Text) + "," +   //デッキ小分類
+                            cd.surroundApos(Decktype1TextBox.Text) + "," +    //デッキタイプ1
+                            cd.surroundApos(Decktype2TextBox.Text) + ")";     //デッキタイプ2
 
                         if (cd.executeSQL(SQLtext) > 0)
                         {
@@ -196,10 +195,10 @@ namespace VersusLog
                     "where ID = " + IDTextBox.Text;
                 DataTable dt = cd.getDataTable(SQLtext);
 
-                MajorclassTextBox.Text = Convert.ToString(dt.Rows[0][0]); //デッキ大分類
-                SmallclassTextBox.Text = (dt.Rows[0][1] == null) ? null : Convert.ToString(dt.Rows[0][1]); //デッキ小分類
-                Decktype1TextBox.Text = (dt.Rows[0][2] == null) ? null : Convert.ToString(dt.Rows[0][2]); //デッキタイプ1
-                Decktype2TextBox.Text = (dt.Rows[0][3] == null) ? null : Convert.ToString(dt.Rows[0][3]); //デッキタイプ2
+                MajorclassTextBox.Text = dt.Rows[0][0].ToString(); //デッキ大分類
+                SmallclassTextBox.Text = (dt.Rows[0][1] == null) ? null : dt.Rows[0][1].ToString(); //デッキ小分類
+                Decktype1TextBox.Text = (dt.Rows[0][2] == null) ? null : dt.Rows[0][2].ToString(); //デッキタイプ1
+                Decktype2TextBox.Text = (dt.Rows[0][3] == null) ? null : dt.Rows[0][3].ToString(); //デッキタイプ2
 
             }
         }
@@ -230,10 +229,10 @@ namespace VersusLog
             {
                 displaylist.Add(new DeckData(
                         row[0], //ID
-                        Convert.ToString (row[1]), //デッキ大分類
-                        Convert.ToString(row[2]), //デッキ小分類
-                        Convert.ToString(row[3]), //デッキタイプ1
-                        Convert.ToString(row[4]) //デッキタイプ2
+                        row[1].ToString(), //デッキ大分類
+                        row[2].ToString(), //デッキ小分類
+                        row[3].ToString(), //デッキタイプ1
+                        row[4].ToString() //デッキタイプ2
                         ));
             }
             DeckMasterGridView.DataSource = displaylist;

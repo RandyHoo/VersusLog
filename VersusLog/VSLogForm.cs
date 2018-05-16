@@ -54,8 +54,8 @@ namespace VersusLog
             var EnemyDeckMajorclassDatasource = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-                MyDeckMajorclassDatasource.Add(Convert.ToString(row[0]));
-                EnemyDeckMajorclassDatasource.Add(Convert.ToString(row[0]));
+                MyDeckMajorclassDatasource.Add(row[0].ToString());
+                EnemyDeckMajorclassDatasource.Add(row[0].ToString());
             }
             VLMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
             VLEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
@@ -66,7 +66,7 @@ namespace VersusLog
             var FormatDatasource = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-                FormatDatasource.Add(Convert.ToString(row[0]));
+                FormatDatasource.Add(row[0].ToString());
             }
             VLFormatComboBox.DataSource = FormatDatasource;
 
@@ -118,13 +118,13 @@ namespace VersusLog
             {
                 displaylist.Add(new LogData(
                     row[0], //ID
-                    Convert.ToString(row[1]), //日付
-                    (row[2] == null) ? null : Convert.ToString(row[2]), //自デッキ・大分類
-                    (row[3] == null) ? null : Convert.ToString(row[3]), //自デッキ・小分類
-                    (row[4] == null) ? null : Convert.ToString(row[4]), //相手デッキ・大分類
-                    (row[5] == null) ? null : Convert.ToString(row[5]), //相手デッキ・小分類
+                    row[1].ToString(), //日付
+                    (row[2] == null) ? null : row[2].ToString(), //自デッキ・大分類
+                    (row[3] == null) ? null : row[3].ToString(), //自デッキ・小分類
+                    (row[4] == null) ? null : row[4].ToString(), //相手デッキ・大分類
+                    (row[5] == null) ? null : row[5].ToString(), //相手デッキ・小分類
                     row[6], //結果
-                    (row[7] == null) ? null : Convert.ToString(row[7]), //フォーマット
+                    (row[7] == null) ? null : row[7].ToString(), //フォーマット
                     row[8] //先攻後攻
                                     ));
             }
@@ -187,15 +187,15 @@ namespace VersusLog
 
                         //自デッキID
                         SQLtext = "select ID from DECK " +
-                            "where MAJORCLASS = '" + VLMydeckMajorclassComboBox.Text + "' " +
-                            "and SMALLCLASS = '" + VLMydeckSmallclassComboBox.Text + "'";
+                            "where MAJORCLASS = " + cd.surroundApos(VLMydeckMajorclassComboBox.Text) +
+                            "and SMALLCLASS = " + cd.surroundApos(VLMydeckSmallclassComboBox.Text);
                         dt = cd.getDataTable(SQLtext);
                         int mydeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
                         //相手デッキID
                         SQLtext = "select ID from DECK " +
-                            "where MAJORCLASS = '" + VLEnemydeckMajorclassComboBox.Text + "' " +
-                            "and SMALLCLASS = '" + VLEnemydeckSmallclassComboBox.Text + "'";
+                            "where MAJORCLASS = " + cd.surroundApos(VLEnemydeckMajorclassComboBox.Text) +
+                            "and SMALLCLASS = " + cd.surroundApos(VLEnemydeckSmallclassComboBox.Text);
                         dt = cd.getDataTable(SQLtext);
                         int enemydeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
@@ -204,7 +204,7 @@ namespace VersusLog
 
                         //フォーマットID
                         SQLtext = "select ID from FORMAT " +
-                            "where FORMATNAME = '" + VLFormatComboBox.Text + "'";
+                            "where FORMATNAME = " + cd.surroundApos(VLFormatComboBox.Text);
                         dt = cd.getDataTable(SQLtext);
                         int formatid = System.Convert.ToInt32(dt.Rows[0][0]);
 
@@ -213,7 +213,7 @@ namespace VersusLog
 
                         //変更用クエリ作成
                         SQLtext = "update VSLOG " +
-                            "set VSDATE = '" + VLDateTextBox.Text + "', " +
+                            "set VSDATE = " + cd.surroundApos(VLDateTextBox.Text) + ", " +
                             "MYDECKID = " + mydeckid.ToString() + ", " +
                             "ENEMYDECKID = " + enemydeckid.ToString() + ", " +
                             "WIN = " + Qwin + ", " +
@@ -364,8 +364,8 @@ namespace VersusLog
             var EnemyDeckMajorclassDatasource = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-                MyDeckMajorclassDatasource.Add(Convert.ToString(row[0]));
-                EnemyDeckMajorclassDatasource.Add(Convert.ToString(row[0]));
+                MyDeckMajorclassDatasource.Add(row[0].ToString());
+                EnemyDeckMajorclassDatasource.Add(row[0].ToString());
             }
             ILMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
             ILEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
@@ -376,7 +376,7 @@ namespace VersusLog
             var FormatDatasource = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-                FormatDatasource.Add(Convert.ToString(row[0]));
+                FormatDatasource.Add(row[0].ToString());
             }
             ILFormatComboBox.DataSource = FormatDatasource;
 
@@ -437,15 +437,15 @@ namespace VersusLog
 
                 //自デッキID
                 SQLtext = "select ID from DECK " +
-                    "where MAJORCLASS = '" + ILMydeckMajorclassComboBox.Text + "' " +
-                    "and SMALLCLASS = '" + ILMydeckSmallclassComboBox.Text + "'";
+                    "where MAJORCLASS = " + cd.surroundApos(ILMydeckMajorclassComboBox.Text) +
+                    "and SMALLCLASS = " + cd.surroundApos(ILMydeckSmallclassComboBox.Text);
                 dt = cd.getDataTable(SQLtext);
                 int mydeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
                 //相手デッキID
                 SQLtext = "select ID from DECK " +
-                    "where MAJORCLASS = '" + ILEnemydeckMajorclassComboBox.Text + "' " +
-                    "and SMALLCLASS = '" + ILEnemydeckSmallclassComboBox.Text + "'";
+                    "where MAJORCLASS = " + cd.surroundApos(ILEnemydeckMajorclassComboBox.Text) +
+                    "and SMALLCLASS = " + cd.surroundApos(ILEnemydeckSmallclassComboBox.Text);
                 dt = cd.getDataTable(SQLtext);
                 int enemydeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
@@ -454,7 +454,7 @@ namespace VersusLog
 
                 //フォーマットID
                 SQLtext = "select ID from FORMAT " +
-                    "where FORMATNAME = '" + ILFormatComboBox.Text + "'";
+                    "where FORMATNAME = " + cd.surroundApos(ILFormatComboBox.Text);
                 dt = cd.getDataTable(SQLtext);
                 int formatid = System.Convert.ToInt32(dt.Rows[0][0]);
 
@@ -464,13 +464,13 @@ namespace VersusLog
                 //DBにログ入力用クエリ作成
                 SQLtext = "insert into VSLOG " +
                     "values( " +
-                    " " + id.ToString() + "," + //ID
-                    " '" + ILDateTextBox.Text + "'," + //日付
-                    " " + mydeckid.ToString() + "," + //自デッキID
-                    " " + enemydeckid.ToString() + "," + //相手デッキID
-                    " " + Qwin + "," + //結果
-                    " " + formatid.ToString() + "," + //フォーマットID
-                    " " + Qpracedence + //先行後攻
+                    id.ToString() + "," + //ID
+                    cd.surroundApos(ILDateTextBox.Text) + "," + //日付
+                    mydeckid.ToString() + "," + //自デッキID
+                    enemydeckid.ToString() + "," + //相手デッキID
+                    Qwin + "," + //結果
+                    formatid.ToString() + "," + //フォーマットID
+                    Qpracedence + //先行後攻
                     " )";
 
                 if (cd.executeSQL(SQLtext) > 0)
@@ -522,7 +522,7 @@ namespace VersusLog
             var DRMyDeckMajorclassDatasource = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-                DRMyDeckMajorclassDatasource.Add(Convert.ToString(row[0]));
+                DRMyDeckMajorclassDatasource.Add(row[0].ToString());
             }
 
             DRMydeckMajorclassComboBox.DataSource = DRMyDeckMajorclassDatasource;
@@ -544,13 +544,13 @@ namespace VersusLog
                 var decklist = new List<DeckList>(); //デッキリスト
                 foreach (DataRow row in dt.Rows)
                 {
-                    decklist.Add(new DeckList(Convert.ToInt32(row[0]), Convert.ToString(row[1]), Convert.ToString(row[2])));
+                    decklist.Add(new DeckList(Convert.ToInt32(row[0]), row[1].ToString(), row[2].ToString()));
                 }
 
                 //自デッキID取得
                 SQLtext = "select ID from DECK " +
-                    "where MAJORCLASS = '" + DRMydeckMajorclassComboBox.Text + "'" +
-                    "and SMALLCLASS = '" + DRMydeckSmallclassComboBox.Text + "'";
+                    "where MAJORCLASS = " + cd.surroundApos(DRMydeckMajorclassComboBox.Text) +
+                    "and SMALLCLASS = " + cd.surroundApos(DRMydeckSmallclassComboBox.Text);
                 dt = cd.getDataTable(SQLtext);
                 int mydeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
@@ -730,7 +730,7 @@ namespace VersusLog
             foreach (int deckid in moredeckidList)
             {
                 //相手デッキを指定してレコード取得
-                SQLtext = "select MYDECK_ID, SCORE from MATCHUP where ENEMYDECK_ID = " + Convert.ToString(deckid);
+                SQLtext = "select MYDECK_ID, SCORE from MATCHUP where ENEMYDECK_ID = " + deckid.ToString();
                 DataTable workdt = cd.getDataTable(SQLtext);
 
                 int work;

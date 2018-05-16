@@ -27,7 +27,7 @@ namespace VersusLog
 
             //デッキ名取得用クエリ作成
             string SQLtext = "select SMALLCLASS from DECK " +
-                        "where MAJORCLASS = '" + MajorclassComboBox.SelectedValue + "'";
+                        "where MAJORCLASS = " + surroundApos(MajorclassComboBox.SelectedValue);
             DataTable dt = getDataTable(SQLtext);
             SmallclassComboBox.DataSource = dt;
             SmallclassComboBox.DisplayMember = "SMALLCLASS";
@@ -60,11 +60,11 @@ namespace VersusLog
                     DateTime datatime = DateTime.Parse(workdate);
                     DateTime dtcal = datatime.AddDays(-7);
                     workdate = dtcal.ToShortDateString();
-                    str = " where VSDATE between '" + workdate + "' and '" + today + "' ";
+                    str = " where VSDATE between " + surroundApos(workdate) + " and " + surroundApos(today);
                     break;
                 case "今月":
                     worktext = today.Substring(0, 7);
-                    str = " where VSDATE like '" + worktext + "%' ";
+                    str = " where VSDATE like " + surroundApos(worktext + "%");
                     break;
                 default:
                     str = " ";
@@ -134,11 +134,6 @@ namespace VersusLog
             }
             return ret;
         }
-
-        /// <summary>
-        /// DB書き込み処理(複数)
-        /// </summary>
-        /// <remarks>同名処理のオーバーロード</remarks>
         /// <param name="SQLList">実行SQLリスト</param>
         /// <returns>実行件数(0なら失敗)</returns>
         public int executeSQL(List<string> SQLList)
@@ -199,6 +194,20 @@ namespace VersusLog
             stream.WriteLine("[source]\n" + ex.Source);
             stream.WriteLine();
             stream.Close();
+        }
+
+        /// <summary>
+        /// 文字列を'(apostrophe)で囲う
+        /// </summary>
+        /// <param name="str">文字列</param>
+        /// <returns>'で囲った文字列</returns>
+        public string surroundApos(string str)
+        {
+            return "'" + str + "'";
+        }
+        public string surroundApos(object str)
+        {
+            return "'" + ((str == null) ? "" : str.ToString()) + "'";
         }
     }
 }

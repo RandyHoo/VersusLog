@@ -58,7 +58,7 @@ namespace VersusLog
                 {
                     case "変更":
                         SQLtext = "update FORMAT " +
-                            "set FORMATNAME = '" + FormatNameTextBox.Text + "' " +
+                            "set FORMATNAME = " + cd.surroundApos(FormatNameTextBox.Text) +
                             "where ID = " + IDTextBox.Text;
 
                         if (cd.executeSQL(SQLtext) > 0)
@@ -75,14 +75,13 @@ namespace VersusLog
                         //追加データ用のID生成
                         SQLtext = "select ID from FORMAT";
                         DataTable dt = cd.getDataTable(SQLtext);
-                        int id = System.Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
-                        
+                        int id = (dt.Rows.Count == 0) ? 0 : Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0]) + 1;
+
                         SQLtext = "insert into FORMAT " +
                             "values( " +
-                            " " + id.ToString() + "," + //ID
-                            " '" + FormatNameTextBox.Text + "' " + //フォーマット名
-                            ")";
-
+                            id.ToString() + "," + //ID
+                            cd.surroundApos(FormatNameTextBox.Text) + ")"; //フォーマット名
+                        
                         if (cd.executeSQL(SQLtext) > 0)
                         {
                             MessageBox.Show("DBに追加されました。", "追加結果", MessageBoxButtons.OK, MessageBoxIcon.None);
@@ -138,7 +137,7 @@ namespace VersusLog
 
                 if (dt.Rows.Count != 0)
                 {
-                    FormatNameTextBox.Text = Convert.ToString(dt.Rows[0][0]); //フォーマット名
+                    FormatNameTextBox.Text = dt.Rows[0][0].ToString(); //フォーマット名
                 }
             }
         }
@@ -192,7 +191,7 @@ namespace VersusLog
             {
                 displaylist.Add(new FormatData(
                     row[0], //ID
-                    Convert.ToString(row[1]) //フォーマット名
+                    row[1].ToString() //フォーマット名
                     ));
             }
 
