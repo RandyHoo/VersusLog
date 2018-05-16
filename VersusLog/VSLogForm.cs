@@ -681,12 +681,17 @@ namespace VersusLog
                 "group by ENEMYDECKID having count(*) >= (select max(cnt) from ( select count(*) as cnt from VSLOG" + wheretext +
                                                                                 "group by ENEMYDECKID))";
             DataTable dt = cd.getDataTable(SQLtext);
+            
+            //戦績ログがなければ終了
+            if (dt.Rows.Count == 0) return;
+
             int moredeckid = System.Convert.ToInt32(dt.Rows[0][0]);
 
             //最頻相手デッキ名取得
             SQLtext = "select MAJORCLASS, SMALLCLASS from DECK " + "where ID = " + moredeckid;
             dt = cd.getDataTable(SQLtext);
             MAMetaAnalyzeDeckText.Text = (dt.Rows[0][0] + " " + dt.Rows[0][1]);
+
         }
 
         /// <summary>
@@ -702,6 +707,10 @@ namespace VersusLog
                 "group by ENEMYDECKID order by CNT desc";
             DataTable dt = new DataTable();
             dt = cd.getDataTable(SQLtext);
+
+            //戦績ログがなければ終了
+            if (dt.Rows.Count == 0) return;
+
             foreach (DataRow row in dt.Rows)
             {
                 moredeckidList.Add(System.Convert.ToInt32(row[0]));
