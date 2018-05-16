@@ -52,9 +52,10 @@ namespace VersusLog
         private void VSLogFormInit()
         {
             //自デッキ、相手デッキ 大分類コンボボックスの要素をセット
-            List<string> DeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
-            VLMydeckMajorclassComboBox.DataSource = DeckMajorclassDatasource;
-            VLEnemydeckMajorclassComboBox.DataSource = DeckMajorclassDatasource;
+            List<string> MyDeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
+            List<string> EnemyDeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
+            VLMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
+            VLEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
 
             //フォーマットコンボボックスの要素をセット
             List<string> FormatDatasource = VSLogCommon.getFormatList();
@@ -96,7 +97,7 @@ namespace VersusLog
             VLLogGridView.DataSource = displaylist;
 
             //LogGridViewの列ヘッダーの表示を日本語にする
-            var cheaderlist = new List<string> { "ID", "日付", "自デッキ・大分類", "自デッキ・小分類", "相手デッキ・大分類", "相手デッキ・小分類", "結果", "フォーマット", "先行後攻" };
+            var cheaderlist = new List<string> { "ID", "日付", "自デッキ・大分類", "自デッキ・小分類", "相手デッキ・大分類", "相手デッキ・小分類", "結果", "フォーマット", "先攻後攻" };
             cd.setDataGridViewHeader(cheaderlist, VLLogGridView);
 
            //表示幅の自動修正をON
@@ -149,7 +150,7 @@ namespace VersusLog
                         string Qwin = (VLWinComboBox.Text == "勝ち") ? "1" : "0";
 
                         //先攻後攻
-                        string Qpracedence = (VLPracedenceComboBox.Text == "先行") ? "1" : "0";
+                        string Qpracedence = (VLPracedenceComboBox.Text == "先攻") ? "1" : "0";
 
                         //変更用クエリ作成
                         SQLtext = "update VSLOG " +
@@ -297,9 +298,10 @@ namespace VersusLog
         private void InsertLogFormInit()
         {
             //デッキ 大分類取得
-            List<string> DeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
-            ILMydeckMajorclassComboBox.DataSource = DeckMajorclassDatasource;
-            ILEnemydeckMajorclassComboBox.DataSource = DeckMajorclassDatasource;
+            List<string> MyDeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
+            List<string> EnemyDeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
+            ILMydeckMajorclassComboBox.DataSource = MyDeckMajorclassDatasource;
+            ILEnemydeckMajorclassComboBox.DataSource = EnemyDeckMajorclassDatasource;
 
             //フォーマット名取得
             List<string> FormatDatasource = VSLogCommon.getFormatList();
@@ -309,7 +311,7 @@ namespace VersusLog
             var WinDatasource = new List<string> { "勝ち", "負け" };
             ILWinComboBox.DataSource = WinDatasource;
 
-            //先行後攻コンボボックスの要素入力
+            //先攻後攻コンボボックスの要素入力
             var PracedenceDatasource = new List<string> { "先攻", "後攻" };
             ILPracedenceComboBox.DataSource = PracedenceDatasource;
 
@@ -354,8 +356,8 @@ namespace VersusLog
                 //結果
                 string Qwin = (ILWinComboBox.Text == "勝ち") ? "1" : "0";
 
-                //先行後攻
-                string Qpracedence = (ILPracedenceComboBox.Text == "先行") ? "1" : "0";
+                //先攻後攻
+                string Qpracedence = (ILPracedenceComboBox.Text == "先攻") ? "1" : "0";
 
                 //DBにログ入力用クエリ作成
                 string SQLtext = "insert into VSLOG " +
@@ -366,7 +368,7 @@ namespace VersusLog
                     VSLogCommon.getDeckID(ILEnemydeckMajorclassComboBox.Text, ILEnemydeckSmallclassComboBox.Text).ToString() + "," +    //相手デッキID
                     Qwin + "," +                                                                                                        //結果
                     VSLogCommon.getFormatID(ILFormatComboBox.Text).ToString() + "," +                                                   //フォーマットID
-                    Qpracedence +                                                                                                       //先行後攻
+                    Qpracedence +                                                                                                       //先攻後攻
                     " )";
 
                 if (cd.executeSQL(SQLtext) > 0)

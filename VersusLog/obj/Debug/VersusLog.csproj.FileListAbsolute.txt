@@ -144,7 +144,6 @@ C:\Users\Ryo\source\repos\VersusLog\VersusLog\VersusLog\obj\Debug\VersusLog.cspr
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\VersusLog\obj\Debug\VersusLog.exe
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
 C:\Users\Ryo\source\repos\VersusLog\VersusLog\VersusLog\obj\Debug\VersusLog.csprojResolveAssemblyReference.cache
-C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csprojAssemblyReference.cache
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.FormatMasterChangeForm.resources
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.MainMenuForm.resources
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.DeckMasterChangeForm.resources
@@ -153,8 +152,6 @@ C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.VSLogForm.
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.Properties.Resources.resources
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.GenerateResource.cache
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.CoreCompileInputs.cache
-C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.exe
-C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\VersusLog.exe.config
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\VersusLog.exe
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\VersusLog.pdb
@@ -168,3 +165,5 @@ C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\EntityFramework.SqlS
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.xml
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.CopyComplete
+C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.exe
+C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
