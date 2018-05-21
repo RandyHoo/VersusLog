@@ -1,0 +1,22 @@
+[message]
+constraint failed
+NOT NULL constraint failed: DECK.ID
+[source]
+System.Data.SQLite
+
+[date]
+2018/05/15 15:18:28
+[message]
+constraint failed
+NOT NULL constraint failed: DECK.ID
+[source]
+System.Data.SQLite
+
+[date]
+2018/05/15 16:15:24
+[message]
+SQL logic error
+no such column: ドルイド
+[source]
+System.Data.SQLite
+
