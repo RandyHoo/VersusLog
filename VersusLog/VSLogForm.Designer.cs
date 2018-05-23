@@ -91,6 +91,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.MAMetaAnalyzeDeckText = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.DRFormatComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -602,6 +604,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.DRFormatComboBox);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.DRMydeckMajorclassComboBox);
             this.groupBox4.Controls.Add(this.label7);
@@ -610,7 +614,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(173, 159);
+            this.groupBox4.Size = new System.Drawing.Size(173, 209);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "選択";
@@ -664,7 +668,7 @@
             // 
             // DRGetDeckRecordButton
             // 
-            this.DRGetDeckRecordButton.Location = new System.Drawing.Point(89, 185);
+            this.DRGetDeckRecordButton.Location = new System.Drawing.Point(89, 236);
             this.DRGetDeckRecordButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DRGetDeckRecordButton.Name = "DRGetDeckRecordButton";
             this.DRGetDeckRecordButton.Size = new System.Drawing.Size(96, 45);
@@ -773,6 +777,24 @@
             this.MAMetaAnalyzeDeckText.TabIndex = 2;
             this.MAMetaAnalyzeDeckText.Text = "default";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 150);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 15);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "フォーマット";
+            // 
+            // DRFormatComboBox
+            // 
+            this.DRFormatComboBox.FormattingEnabled = true;
+            this.DRFormatComboBox.Location = new System.Drawing.Point(10, 169);
+            this.DRFormatComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DRFormatComboBox.Name = "DRFormatComboBox";
+            this.DRFormatComboBox.Size = new System.Drawing.Size(140, 23);
+            this.DRFormatComboBox.TabIndex = 22;
+            // 
             // VSLogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -871,6 +893,8 @@
         private System.Windows.Forms.Label MetaDeckAnalyzeLabel;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox DRFormatComboBox;
     }
 }
 

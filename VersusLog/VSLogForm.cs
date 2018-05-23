@@ -416,6 +416,10 @@ namespace VersusLog
             //デッキ名一覧取得
             List<string> DRMyDeckMajorclassDatasource = VSLogCommon.getDeckMajorClassList();
             DRMydeckMajorclassComboBox.DataSource = DRMyDeckMajorclassDatasource;
+
+            //フォーマット一覧取得
+            List<string> DRFormatDatasource = VSLogCommon.getFormatList();
+            DRFormatComboBox.DataSource = DRFormatDatasource;
         }
 
         /// <summary>
@@ -433,8 +437,11 @@ namespace VersusLog
                 //自デッキID取得
                 int mydeckid = VSLogCommon.getDeckID(DRMydeckMajorclassComboBox.Text, DRMydeckSmallclassComboBox.Text);
 
+                //フォーマットID取得
+                int formatid = VSLogCommon.getFormatID(DRFormatComboBox.Text);
+
                 //全体・デッキ毎の勝率を取得し、ソースとしてセット
-                DRDeckRecodeView.DataSource = DeckRecode.getDeckRecode(mydeckid, decklist);
+                DRDeckRecodeView.DataSource = DeckRecode.getDeckRecode(mydeckid, decklist, formatid);
 
                 //DRDeckRecodeViewの列ヘッダーの表示を日本語にする
                 var cheaderlist = new List<string> { "デッキ", "勝率(%)" };
