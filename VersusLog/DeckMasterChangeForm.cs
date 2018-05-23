@@ -262,14 +262,10 @@ namespace VersusLog
                         if (string.IsNullOrEmpty(IDTextBox.Text)) { return false; } //ID
                         if (string.IsNullOrEmpty(MajorclassTextBox.Text)) { return false; } //デッキ・大分類
                         if (string.IsNullOrEmpty(SmallclassTextBox.Text)) { return false; } //デッキ・小分類
-                        if (string.IsNullOrEmpty(Decktype1TextBox.Text)) { return false; } //デッキタイプ1
-                        if (string.IsNullOrEmpty(Decktype2TextBox.Text)) { return false; } //デッキタイプ2
                         break;
                     case "追加":
                         if (string.IsNullOrEmpty(MajorclassTextBox.Text)) { return false; } //デッキ・大分類
                         if (string.IsNullOrEmpty(SmallclassTextBox.Text)) { return false; } //デッキ・小分類
-                        if (string.IsNullOrEmpty(Decktype1TextBox.Text)) { return false; } //デッキタイプ1
-                        if (string.IsNullOrEmpty(Decktype2TextBox.Text)) { return false; } //デッキタイプ2
                         break;
                     case "削除":
                         if (string.IsNullOrEmpty(IDTextBox.Text)) { return false; } //ID
