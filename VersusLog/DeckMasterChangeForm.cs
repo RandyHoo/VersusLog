@@ -104,6 +104,8 @@ namespace VersusLog
                     default:
                         break;
                 }
+
+                UpdateView();
             }
             else
             {

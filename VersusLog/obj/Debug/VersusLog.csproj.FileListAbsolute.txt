@@ -167,3 +167,4 @@ C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\bin\Debug\System.Data.SQLite.d
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csproj.CopyComplete
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.exe
 C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.pdb
+C:\Users\BP-012\Documents\Git\VersusLog\VersusLog\obj\Debug\VersusLog.csprojAssemblyReference.cache

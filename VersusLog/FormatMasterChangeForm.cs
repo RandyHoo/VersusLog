@@ -110,6 +110,7 @@ namespace VersusLog
                         break;
                 }
 
+                UpdateView();
             }
             else
             {
