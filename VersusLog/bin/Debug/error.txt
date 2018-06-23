@@ -20,3 +20,27 @@ no such column: ドルイド
 [source]
 System.Data.SQLite
 
+[date]
+2018/06/23 16:34:23
+[message]
+SQL logic error
+table DECK has 5 columns but 3 values were supplied
+[source]
+System.Data.SQLite
+
+[date]
+2018/06/23 16:35:03
+[message]
+SQL logic error
+table DECK has 5 columns but 3 values were supplied
+[source]
+System.Data.SQLite
+
+[date]
+2018/06/23 16:37:06
+[message]
+SQL logic error
+table DECK has 5 columns but 3 values were supplied
+[source]
+System.Data.SQLite
+
